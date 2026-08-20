@@ -1,0 +1,12 @@
+.nav-group:hover .dropdown { display: grid; }
+.nav-group button b { display: none; }
+
+@media (min-width: 801px) {
+  .nav-group { padding: 28px 0; }
+  .dropdown { top: 68px; }
+}
+
+@media (max-width: 800px) {
+  .nav-group:hover .dropdown { display: none; }
+  .nav-group .dropdown.open { display: grid; }
+}

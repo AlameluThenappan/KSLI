@@ -1,0 +1,358 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Kumaraguru Microcosm - KSLI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Montserrat:wght@100..900&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "eco-accent": "#2D6A4F",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#fedead",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#a7f1de",
+                        "primary-fixed-dim": "#bac7e6",
+                        "outline-variant": "#c5c6ce",
+                        "background": "#f9f9f9",
+                        "primary": "#05132a",
+                        "on-surface-variant": "#45474d",
+                        "surface-bright": "#f9f9f9",
+                        "secondary-fixed-dim": "#8bd4c2",
+                        "institute-navy": "#1B2840",
+                        "secondary": "#1a6a5b",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e2e2e2",
+                        "on-error-container": "#93000a",
+                        "surface": "#f9f9f9",
+                        "surface-container-low": "#f3f3f3",
+                        "outline": "#75777e",
+                        "surface-container-high": "#e8e8e8",
+                        "on-primary-container": "#828fac",
+                        "on-primary-fixed-variant": "#3a4760",
+                        "tertiary-container": "#362504",
+                        "on-surface": "#1a1c1c",
+                        "surface-container-highest": "#e2e2e2",
+                        "surface-container": "#eeeeee",
+                        "on-secondary-fixed": "#00201a",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed": "#271900",
+                        "inverse-primary": "#bac7e6",
+                        "tertiary-fixed-dim": "#e0c293",
+                        "primary-fixed": "#d7e2ff",
+                        "primary-container": "#1b2840",
+                        "tertiary": "#1d1100",
+                        "on-tertiary-fixed-variant": "#58431f",
+                        "sustainability-teal": "#85CEBC",
+                        "surface-muted": "#F8F9FA",
+                        "on-secondary-fixed-variant": "#005144",
+                        "on-primary": "#ffffff",
+                        "on-background": "#1a1c1c",
+                        "surface-tint": "#525e79",
+                        "on-primary-fixed": "#0e1b33",
+                        "inverse-on-surface": "#f1f1f1",
+                        "secondary-container": "#a4eedb",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#dadada",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-container": "#a68b61",
+                        "on-secondary-container": "#216e5f",
+                        "inverse-surface": "#2f3131"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "margin-desktop": "80px",
+                        "xs": "4px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "base": "8px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "xxl": "64px",
+                        "xl": "32px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Montserrat"],
+                        "headline-md": ["Montserrat"],
+                        "label-caps": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-bold": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Montserrat"],
+                        "headline-lg-mobile": ["Montserrat"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-bold": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-body-md text-on-surface antialiased light">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-surface-container-low text-institute-navy dark:text-primary-fixed-dim fixed top-0 w-full h-[80px] border-b border-outline-variant dark:border-outline shadow-sm shadow-[0px_2px_4px_rgba(27,40,64,0.05)] z-50">
+<div class="flex justify-between items-center px-margin-desktop w-full max-w-7xl mx-auto h-full">
+<div class="font-headline-md text-headline-md font-bold text-institute-navy dark:text-primary-fixed-dim">
+                KSLI
+            </div>
+<nav class="hidden md:flex space-x-lg items-center h-full"><a class="text-on-surface-variant dark:text-outline-variant font-semibold font-label-bold text-label-bold hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200" href="#">Home</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-semibold font-label-bold text-label-bold hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200" href="#">About Us</a>
+<div class="relative group h-full flex items-center">
+    <button class="text-institute-navy dark:text-primary-fixed-dim border-b-2 border-sustainability-teal pb-1 font-label-bold text-label-bold opacity-80 scale-95 transition-all flex items-center gap-xs">
+        Sustainability
+        <span class="material-symbols-outlined text-[16px]">keyboard_arrow_down</span>
+    </button>
+    <div class="absolute top-full left-0 w-48 bg-surface-container-lowest shadow-lg rounded-lg py-sm hidden group-hover:block border border-outline-variant z-50">
+        <a href="#" class="block px-md py-sm text-body-sm hover:bg-surface-muted hover:text-secondary transition-colors">Kumaraguru Microcosm</a>
+        <a href="#" class="block px-md py-sm text-body-sm hover:bg-surface-muted hover:text-secondary transition-colors">Research</a>
+        <a href="#" class="block px-md py-sm text-body-sm hover:bg-surface-muted hover:text-secondary transition-colors">Projects</a>
+        <a href="#" class="block px-md py-sm text-body-sm hover:bg-surface-muted hover:text-secondary transition-colors">Events</a>
+    </div>
+</div>
+<div class="relative group h-full flex items-center">
+    <button class="text-on-surface-variant dark:text-outline-variant font-semibold font-label-bold text-label-bold hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200 flex items-center gap-xs">
+        Livelihood
+        <span class="material-symbols-outlined text-[16px]">keyboard_arrow_down</span>
+    </button>
+    <div class="absolute top-full left-0 w-48 bg-surface-container-lowest shadow-lg rounded-lg py-sm hidden group-hover:block border border-outline-variant z-50">
+        <a href="#" class="block px-md py-sm text-body-sm hover:bg-surface-muted hover:text-secondary transition-colors">Overview</a>
+        <a href="#" class="block px-md py-sm text-body-sm hover:bg-surface-muted hover:text-secondary transition-colors">Research</a>
+        <a href="#" class="block px-md py-sm text-body-sm hover:bg-surface-muted hover:text-secondary transition-colors">Projects</a>
+        <a href="#" class="block px-md py-sm text-body-sm hover:bg-surface-muted hover:text-secondary transition-colors">Events</a>
+    </div>
+</div>
+<a class="text-on-surface-variant dark:text-outline-variant font-semibold font-label-bold text-label-bold hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200" href="#">Get Involved</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-semibold font-label-bold text-label-bold hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200" href="#">Contact Us</a></nav>
+<div class="hidden md:block">
+<button class="bg-institute-navy text-white px-lg py-sm rounded font-label-bold text-label-bold hover:bg-opacity-90 transition-colors shadow-[0px_2px_4px_rgba(27,40,64,0.05)]">
+                    Submit a Project
+                </button>
+</div>
+</div>
+</header>
+<main class="pt-[80px]">
+<!-- Intro Block -->
+<section class="relative bg-surface-muted border-b border-surface-variant">
+<div class="max-w-7xl mx-auto px-margin-desktop py-xxl grid grid-cols-1 md:grid-cols-2 gap-xxl items-center">
+<div>
+<h1 class="font-headline-xl text-headline-xl text-institute-navy mb-lg">
+                        Kumaraguru Microcosm
+                    </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                        The Kumaraguru campus serves as a living laboratory—a microcosm of sustainable practices and environmental stewardship. Through dedicated initiatives in resource management, biodiversity conservation, and conscious living, we model the sustainable future we strive to create globally.
+                    </p>
+</div>
+<div class="relative h-[400px] rounded-xl overflow-hidden shadow-[0px_8px_16px_rgba(27,40,64,0.10)]">
+<img class="absolute inset-0 w-full h-full object-cover" data-alt="A wide, high-resolution photograph of a modern, eco-friendly university campus setting bathed in soft morning light. The architecture is clean and contemporary, featuring large glass windows reflecting lush green trees and integrated rooftop gardens. The overall color palette is dominated by cool blues, stark whites, and vibrant natural greens, reflecting a calm, professional academic and sustainable aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCtXC8awUVkaDjK48tvYXANeUoSFqYnNKpjvUiM0ClqU6dWhq3H6L6xADI0569uFlAyKFMJXmzuqY9UvuUkpTIFsU0G1s3s53Y5YX-MA3Xw-ibttxSV2iTwK_TUPWI10fXvfhXBiKPqU9x1IYk-js_6YBLMFIDrKCkZEWbNpmunzl-IUuSPD-80UA1SC9vMzcnFxpJ-_vBanWR4xhT7Lx9ykY8aZKaQIFv7cIrpn6tgL4RdlEr8BiUhw">
+<!-- Decorative tonal overlay -->
+<div class="absolute inset-0 bg-institute-navy opacity-10 mix-blend-multiply"></div>
+</div>
+</div>
+</section>
+<!-- Focus Areas Grid (Bento Style) -->
+<section class="py-xxl bg-surface">
+<div class="max-w-7xl mx-auto px-margin-desktop">
+<div class="mb-xl">
+<h2 class="font-headline-lg text-headline-lg text-institute-navy">Campus Focus Areas</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-sm">Key pillars of our institutional sustainability framework.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Large Feature Card -->
+<div class="md:col-span-8 bg-surface-container-lowest rounded-xl p-lg shadow-[0px_2px_4px_rgba(27,40,64,0.05)] border-t-[3px] border-sustainability-teal hover:shadow-[0px_8px_16px_rgba(27,40,64,0.10)] transition-shadow duration-300 flex flex-col justify-between group">
+<div>
+<div class="flex items-center space-x-sm mb-md text-sustainability-teal">
+<span class="material-symbols-outlined fill text-[32px]">psychiatry</span>
+<span class="font-label-caps text-label-caps text-institute-navy uppercase tracking-wider">Primary Initiative</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-institute-navy mb-sm group-hover:text-secondary transition-colors">Campus Biodiversity</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-lg">
+                                Preserving and documenting the rich flora and fauna within the campus ecosystem. Our continuous efforts include afforestation drives, habitat protection, and creating sustainable micro-environments that support local wildlife and plant species.
+                            </p>
+</div>
+<div class="flex items-center justify-between mt-auto pt-md border-t border-surface-variant">
+<span class="font-label-bold text-label-bold text-institute-navy">150+ Species Documented</span>
+<span class="material-symbols-outlined text-institute-navy">arrow_forward</span>
+</div>
+</div>
+<!-- Medium Card 1 -->
+<div class="md:col-span-4 bg-surface-container-lowest rounded-xl p-lg shadow-[0px_2px_4px_rgba(27,40,64,0.05)] hover:shadow-[0px_8px_16px_rgba(27,40,64,0.10)] transition-shadow duration-300 flex flex-col">
+<span class="material-symbols-outlined fill text-sustainability-teal text-[32px] mb-md">recycling</span>
+<h3 class="font-headline-md text-headline-md text-institute-navy mb-sm text-lg">Waste Management</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-auto">
+                            Comprehensive solid and liquid waste segregation, upcycling initiatives, and zero-to-landfill operational goals.
+                        </p>
+</div>
+<!-- Medium Card 2 -->
+<div class="md:col-span-4 bg-surface-container-lowest rounded-xl p-lg shadow-[0px_2px_4px_rgba(27,40,64,0.05)] hover:shadow-[0px_8px_16px_rgba(27,40,64,0.10)] transition-shadow duration-300 flex flex-col">
+<span class="material-symbols-outlined fill text-sustainability-teal text-[32px] mb-md">water_drop</span>
+<h3 class="font-headline-md text-headline-md text-institute-navy mb-sm text-lg">Water Stewardship</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-auto">
+                            Rainwater harvesting, greywater recycling, and efficient irrigation systems ensuring self-reliance in campus water needs.
+                        </p>
+</div>
+<!-- Medium Card 3 -->
+<div class="md:col-span-8 bg-surface-container-lowest rounded-xl p-lg shadow-[0px_2px_4px_rgba(27,40,64,0.05)] hover:shadow-[0px_8px_16px_rgba(27,40,64,0.10)] transition-shadow duration-300 flex flex-col md:flex-row items-center gap-lg">
+<div class="w-full md:w-1/3 bg-surface-muted h-full rounded-lg flex items-center justify-center p-xl">
+<span class="material-symbols-outlined fill text-institute-navy text-[64px]">solar_power</span>
+</div>
+<div class="w-full md:w-2/3">
+<h3 class="font-headline-md text-headline-md text-institute-navy mb-sm">Energy Conservation</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">
+                                Transitioning to renewable energy sources, deploying smart-grid technologies, and optimizing infrastructure for minimal carbon footprint across all institutional activities.
+                            </p>
+<button class="text-institute-navy font-label-bold text-label-bold border border-outline-variant px-md py-sm rounded hover:bg-surface-muted transition-colors">
+                                View Energy Report
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Resources Section -->
+<section class="py-xxl bg-surface-muted border-t border-surface-variant">
+<div class="max-w-7xl mx-auto px-margin-desktop">
+<div class="mb-xl text-center">
+<h2 class="font-headline-lg text-headline-lg text-institute-navy">Microcosm Resources</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-sm">Documentation, policies, and acknowledgments of our continuous efforts.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-xxl">
+<!-- Group 1: Awards & Recognition -->
+<div>
+<h3 class="font-headline-md text-headline-md text-institute-navy border-b-2 border-sustainability-teal pb-sm mb-lg text-xl flex items-center gap-sm">
+<span class="material-symbols-outlined text-sustainability-teal">workspace_premium</span>
+                            Awards &amp; Recognition
+                        </h3>
+<ul class="space-y-md">
+<li class="bg-surface-container-lowest p-md rounded shadow-[0px_2px_4px_rgba(27,40,64,0.05)] flex items-start gap-md hover:-translate-y-1 transition-transform duration-200">
+<span class="material-symbols-outlined text-institute-navy mt-xs text-[20px]">military_tech</span>
+<div>
+<h4 class="font-label-bold text-label-bold text-institute-navy">Green Campus Gold Rating</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-xs">Indian Green Building Council (IGBC) - 2023</p>
+</div>
+</li>
+<li class="bg-surface-container-lowest p-md rounded shadow-[0px_2px_4px_rgba(27,40,64,0.05)] flex items-start gap-md hover:-translate-y-1 transition-transform duration-200">
+<span class="material-symbols-outlined text-institute-navy mt-xs text-[20px]">military_tech</span>
+<div>
+<h4 class="font-label-bold text-label-bold text-institute-navy">Excellence in Water Management</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-xs">National Water Awards - 2022</p>
+</div>
+</li>
+</ul>
+</div>
+<!-- Group 2: Policies -->
+<div>
+<h3 class="font-headline-md text-headline-md text-institute-navy border-b-2 border-sustainability-teal pb-sm mb-lg text-xl flex items-center gap-sm">
+<span class="material-symbols-outlined text-sustainability-teal">gavel</span>
+                            Institutional Policies
+                        </h3>
+<ul class="space-y-md">
+<li class="bg-surface-container-lowest p-md rounded shadow-[0px_2px_4px_rgba(27,40,64,0.05)] flex items-center justify-between hover:bg-surface transition-colors cursor-pointer group">
+<span class="font-body-sm text-body-sm text-institute-navy font-semibold">Campus Environmental Policy</span>
+<span class="material-symbols-outlined text-outline group-hover:text-institute-navy transition-colors">description</span>
+</li>
+<li class="bg-surface-container-lowest p-md rounded shadow-[0px_2px_4px_rgba(27,40,64,0.05)] flex items-center justify-between hover:bg-surface transition-colors cursor-pointer group">
+<span class="font-body-sm text-body-sm text-institute-navy font-semibold">Sustainable Procurement Guidelines</span>
+<span class="material-symbols-outlined text-outline group-hover:text-institute-navy transition-colors">description</span>
+</li>
+<li class="bg-surface-container-lowest p-md rounded shadow-[0px_2px_4px_rgba(27,40,64,0.05)] flex items-center justify-between hover:bg-surface transition-colors cursor-pointer group">
+<span class="font-body-sm text-body-sm text-institute-navy font-semibold">E-Waste Disposal Framework</span>
+<span class="material-symbols-outlined text-outline group-hover:text-institute-navy transition-colors">description</span>
+</li>
+</ul>
+</div>
+<!-- Group 3: Downloadable Reports -->
+<div>
+<h3 class="font-headline-md text-headline-md text-institute-navy border-b-2 border-sustainability-teal pb-sm mb-lg text-xl flex items-center gap-sm">
+<span class="material-symbols-outlined text-sustainability-teal">download</span>
+                            Downloadable Reports
+                        </h3>
+<ul class="space-y-md">
+<li class="bg-surface-container-lowest border border-outline-variant p-md rounded flex items-center justify-between group hover:border-sustainability-teal transition-colors">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-institute-navy text-[24px]">picture_as_pdf</span>
+<div>
+<h4 class="font-label-bold text-label-bold text-institute-navy">Annual Sustainability Report</h4>
+<span class="font-label-caps text-label-caps text-on-surface-variant">2023-2024 • 4.2 MB</span>
+</div>
+</div>
+<button class="text-institute-navy hover:text-sustainability-teal transition-colors">
+<span class="material-symbols-outlined">download</span>
+</button>
+</li>
+<li class="bg-surface-container-lowest border border-outline-variant p-md rounded flex items-center justify-between group hover:border-sustainability-teal transition-colors">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-institute-navy text-[24px]">picture_as_pdf</span>
+<div>
+<h4 class="font-label-bold text-label-bold text-institute-navy">Biodiversity Audit Summary</h4>
+<span class="font-label-caps text-label-caps text-on-surface-variant">2023 • 1.8 MB</span>
+</div>
+</div>
+<button class="text-institute-navy hover:text-sustainability-teal transition-colors">
+<span class="material-symbols-outlined">download</span>
+</button>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-institute-navy dark:bg-primary-container text-on-primary dark:text-on-primary-container w-full py-xxl flat no shadows">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop w-full max-w-7xl mx-auto">
+<div class="md:col-span-1">
+<div class="font-headline-md text-headline-md font-bold text-on-primary mb-md">
+                    KSLI
+                </div>
+<p class="font-body-sm text-body-sm text-on-primary-container dark:text-primary-fixed-dim">
+                    Driving sustainable innovation and livelihood development through academic excellence and applied research.
+                </p>
+</div>
+<div class="md:col-span-3 flex flex-wrap gap-xl md:justify-end items-center h-full">
+<nav class="flex flex-wrap gap-lg">
+<a class="font-label-caps text-label-caps text-on-primary-container dark:text-primary-fixed-dim hover:text-white dark:hover:text-white transition-colors duration-200" href="#">Privacy Policy</a>
+<a class="font-label-caps text-label-caps text-on-primary-container dark:text-primary-fixed-dim hover:text-white dark:hover:text-white transition-colors duration-200" href="#">Terms of Service</a>
+<a class="font-label-caps text-label-caps text-on-primary-container dark:text-primary-fixed-dim hover:text-white dark:hover:text-white transition-colors duration-200" href="#">Site Map</a>
+<a class="font-label-caps text-label-caps text-on-primary-container dark:text-primary-fixed-dim hover:text-white dark:hover:text-white transition-colors duration-200" href="#">Contact Us</a>
+<a class="font-label-caps text-label-caps text-on-primary-container dark:text-primary-fixed-dim hover:text-white dark:hover:text-white transition-colors duration-200" href="#">Partner Login</a>
+</nav>
+</div>
+<div class="md:col-span-4 mt-xl pt-lg border-t border-surface-tint opacity-50 text-center">
+<span class="font-body-sm text-body-sm text-on-primary-container dark:text-primary-fixed-dim">
+                    © 2024 Kumaraguru Sustainability and Livelihood Institute. All rights reserved.
+                </span>
+</div>
+</div>
+</footer>
+
+
+</body></html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>KSLI - Sustainability Overview</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "eco-accent": "#2D6A4F",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed": "#fedead",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed": "#a7f1de",
+                    "primary-fixed-dim": "#bac7e6",
+                    "outline-variant": "#c5c6ce",
+                    "background": "#f9f9f9",
+                    "primary": "#05132a",
+                    "on-surface-variant": "#45474d",
+                    "surface-bright": "#f9f9f9",
+                    "secondary-fixed-dim": "#8bd4c2",
+                    "institute-navy": "#1B2840",
+                    "secondary": "#1a6a5b",
+                    "error": "#ba1a1a",
+                    "surface-variant": "#e2e2e2",
+                    "on-error-container": "#93000a",
+                    "surface": "#f9f9f9",
+                    "surface-container-low": "#f3f3f3",
+                    "outline": "#75777e",
+                    "surface-container-high": "#e8e8e8",
+                    "on-primary-container": "#828fac",
+                    "on-primary-fixed-variant": "#3a4760",
+                    "tertiary-container": "#362504",
+                    "on-surface": "#1a1c1c",
+                    "surface-container-highest": "#e2e2e2",
+                    "surface-container": "#eeeeee",
+                    "on-secondary-fixed": "#00201a",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed": "#271900",
+                    "inverse-primary": "#bac7e6",
+                    "tertiary-fixed-dim": "#e0c293",
+                    "primary-fixed": "#d7e2ff",
+                    "primary-container": "#1b2840",
+                    "tertiary": "#1d1100",
+                    "on-tertiary-fixed-variant": "#58431f",
+                    "sustainability-teal": "#85CEBC",
+                    "surface-muted": "#F8F9FA",
+                    "on-secondary-fixed-variant": "#005144",
+                    "on-primary": "#ffffff",
+                    "on-background": "#1a1c1c",
+                    "surface-tint": "#525e79",
+                    "on-primary-fixed": "#0e1b33",
+                    "inverse-on-surface": "#f1f1f1",
+                    "secondary-container": "#a4eedb",
+                    "on-tertiary": "#ffffff",
+                    "surface-dim": "#dadada",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-container": "#a68b61",
+                    "on-secondary-container": "#216e5f",
+                    "inverse-surface": "#2f3131"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "8px",
+                    "margin-desktop": "80px",
+                    "xs": "4px",
+                    "gutter": "24px",
+                    "margin-mobile": "16px",
+                    "base": "8px",
+                    "md": "16px",
+                    "lg": "24px",
+                    "xxl": "64px",
+                    "xl": "32px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Montserrat", "sans-serif"],
+                    "headline-md": ["Montserrat", "sans-serif"],
+                    "label-caps": ["Inter", "sans-serif"],
+                    "body-sm": ["Inter", "sans-serif"],
+                    "label-bold": ["Inter", "sans-serif"],
+                    "body-lg": ["Inter", "sans-serif"],
+                    "headline-lg": ["Montserrat", "sans-serif"],
+                    "headline-lg-mobile": ["Montserrat", "sans-serif"],
+                    "body-md": ["Inter", "sans-serif"]
+            },
+            "fontSize": {
+                    "headline-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                    "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                    "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                    "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                    "label-bold": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                    "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                    "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                    "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                    "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+            }
+          }
+        }
+      }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&amp;family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md text-body-md antialiased min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-surface-container-low border-b border-outline-variant dark:border-outline shadow-[0px_2px_4px_rgba(27,40,64,0.05)] fixed top-0 w-full h-[80px] z-50">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop w-full max-w-7xl mx-auto h-full">
+<div class="font-headline-md text-headline-md font-bold text-institute-navy dark:text-primary-fixed-dim">
+                KSLI
+            </div>
+<nav class="hidden md:flex gap-lg items-center"><a class="text-on-surface-variant dark:text-outline-variant font-semibold hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200 font-label-bold text-label-bold" href="#">Home</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-semibold hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200 font-label-bold text-label-bold" href="#">About Us</a>
+<div class="relative group">
+    <button class="flex items-center gap-xs text-institute-navy dark:text-primary-fixed-dim border-b-2 border-sustainability-teal pb-1 font-label-bold text-label-bold">
+        Sustainability
+        <span class="material-symbols-outlined text-[18px]">keyboard_arrow_down</span>
+    </button>
+    <div class="absolute top-full left-0 hidden group-hover:flex flex-col bg-surface-container-lowest shadow-lg rounded-lg py-sm min-w-[200px] z-50 border border-outline-variant">
+        <a href="#" class="px-lg py-sm hover:bg-surface-muted text-body-sm text-on-surface-variant hover:text-secondary transition-colors">Kumaraguru Microcosm</a>
+        <a href="#" class="px-lg py-sm hover:bg-surface-muted text-body-sm text-on-surface-variant hover:text-secondary transition-colors">Research</a>
+        <a href="#" class="px-lg py-sm hover:bg-surface-muted text-body-sm text-on-surface-variant hover:text-secondary transition-colors">Projects</a>
+        <a href="#" class="px-lg py-sm hover:bg-surface-muted text-body-sm text-on-surface-variant hover:text-secondary transition-colors">Events</a>
+    </div>
+</div>
+<div class="relative group">
+    <button class="flex items-center gap-xs text-on-surface-variant dark:text-outline-variant font-semibold hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200 font-label-bold text-label-bold">
+        Livelihood
+        <span class="material-symbols-outlined text-[18px]">keyboard_arrow_down</span>
+    </button>
+    <div class="absolute top-full left-0 hidden group-hover:flex flex-col bg-surface-container-lowest shadow-lg rounded-lg py-sm min-w-[160px] z-50 border border-outline-variant">
+        <a href="#" class="px-lg py-sm hover:bg-surface-muted text-body-sm text-on-surface-variant hover:text-secondary transition-colors">Overview</a>
+        <a href="#" class="px-lg py-sm hover:bg-surface-muted text-body-sm text-on-surface-variant hover:text-secondary transition-colors">Research</a>
+        <a href="#" class="px-lg py-sm hover:bg-surface-muted text-body-sm text-on-surface-variant hover:text-secondary transition-colors">Projects</a>
+        <a href="#" class="px-lg py-sm hover:bg-surface-muted text-body-sm text-on-surface-variant hover:text-secondary transition-colors">Events</a>
+    </div>
+</div>
+<a class="text-on-surface-variant dark:text-outline-variant font-semibold hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200 font-label-bold text-label-bold" href="#">Get Involved</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-semibold hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200 font-label-bold text-label-bold" href="#">Contact Us</a></nav>
+<button class="hidden md:block bg-institute-navy text-on-primary px-md py-sm rounded font-label-bold text-label-bold hover:opacity-80 scale-95 transition-all">
+                Submit a Project
+            </button>
+<button class="md:hidden text-institute-navy">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</div>
+</header>
+<main class="flex-grow pt-[80px]">
+<!-- Hero Banner -->
+<section class="relative w-full py-xxl md:py-[120px] bg-institute-navy overflow-hidden">
+<div class="absolute inset-0 z-0 opacity-40 mix-blend-overlay" data-alt="A sweeping aerial photograph of a sustainable campus seamlessly integrated with lush, dense native forests and a tranquil river. The architectural style is modern, minimalist, and eco-friendly with green roofs and solar panel arrays visible. The lighting is early morning, casting long, soft shadows and highlighting the deep, rich blues of the water against the vibrant greens. The overall mood is academic, serene, and forward-thinking, embodying a commitment to environmental stewardship." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC0aCfPGhwkzRiq7INx_Ku7YGgODgysXSucL-W3k7qk9eu_kloM62NV55XdkMPM0iL8AiD-CZLk_R24QathZPnOboweQPs-OYzDuOp0l9-TaiwqFTJKMS2h9DdlHpaobN9gkQ6WLpG0HmdDLV_ugP2Fx9hk1fttB50b3nebFXo0gBwsLpLN9GHLlFRXS9AkjOpa301BU1QPfYRc2zBCqvfYxUaZNh61mmit4jwdRxqzoOvPsfDmbToulw')"></div>
+<div class="relative z-10 max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop text-center">
+<h1 class="font-headline-xl text-headline-xl text-on-primary mb-md">Sustainability at KSLI</h1>
+<p class="font-body-lg text-body-lg text-primary-fixed-dim max-w-2xl mx-auto">
+                    Driving systemic change through rigorous research, innovative projects, and a steadfast commitment to ecological balance and community livelihood.
+                </p>
+</div>
+</section>
+<!-- Domain Description -->
+<section class="max-w-4xl mx-auto px-margin-mobile md:px-margin-desktop py-xxl">
+<div class="space-y-md font-body-md text-body-md text-on-surface-variant text-center leading-relaxed">
+<p class="">
+                    At the Kumaraguru Sustainability and Livelihood Institute (KSLI), our approach to sustainability is deeply rooted in the philosophy of academic stewardship. We recognize that true sustainability transcends environmental conservation; it requires a holistic integration of ecological health, economic viability, and social equity.
+                </p>
+<p class="">
+                    Our multidisciplinary teams work at the intersection of these domains, employing modern research methodologies and field-based interventions. By collaborating with local communities, industry partners, and policy-makers, KSLI strives to develop scalable solutions that address complex global challenges while empowering local livelihoods.
+                </p>
+</div>
+</section>
+<!-- Focus Areas Grid -->
+<section class="bg-surface-muted py-xxl">
+<div class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="text-center mb-xl">
+<h2 class="font-headline-lg text-headline-lg text-institute-navy">Core Focus Areas</h2>
+<div class="w-16 h-1 bg-sustainability-teal mx-auto mt-sm"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest rounded-lg p-lg shadow-[0px_2px_4px_rgba(27,40,64,0.05)] hover:shadow-[0px_8px_16px_rgba(27,40,64,0.10)] transition-shadow duration-300 border-t-2 border-transparent hover:border-sustainability-teal flex flex-col items-center text-center">
+<div class="w-16 h-16 rounded-full bg-surface-muted flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-institute-navy text-[32px]" data-icon="recycling">recycling</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-institute-navy mb-sm">Circular Economy</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Designing systems that eliminate waste and continually use resources through closed-loop methodologies.</p>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest rounded-lg p-lg shadow-[0px_2px_4px_rgba(27,40,64,0.05)] hover:shadow-[0px_8px_16px_rgba(27,40,64,0.10)] transition-shadow duration-300 border-t-2 border-transparent hover:border-sustainability-teal flex flex-col items-center text-center">
+<div class="w-16 h-16 rounded-full bg-surface-muted flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-institute-navy text-[32px]" data-icon="eco">eco</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-institute-navy mb-sm">Climate Action</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Developing mitigation strategies and adaptation frameworks to build resilience against climate change.</p>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest rounded-lg p-lg shadow-[0px_2px_4px_rgba(27,40,64,0.05)] hover:shadow-[0px_8px_16px_rgba(27,40,64,0.10)] transition-shadow duration-300 border-t-2 border-transparent hover:border-sustainability-teal flex flex-col items-center text-center">
+<div class="w-16 h-16 rounded-full bg-surface-muted flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-institute-navy text-[32px]" data-icon="water_drop">water_drop</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-institute-navy mb-sm">Water Stewardship</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Advancing sustainable water management practices to ensure equitable access and ecological flow.</p>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest rounded-lg p-lg shadow-[0px_2px_4px_rgba(27,40,64,0.05)] hover:shadow-[0px_8px_16px_rgba(27,40,64,0.10)] transition-shadow duration-300 border-t-2 border-transparent hover:border-sustainability-teal flex flex-col items-center text-center">
+<div class="w-16 h-16 rounded-full bg-surface-muted flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-institute-navy text-[32px]" data-icon="solar_power">solar_power</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-institute-navy mb-sm">Renewable Energy</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Researching and implementing clean energy alternatives to reduce carbon footprints and energy poverty.</p>
+</div>
+<!-- Card 5 -->
+<div class="bg-surface-container-lowest rounded-lg p-lg shadow-[0px_2px_4px_rgba(27,40,64,0.05)] hover:shadow-[0px_8px_16px_rgba(27,40,64,0.10)] transition-shadow duration-300 border-t-2 border-transparent hover:border-sustainability-teal flex flex-col items-center text-center">
+<div class="w-16 h-16 rounded-full bg-surface-muted flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-institute-navy text-[32px]" data-icon="forest">forest</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-institute-navy mb-sm">Biodiversity Conservation</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Protecting local ecosystems and promoting practices that enhance flora and fauna diversity.</p>
+</div>
+<!-- Card 6 -->
+<div class="bg-surface-container-lowest rounded-lg p-lg shadow-[0px_2px_4px_rgba(27,40,64,0.05)] hover:shadow-[0px_8px_16px_rgba(27,40,64,0.10)] transition-shadow duration-300 border-t-2 border-transparent hover:border-sustainability-teal flex flex-col items-center text-center">
+<div class="w-16 h-16 rounded-full bg-surface-muted flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-institute-navy text-[32px]" data-icon="agriculture">agriculture</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-institute-navy mb-sm">Sustainable Agriculture</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Fostering regenerative farming techniques to ensure long-term food security and soil health.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-xxl flex justify-center items-center bg-surface">
+<button class="bg-institute-navy hover:bg-primary-container text-on-primary px-lg py-md rounded-lg font-label-bold text-label-bold transition-colors duration-200 shadow-[0px_2px_4px_rgba(27,40,64,0.05)] flex items-center gap-sm">
+                View Research &amp; Projects
+                <span class="material-symbols-outlined text-[18px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-institute-navy dark:bg-primary-container w-full py-xxl">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop w-full max-w-7xl mx-auto">
+<div class="col-span-1 md:col-span-2 space-y-md">
+<div class="font-headline-md text-headline-md font-bold text-on-primary">
+                    KSLI
+                </div>
+<p class="font-body-sm text-body-sm text-on-primary-container dark:text-primary-fixed-dim max-w-sm">
+                    © 2024 Kumaraguru Sustainability and Livelihood Institute. All rights reserved.
+                </p>
+</div>
+<div class="col-span-1 flex flex-col space-y-sm">
+<a class="font-label-caps text-label-caps text-on-primary-container dark:text-primary-fixed-dim hover:text-white dark:hover:text-white transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-caps text-label-caps text-on-primary-container dark:text-primary-fixed-dim hover:text-white dark:hover:text-white transition-colors" href="#">Terms of Service</a>
+<a class="font-label-caps text-label-caps text-on-primary-container dark:text-primary-fixed-dim hover:text-white dark:hover:text-white transition-colors" href="#">Site Map</a>
+</div>
+<div class="col-span-1 flex flex-col space-y-sm">
+<a class="font-label-caps text-label-caps text-on-primary-container dark:text-primary-fixed-dim hover:text-white dark:hover:text-white transition-colors" href="#">Contact Us</a>
+<a class="font-label-caps text-label-caps text-on-primary-container dark:text-primary-fixed-dim hover:text-white dark:hover:text-white transition-colors" href="#">Partner Login</a>
+</div>
+</div>
+</footer>
+
+
+</body></html>
