@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import '../styles/AboutKSLI.css';
 
 const thrustAreas = [
@@ -9,13 +9,31 @@ const thrustAreas = [
   ['04', 'Education & Capacity Building', 'Practice-oriented education and capacity building connected to real environmental and livelihood challenges.'],
 ];
 
-const teams = [
-  { name: 'Campus Sustainability', people: ['Keerthana', 'Jeevesh', 'Paramaguru'] },
-  { name: 'Dairy', people: ['Dr Thanammal', 'Nethaji Subash - Program Management', 'Kavin - Program Associate', 'Arun Kumar - Field', 'Bharani - Admin Support'] },
-  { name: 'Farmer 360', people: ['Mr Sezhian', 'Dr Gopi', 'Dr Sudhakar', 'Mr Amarendran', 'Ms Sangeetha'] },
-  { name: 'Sugarcane', people: ['Dr Hemalatha', 'Boopathy - JRF', 'Bhuvaneshwari - JRF', 'Sujeeth - Field Coordinator', 'Gokulraj - FC'] },
-  { name: 'Farmer Producer Organization', people: ['Shanthra - CEO', 'Gowsika - Accountant', 'Karthika - Extension Officer', 'Nithya - Business Executive'] },
+const teamMembers = [
+  { name: 'Keerthana', role: 'Role to be confirmed', category: 'Campus Sustainability' },
+  { name: 'Jeevesh', role: 'Role to be confirmed', category: 'Campus Sustainability' },
+  { name: 'Paramaguru', role: 'Role to be confirmed', category: 'Campus Sustainability' },
+  { name: 'Dr Thanammal', role: 'Role to be confirmed', category: 'Dairy' },
+  { name: 'Nethaji Subash', role: 'Program Management', category: 'Dairy' },
+  { name: 'Kavin', role: 'Program Associate', category: 'Dairy' },
+  { name: 'Arun Kumar', role: 'Field', category: 'Dairy' },
+  { name: 'Bharani', role: 'Admin Support', category: 'Dairy' },
+  { name: 'Mr Sezhian', role: 'Role to be confirmed', category: 'Farmer 360' },
+  { name: 'Dr Gopi', role: 'Role to be confirmed', category: 'Farmer 360' },
+  { name: 'Dr Sudhakar', role: 'Role to be confirmed', category: 'Farmer 360' },
+  { name: 'Mr Amarendran', role: 'Role to be confirmed', category: 'Farmer 360' },
+  { name: 'Ms Sangeetha', role: 'Role to be confirmed', category: 'Farmer 360' },
+  { name: 'Dr Hemalatha', role: 'Role to be confirmed', category: 'Sugarcane' },
+  { name: 'Boopathy', role: 'JRF', category: 'Sugarcane' },
+  { name: 'Bhuvaneshwari', role: 'JRF', category: 'Sugarcane' },
+  { name: 'Sujeeth', role: 'Field Coordinator', category: 'Sugarcane' },
+  { name: 'Gokulraj', role: 'FC', category: 'Sugarcane' },
+  { name: 'Shanthra', role: 'CEO', category: 'Farmer Producer Organization' },
+  { name: 'Gowsika', role: 'Accountant', category: 'Farmer Producer Organization' },
+  { name: 'Karthika', role: 'Extension Officer', category: 'Farmer Producer Organization' },
+  { name: 'Nithya', role: 'Business Executive', category: 'Farmer Producer Organization' },
 ];
+const teamFilters = ['All', 'Dairy', 'Sugarcane', 'Campus Sustainability', 'Farmer 360', 'Farmer Producer Organization'];
 
 function ImagePlaceholder({ label, className = '' }) {
   return <div className={`aboutksli-image-placeholder ${className}`} role="img" aria-label={label}><span>{label}</span></div>;
@@ -26,10 +44,7 @@ function RevealSection({ eyebrow, title, children, direction, imageLabel, revers
   useEffect(() => {
     const node = ref.current;
     const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        node.classList.add('is-visible');
-        observer.unobserve(node);
-      }
+      node.classList.toggle('is-visible', entry.isIntersecting);
     }, { threshold: 0.18 });
     observer.observe(node);
     return () => observer.disconnect();
@@ -47,6 +62,22 @@ function RevealSection({ eyebrow, title, children, direction, imageLabel, revers
 }
 
 export default function AboutKSLI() {
+  const [activeFilter, setActiveFilter] = useState('All');
+  const [carouselIndex, setCarouselIndex] = useState(0);
+  const [cardStep, setCardStep] = useState(0);
+  const carouselViewport = useRef(null);
+  const visibleMembers = activeFilter === 'All' ? teamMembers : teamMembers.filter((member) => member.category === activeFilter);
+  useEffect(() => {
+    const updateStep = () => {
+      const firstCard = carouselViewport.current?.querySelector('.aboutksli-person');
+      if (firstCard) setCardStep(firstCard.getBoundingClientRect().width + 18);
+    };
+    updateStep();
+    window.addEventListener('resize', updateStep);
+    return () => window.removeEventListener('resize', updateStep);
+  }, [activeFilter]);
+  const chooseFilter = (filter) => { setActiveFilter(filter); setCarouselIndex(0); };
+  const moveCarousel = (direction) => setCarouselIndex((current) => Math.min(Math.max(current + direction, 0), Math.max(visibleMembers.length - 1, 0)));
   return <article className="aboutksli-page">
     <section className="aboutksli-hero">
       <ImagePlaceholder className="aboutksli-hero-image" label="HERO IMAGE PLACEHOLDER"/>
@@ -80,10 +111,9 @@ export default function AboutKSLI() {
     </section>
 
     <section className="aboutksli-team">
-      <div className="shell">
-        <p className="eyebrow teal">Our Team</p>
-        <div className="aboutksli-team-heading"><h2>People working across campus and communities.</h2><p>The current KSLI team spans campus sustainability, dairy, Farmer 360, sugarcane, and farmer producer organization work.</p></div>
-        <div className="aboutksli-team-groups">{teams.map((team) => <section className="aboutksli-team-group" key={team.name}><h3>{team.name}</h3><div className="aboutksli-people">{team.people.map((person) => <article className="aboutksli-person" key={person}><ImagePlaceholder label="TEAM PHOTO PLACEHOLDER"/><p>{person}</p></article>)}</div></section>)}</div>
+      <div className="aboutksli-team-shell">
+        <div className="aboutksli-team-topline"><div><p className="eyebrow teal">Our Team</p><h2>The Faces Behind Our Mission</h2></div><div className="aboutksli-carousel-controls"><button type="button" aria-label="Previous team members" onClick={() => moveCarousel(-1)} disabled={carouselIndex === 0}>←</button><output aria-live="polite">{String(carouselIndex + 1).padStart(2, '0')}/{String(visibleMembers.length).padStart(2, '0')}</output><button type="button" aria-label="Next team members" onClick={() => moveCarousel(1)} disabled={carouselIndex >= visibleMembers.length - 1}>→</button></div></div>
+        <div className="aboutksli-team-directory"><div className="aboutksli-team-filters" aria-label="Filter team members">{teamFilters.map((filter) => <button type="button" key={filter} className={activeFilter === filter ? 'active' : ''} onClick={() => chooseFilter(filter)}>{filter}</button>)}</div><div className="aboutksli-carousel-viewport" ref={carouselViewport}><div className="aboutksli-carousel-track" style={{ transform: `translateX(-${carouselIndex * cardStep}px)` }}>{visibleMembers.map((member) => <article className="aboutksli-person" key={`${member.category}-${member.name}`}><ImagePlaceholder label="TEAM PHOTO PLACEHOLDER"/><h3>{member.name}</h3><p>{member.role}</p></article>)}</div></div></div>
       </div>
     </section>
 
