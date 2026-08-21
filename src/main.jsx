@@ -10,6 +10,22 @@ import earthonomicLogo from '../assets/Earthonomic Engineers.png';
 import salzerLogo from '../assets/Salzer.png';
 import schneiderLogo from '../assets/Schneider Electric.png';
 import sierraLogo from '../assets/Sierra.png';
+import edfLogo from '../assets/Environmental Defense Fund.png';
+import kisanLogo from '../assets/Kisan Konnect.png';
+import mobitechLogo from '../assets/Mobitech Wireless Solutions.png';
+import nddbLogo from '../assets/NDDB Mrida Limited.png';
+import csaLogo from '../assets/Centre for Sustainable Agriculture.png';
+import bnhsLogo from '../assets/BNHS India.png';
+import naturalistLogo from '../assets/The Naturalist School.png';
+import zooOutreachLogo from '../assets/Zoo Outreach Organisation.png';
+import aTreeLogo from '../assets/a tree.png';
+import wwfLogo from '../assets/WWF.png';
+import igbcLogo from '../assets/IGBC.png';
+import nicmarLogo from '../assets/NICMAR.png';
+import aurovilleLogo from '../assets/Auroville Botanical Gardens.png';
+import udriLogo from '../assets/Urban Design Research Institute.png';
+import biomeLogo from '../assets/Biome Environmental.png';
+import thannalLogo from '../assets/thannal.png';
 import AboutKSLI from './pages/AboutKSLI.jsx';
 
 const img = {
@@ -49,9 +65,9 @@ function AnimatedSectionHeading({eyebrow, title, children}){const [inView, setIn
 function Home(){
   const partnerCategories = [
     { name: 'Resource Efficiency', partners: [{name:'CEEW', logo:ceewLogo}, {name:'Schneider Electric', logo:schneiderLogo}, {name:'Sierra', logo:sierraLogo}, {name:'Earthonomic Engineers', logo:earthonomicLogo}, {name:'Salzer', logo:salzerLogo}] },
-    { name: 'Sustainable Agriculture', partners: ['Environmental Defense Fund', 'Kisan Konnect', 'Mobitech Wireless Solutions', 'NDDB Mrida Limited', 'Centre for Sustainable Agriculture'] },
-    { name: 'Nature Conservation', partners: ['BNHS India', 'The Naturalist School', 'Zoo Outreach Organisation', 'a tree', 'WWF'] },
-    { name: 'Green Buildings', partners: ['IGBC', 'NICMAR', 'Auroville Botanical Gardens', 'Urban Design Research Institute', 'Biome Environmental', 'thannal'] }
+    { name: 'Sustainable Agriculture', partners: [{name:'Environmental Defense Fund', logo:edfLogo}, {name:'Kisan Konnect', logo:kisanLogo}, {name:'Mobitech Wireless Solutions', logo:mobitechLogo}, {name:'NDDB Mrida Limited', logo:nddbLogo}, {name:'Centre for Sustainable Agriculture', logo:csaLogo}] },
+    { name: 'Nature Conservation', partners: [{name:'BNHS India', logo:bnhsLogo}, {name:'The Naturalist School', logo:naturalistLogo}, {name:'Zoo Outreach Organisation', logo:zooOutreachLogo}, {name:'a tree', logo:aTreeLogo}, {name:'WWF', logo:wwfLogo}] },
+    { name: 'Green Buildings', partners: [{name:'IGBC', logo:igbcLogo}, {name:'NICMAR', logo:nicmarLogo}, {name:'Auroville Botanical Gardens', logo:aurovilleLogo}, {name:'Urban Design Research Institute', logo:udriLogo}, {name:'Biome Environmental', logo:biomeLogo}, {name:'thannal', logo:thannalLogo}] }
   ];
   return <><section className="home-hero" style={{backgroundImage:`linear-gradient(90deg,rgba(27,40,64,.96),rgba(27,40,64,.74),transparent),url(${img.hero})`}}><div className="shell"><p className="teal intro-label">Kumaraguru Sustainability and Livelihood Institute</p><h1>Fostering a Sustainable Future through Knowledge and Action</h1><p>Advancing sustainability and livelihoods through research, education, entrepreneurship, and community transformation.</p><div className="actions"><Link className="primary" to="/academic-programs">Explore Programs →</Link><Link className="secondary" to="/coe-partners">Partner With Us</Link></div></div></section><Stats/><section className="section narrow center"><AnimatedSectionHeading eyebrow="Our Core Purpose" title="KSLI is proposed as a strategic institutional platform to consolidate, lead, and scale sustainability- and livelihood-focused initiatives, aligning academic programs, research, partnerships, flagship events, and community engagement under a single governance and identity."/></section><section className="section muted"><div className="shell cards-2"><CtaCard title="Sustainability Initiatives" text="Advancing resource efficiency, sustainable agriculture, nature conservation, and sustainable human settlements through applied research and green infrastructure." to="/sustainability" image={img.sustainability}/><CtaCard title="Livelihood Development" text="Strengthening farm-based, off-farm, and non-farm livelihoods through capacity building, entrepreneurship, and market linkages." to="/livelihood" image={img.pathway}/></div></section><section className="section shell"><SectionHeading title="Latest Updates">Recent flagship events and initiatives.</SectionHeading><div className="entry-grid"><EntryCard title="Dairy Yatra" type="SUSTAINABILITY EVENT"/><EntryCard title="Student Conclave for Climate Action" type="SUSTAINABILITY EVENT"/><EntryCard title="Young Farmers Conclave" type="LIVELIHOOD EVENT"/></div></section><section className="section muted"><SectionHeading title="Academic Programs" center={true}/><div className="shell entry-grid"><EntryCard title="MBA – Agri Business Management" type="ACADEMIC PROGRAM"/><EntryCard title="MBA – Sustainability Management" type="ACADEMIC PROGRAM"/><EntryCard title="MSW – Master of Social Work" type="ACADEMIC PROGRAM"/></div></section><section className="section shell"><div className="shell"><LogoGrid title="Our Collaborators" categories={partnerCategories}/></div></section><section className="bottom-cta"><div className="shell"><div><p className="eyebrow teal">Collaborate with KSLI</p><h2>Have a project that can create meaningful impact?</h2></div><Link className="primary" to="/submit-a-project">Submit a Project →</Link></div></section></>}
 function DomainOverview({domain}){const sustain=domain==='Sustainability'; const areas=sustain?['Circular Economy','Climate Action','Water Stewardship','Renewable Energy','Biodiversity Conservation','Sustainable Agriculture']:['Community Enterprise','Skills & Learning','Inclusive Innovation','Rural Futures','Social Impact','Local Economies'];return <><section className={`domain-hero ${sustain?'sustain':''}`} style={sustain?{backgroundImage:`linear-gradient(90deg,#1b2840ee,#1b2840c0),url(${img.sustainability})`}:{}}><div className="shell"><p className="eyebrow teal">KSLI Domain</p><h1>{sustain?'Sustainability at KSLI':'Livelihood at KSLI'}</h1><p>{sustain?'Environmental stewardship is central to KSLI’s institutional work.':'KSLI enables sustainable livelihoods through research, learning and community partnership.'}</p></div></section><section className="section shell"><SectionHeading eyebrow="Areas of work" title={sustain?'Core Focus Areas':'Livelihood Focus Areas'}/><FocusGrid areas={areas}/></section></>}
