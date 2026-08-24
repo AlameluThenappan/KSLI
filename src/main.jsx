@@ -62,6 +62,54 @@ function LogoGrid({title='Our Partners', categories}){
   return <section><SectionHeading title={title}/><div className="marquee-container"><div className="marquee-track"><div className="marquee-group">{names.map((name,i)=><div className="logo-tile" style={{padding:'0 10px', fontSize:'12px', minWidth:'180px'}} key={name}><span>{String(i+1).padStart(2,'0')}</span>{name}</div>)}</div><div className="marquee-group" aria-hidden="true">{names.map((name,i)=><div className="logo-tile" style={{padding:'0 10px', fontSize:'12px', minWidth:'180px'}} key={name+'-dup'}><span>{String(i+1).padStart(2,'0')}</span>{name}</div>)}</div></div></div></section>;
 }
 function AnimatedSectionHeading({eyebrow, title, children}){const [inView, setInView] = useState(false); const ref = React.useRef(); React.useEffect(() => { const observer = new IntersectionObserver(([entry]) => { if (entry.isIntersecting) { setInView(true); observer.disconnect(); } }, { threshold: 0.2 }); if (ref.current) observer.observe(ref.current); return () => observer.disconnect(); }, []); return <div ref={ref} className={`section-heading center core-purpose-animated ${inView ? 'in-view' : ''}`}>{eyebrow&&<p className="eyebrow teal">{eyebrow}</p>}<h2>{title}</h2>{children&&<p>{children}</p>}</div>}
+
+function CorePurposeArch() {
+  const [inView, setInView] = useState(false);
+  const ref = React.useRef();
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setInView(true);
+        observer.disconnect();
+      }
+    }, { threshold: 0.2 });
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  const nodes = [
+    { icon: '⌁', left: '4.68%', top: '57.74%', delay: '0.2s' },
+    { icon: '♧', left: '28.87%', top: '9.37%', delay: '0.35s' },
+    { icon: '⌘', left: '71.13%', top: '9.37%', delay: '0.5s' },
+    { icon: '◈', left: '95.31%', top: '57.74%', delay: '0.65s' }
+  ];
+  const dots = [
+    { left: '14.65%', top: '29.3%' },
+    { left: '50%', top: '0%' },
+    { left: '85.35%', top: '29.3%' }
+  ];
+
+  return (
+    <section className="section" ref={ref}>
+      <div className={`arch-wrapper ${inView ? 'in-view' : ''}`}>
+        <div className="arch-path">
+          {nodes.map((node, i) => (
+            <div className="arch-node" key={i} style={{ left: node.left, top: node.top, transitionDelay: inView ? node.delay : '0s' }}>
+              {node.icon}
+            </div>
+          ))}
+          {dots.map((dot, i) => (
+            <div className="arch-dot" key={i} style={{ left: dot.left, top: dot.top }} />
+          ))}
+        </div>
+        <div className="arch-content">
+          <h2 className="core-purpose-title">Our Core Purpose</h2>
+          <p>KSLI is proposed as a strategic institutional platform to consolidate, lead, and scale sustainability- and livelihood-focused initiatives, aligning academic programs, research, partnerships, flagship events, and community engagement under a single governance and identity.</p>
+        </div>
+      </div>
+    </section>
+  );
+}
 function Home(){
   const partnerCategories = [
     { name: 'Resource Efficiency', partners: [{name:'CEEW', logo:ceewLogo}, {name:'Schneider Electric', logo:schneiderLogo}, {name:'Sierra', logo:sierraLogo}, {name:'Earthonomic Engineers', logo:earthonomicLogo}, {name:'Salzer', logo:salzerLogo}] },
@@ -69,7 +117,7 @@ function Home(){
     { name: 'Nature Conservation', partners: [{name:'BNHS India', logo:bnhsLogo}, {name:'The Naturalist School', logo:naturalistLogo}, {name:'Zoo Outreach Organisation', logo:zooOutreachLogo}, {name:'a tree', logo:aTreeLogo}, {name:'WWF', logo:wwfLogo}] },
     { name: 'Green Buildings', partners: [{name:'IGBC', logo:igbcLogo}, {name:'NICMAR', logo:nicmarLogo}, {name:'Auroville Botanical Gardens', logo:aurovilleLogo}, {name:'Urban Design Research Institute', logo:udriLogo}, {name:'Biome Environmental', logo:biomeLogo}, {name:'thannal', logo:thannalLogo}] }
   ];
-  return <><section className="home-hero" style={{position:'relative', overflow:'hidden'}}><video src={heroVideo} autoPlay loop muted playsInline style={{position:'absolute', top:0, left:0, width:'100%', height:'100%', objectFit:'cover', zIndex:-2}} /><div style={{position:'absolute', top:0, left:0, width:'100%', height:'100%', zIndex:-1, backgroundImage:'linear-gradient(90deg,rgba(27,40,64,.96),rgba(27,40,64,.74),transparent)'}} /><div className="shell" style={{position:'relative', zIndex:1}}><p className="teal intro-label">Kumaraguru Sustainability and Livelihood Institute</p><h1>Fostering a Sustainable Future through Knowledge and Action</h1><p>Advancing sustainability and livelihoods through research, education, entrepreneurship, and community transformation.</p><div className="actions"><Link className="primary" to="/academic-programs">Explore Programs →</Link><Link className="secondary" to="/coe-partners">Partner With Us</Link></div></div></section><Stats/><section className="section narrow center"><AnimatedSectionHeading eyebrow="Our Core Purpose" title="KSLI is proposed as a strategic institutional platform to consolidate, lead, and scale sustainability- and livelihood-focused initiatives, aligning academic programs, research, partnerships, flagship events, and community engagement under a single governance and identity."/></section><section className="section muted"><div className="shell cards-2"><CtaCard title="Sustainability Initiatives" text="Advancing resource efficiency, sustainable agriculture, nature conservation, and sustainable human settlements through applied research and green infrastructure." to="/sustainability" image={img.sustainability}/><CtaCard title="Livelihood Development" text="Strengthening farm-based, off-farm, and non-farm livelihoods through capacity building, entrepreneurship, and market linkages." to="/livelihood" image={img.pathway}/></div></section><section className="section shell"><SectionHeading title="Latest Updates">Recent flagship events and initiatives.</SectionHeading><div className="entry-grid"><EntryCard title="Dairy Yatra" type="SUSTAINABILITY EVENT"/><EntryCard title="Student Conclave for Climate Action" type="SUSTAINABILITY EVENT"/><EntryCard title="Young Farmers Conclave" type="LIVELIHOOD EVENT"/></div></section><section className="section muted"><SectionHeading title="Academic Programs" center={true}/><div className="shell entry-grid"><EntryCard title="MBA – Agri Business Management" type="ACADEMIC PROGRAM"/><EntryCard title="MBA – Sustainability Management" type="ACADEMIC PROGRAM"/><EntryCard title="MSW – Master of Social Work" type="ACADEMIC PROGRAM"/></div></section><section className="section shell"><div className="shell"><LogoGrid title="Our Collaborators" categories={partnerCategories}/></div></section><section className="bottom-cta"><div className="shell"><div><p className="eyebrow teal">Collaborate with KSLI</p><h2>Have a project that can create meaningful impact?</h2></div><Link className="primary" to="/submit-a-project">Submit a Project →</Link></div></section></>}
+  return <><section className="home-hero" style={{position:'relative', overflow:'hidden'}}><video src={heroVideo} autoPlay loop muted playsInline style={{position:'absolute', top:0, left:0, width:'100%', height:'100%', objectFit:'cover', zIndex:-2}} /><div style={{position:'absolute', top:0, left:0, width:'100%', height:'100%', zIndex:-1, backgroundImage:'linear-gradient(90deg, rgba(27,40,64,0.98) 0%, rgba(27,40,64,0.90) 35%, rgba(27,40,64,0.4) 70%, transparent 100%)'}} /><div className="shell" style={{position:'relative', zIndex:1}}><div className="hero-content"><p className="teal intro-label">Kumaraguru Sustainability and Livelihood Institute</p><h1>Fostering a Sustainable Future through Knowledge and Action</h1><p>Advancing sustainability and livelihoods through research, education, entrepreneurship, and community transformation.</p><div className="actions"><Link className="primary" to="/academic-programs">Explore Programs →</Link><Link className="secondary" to="/coe-partners">Partner With Us</Link></div></div></div></section><Stats/><CorePurposeArch/><section className="section muted"><div className="shell cards-2"><CtaCard title="Sustainability Initiatives" text="Advancing resource efficiency, sustainable agriculture, nature conservation, and sustainable human settlements through applied research and green infrastructure." to="/sustainability" image={img.sustainability}/><CtaCard title="Livelihood Development" text="Strengthening farm-based, off-farm, and non-farm livelihoods through capacity building, entrepreneurship, and market linkages." to="/livelihood" image={img.pathway}/></div></section><section className="section shell"><SectionHeading title="Latest Updates">Recent flagship events and initiatives.</SectionHeading><div className="entry-grid"><EntryCard title="Dairy Yatra" type="SUSTAINABILITY EVENT"/><EntryCard title="Student Conclave for Climate Action" type="SUSTAINABILITY EVENT"/><EntryCard title="Young Farmers Conclave" type="LIVELIHOOD EVENT"/></div></section><section className="section muted"><SectionHeading title="Academic Programs" center={true}/><div className="shell entry-grid"><EntryCard title="MBA – Agri Business Management" type="ACADEMIC PROGRAM"/><EntryCard title="MBA – Sustainability Management" type="ACADEMIC PROGRAM"/><EntryCard title="MSW – Master of Social Work" type="ACADEMIC PROGRAM"/></div></section><section className="section shell"><div className="shell"><LogoGrid title="Our Collaborators" categories={partnerCategories}/></div></section><section className="bottom-cta"><div className="shell"><div><p className="eyebrow teal">Collaborate with KSLI</p><h2>Have a project that can create meaningful impact?</h2></div><Link className="primary" to="/submit-a-project">Submit a Project →</Link></div></section></>}
 function DomainOverview({domain}){const sustain=domain==='Sustainability'; const areas=sustain?['Circular Economy','Climate Action','Water Stewardship','Renewable Energy','Biodiversity Conservation','Sustainable Agriculture']:['Community Enterprise','Skills & Learning','Inclusive Innovation','Rural Futures','Social Impact','Local Economies'];return <><section className={`domain-hero ${sustain?'sustain':''}`} style={sustain?{backgroundImage:`linear-gradient(90deg,#1b2840ee,#1b2840c0),url(${img.sustainability})`}:{}}><div className="shell"><p className="eyebrow teal">KSLI Domain</p><h1>{sustain?'Sustainability at KSLI':'Livelihood at KSLI'}</h1><p>{sustain?'Environmental stewardship is central to KSLI’s institutional work.':'KSLI enables sustainable livelihoods through research, learning and community partnership.'}</p></div></section><section className="section shell"><SectionHeading eyebrow="Areas of work" title={sustain?'Core Focus Areas':'Livelihood Focus Areas'}/><FocusGrid areas={areas}/></section></>}
 function Microcosm(){return <><PageIntro eyebrow="Sustainability" title="Kumaraguru Microcosm">A living campus laboratory that brings sustainability principles into everyday practice.</PageIntro><section className="section shell"><SectionHeading title="Campus Focus Areas"/><FocusGrid areas={['Campus Biodiversity','Waste Management','Water Stewardship','Energy Conservation']}/></section><section className="section muted"><div className="shell"><SectionHeading title="Microcosm Resources"/><GroupedList groups={[{title:'Awards & Recognition',items:['Recognition and awards placeholder']},{title:'Policies',items:['Campus sustainability policy placeholder']},{title:'Reports & Documents',items:['Downloadable reports placeholder']} ]}/></div></section></>}
 function Listing({domain='Sustainability', kind='Research'}){const names=kind==='Research'?['Systems research initiative','Community knowledge project','Applied research programme']:kind==='Projects'?['Campus impact initiative','Collaborative field project','Sustainable systems project']:['Annual institute gathering','Knowledge exchange session','Community engagement event'];return <><PageIntro eyebrow={domain} title={`${domain} ${kind}`}>Featured {kind.toLowerCase()} entries will be listed here.</PageIntro><section className="section shell"><div className="entry-grid">{names.map((x,i)=><EntryCard key={x} title={x} type={kind.slice(0,-1).toUpperCase()} image={i===0?img.sustainability:null}/>)}</div></section></>}
