@@ -26,7 +26,7 @@ import aurovilleLogo from '../assets/Auroville Botanical Gardens.png';
 import udriLogo from '../assets/Urban Design Research Institute.png';
 import biomeLogo from '../assets/Biome Environmental.png';
 import thannalLogo from '../assets/thannal.png';
-import heroVideo from '../assets/homepage-video.mp4';
+import heroVideo from '../assets/Video Project 9.mp4';
 import AboutKSLI from './pages/AboutKSLI.jsx';
 
 const img = {
