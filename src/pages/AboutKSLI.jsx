@@ -159,8 +159,16 @@ export default function AboutKSLI() {
     return () => window.removeEventListener('resize', updateCardMetrics);
   }, [updateCardMetrics, activeFilter]);
 
-  const maxIndex = Math.max(0, visibleMembers.length - visibleCardsCount);
+  // The counter represents the leading card in the track. Allow it to advance
+  // through the final member, even when the final viewport has fewer cards.
+  // This keeps navigation and its disabled state tied to the active dataset.
+  const maxIndex = Math.max(0, visibleMembers.length - 1);
   const isPaginationNeeded = visibleMembers.length > visibleCardsCount;
+
+  // Keep the index valid if the viewport size or active dataset changes.
+  useEffect(() => {
+    setCarouselIndex((current) => Math.min(current, maxIndex));
+  }, [maxIndex]);
 
   // Filter change handler
   const chooseFilter = (filter) => {
