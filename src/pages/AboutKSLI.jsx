@@ -3,10 +3,10 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import '../styles/AboutKSLI.css';
 
 const thrustAreas = [
-  ['01', 'Development Projects', 'Place-based initiatives that translate institutional intent into sustained community work.'],
-  ['02', 'Research & Field Innovation', 'Applied inquiry and field innovation that inform practical, scalable solutions.'],
-  ['03', 'Entrepreneurship Development', 'Entrepreneurship-focused pathways that create value across sustainability and livelihood ecosystems.'],
-  ['04', 'Education & Capacity Building', 'Practice-oriented education and capacity building connected to real environmental and livelihood challenges.'],
+  ['01', 'Development Projects', 'Place-based initiatives that translate institutional intent into sustained community work.', 'Sustainability'],
+  ['02', 'Research & Field Innovation', 'Applied inquiry and field innovation that inform practical, scalable solutions.', 'Research'],
+  ['03', 'Entrepreneurship Development', 'Entrepreneurship-focused pathways that create value across sustainability and livelihood ecosystems.', 'Livelihood'],
+  ['04', 'Education & Capacity Building', 'Practice-oriented education and capacity building connected to real environmental and livelihood challenges.', 'Education'],
 ];
 
 const teamMembers = [
@@ -56,6 +56,21 @@ function ImagePlaceholder({ label, className = '' }) {
   return (
     <div className={`aboutksli-image-placeholder ${className}`} role="img" aria-label={label}>
       <span>{label}</span>
+    </div>
+  );
+}
+
+function ThrustPlaceholder({ number, title }) {
+  return (
+    <div className="aboutksli-thrust-visual" role="img" aria-label={`${title} graphic placeholder`}>
+      <span className="aboutksli-thrust-visual-number">{number}</span>
+      <svg viewBox="0 0 320 320" aria-hidden="true" focusable="false">
+        <circle cx="160" cy="160" r="94" />
+        <circle cx="160" cy="160" r="61" />
+        <path d="M74 221C122 173 166 142 250 100" />
+        <path d="M105 93C138 143 174 185 223 239" />
+      </svg>
+      <span className="aboutksli-thrust-visual-label">KSLI</span>
     </div>
   );
 }
@@ -122,8 +137,14 @@ export default function AboutKSLI() {
   const [cardStep, setCardStep] = useState(0);
   const [visibleCardsCount, setVisibleCardsCount] = useState(5);
   const [isFilterSwitching, setIsFilterSwitching] = useState(false);
+  const [thrustIndex, setThrustIndex] = useState(0);
+  const [thrustVisible, setThrustVisible] = useState(false);
+  const [thrustPaused, setThrustPaused] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
 
   const carouselViewport = useRef(null);
+  const thrustSection = useRef(null);
+  const thrustResumeTimer = useRef(null);
 
   const visibleMembers = activeFilter === 'All'
     ? teamMembers
@@ -158,6 +179,54 @@ export default function AboutKSLI() {
     window.addEventListener('resize', updateCardMetrics);
     return () => window.removeEventListener('resize', updateCardMetrics);
   }, [updateCardMetrics, activeFilter]);
+
+  useEffect(() => {
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const syncMotionPreference = () => {
+      setReducedMotion(media.matches);
+      if (media.matches) setThrustIndex(0);
+    };
+    syncMotionPreference();
+    media.addEventListener('change', syncMotionPreference);
+    return () => media.removeEventListener('change', syncMotionPreference);
+  }, []);
+
+  useEffect(() => {
+    const node = thrustSection.current;
+    if (!node || reducedMotion) {
+      if (reducedMotion) setThrustVisible(true);
+      return undefined;
+    }
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setThrustVisible(true);
+        observer.disconnect();
+      }
+    }, { threshold: 0.2 });
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [reducedMotion]);
+
+  useEffect(() => {
+    if (!thrustVisible || thrustPaused || reducedMotion) return undefined;
+    const interval = window.setInterval(() => {
+      setThrustIndex((current) => (current + 1) % thrustAreas.length);
+    }, 4000);
+    return () => window.clearInterval(interval);
+  }, [thrustVisible, thrustPaused, reducedMotion]);
+
+  useEffect(() => () => window.clearTimeout(thrustResumeTimer.current), []);
+
+  const pauseThrustCarousel = () => {
+    window.clearTimeout(thrustResumeTimer.current);
+    setThrustPaused(true);
+  };
+
+  const selectThrust = (index) => {
+    setThrustIndex(index);
+    pauseThrustCarousel();
+    thrustResumeTimer.current = window.setTimeout(() => setThrustPaused(false), 5000);
+  };
 
   // The counter represents the leading card in the track. Allow it to advance
   // through the final member, even when the final viewport has fewer cards.
@@ -232,20 +301,44 @@ export default function AboutKSLI() {
         <p>KSLI is proposed to consolidate, lead, and scale sustainability- and livelihood-focused initiatives, aligning academic programs, research, partnerships, flagship events, and community engagement under a single governance and identity.</p>
       </RevealSection>
 
-      <section className="aboutksli-thrust">
-        <div className="shell">
+      <section ref={thrustSection} className={`aboutksli-thrust ${thrustVisible ? 'is-visible' : ''}`} aria-labelledby="thrust-title">
+        <div className="aboutksli-thrust-shell">
           <p className="eyebrow teal">Thrust Areas</p>
-          <div className="aboutksli-thrust-heading">
-            <h2>From knowledge to meaningful action.</h2>
-            <p>KSLI brings its work together through four connected areas of institutional focus.</p>
+          <div
+            className="aboutksli-thrust-viewport"
+            onMouseEnter={pauseThrustCarousel}
+            onMouseLeave={() => {
+              thrustResumeTimer.current = window.setTimeout(() => setThrustPaused(false), 3000);
+            }}
+          >
+            <div className="aboutksli-thrust-track" style={{ transform: `translateX(-${thrustIndex * 100}%)` }}>
+              {thrustAreas.map(([number, title, description, tag]) => (
+                <article className="aboutksli-thrust-card" key={title} aria-hidden={thrustIndex !== Number(number) - 1}>
+                  <ThrustPlaceholder number={number} title={title} />
+                  <div className="aboutksli-thrust-card-copy">
+                    <div className="aboutksli-thrust-card-meta">
+                      <span>Thrust Areas · KSLI</span>
+                      <strong>{tag}</strong>
+                    </div>
+                    <span className="aboutksli-thrust-counter">{number} / 04</span>
+                    <h3>{title}</h3>
+                    <p>{description}</p>
+                    <Link to="/sustainability" className="aboutksli-thrust-link" tabIndex={thrustIndex === Number(number) - 1 ? 0 : -1}>Learn more <span aria-hidden="true">→</span></Link>
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
-          <div className="aboutksli-thrust-grid">
-            {thrustAreas.map(([number, title, description]) => (
-              <article className="aboutksli-thrust-card" key={title}>
-                <span>{number}</span>
-                <h3>{title}</h3>
-                <p>{description}</p>
-              </article>
+          <div className="aboutksli-thrust-dots" role="group" aria-label="Thrust area slides">
+            {thrustAreas.map(([, title], index) => (
+              <button
+                key={title}
+                type="button"
+                className={index === thrustIndex ? 'is-active' : ''}
+                aria-label={`Show ${title}`}
+                aria-current={index === thrustIndex ? 'true' : undefined}
+                onClick={() => selectThrust(index)}
+              />
             ))}
           </div>
         </div>
