@@ -1,0 +1,661 @@
+/* ============================================================
+   ACADEMIC PROGRAMS PAGE  —  AcademicPrograms.css
+   Scoped with .ap-* prefix throughout.
+   Palette: --navy #1b2840 | --teal #6c8c7c | --green #2d6a4f
+            --soft #f4f3ef | --muted #45474d | --ink #1a1c1c
+   ============================================================ */
+
+/* ── 1. PAGE WRAPPER ───────────────────────────────────────── */
+
+.ap-page {
+  background: #fff;
+  color: var(--ink);
+}
+
+/* ── 2. HERO ────────────────────────────────────────────────── */
+
+.ap-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  padding-top: 120px;
+  color: #fff;
+  isolation: isolate;
+}
+
+.ap-hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 38%;
+  z-index: -2;
+}
+
+/* Lighter at top, darker at bottom so KPI cards stay readable */
+.ap-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    to bottom,
+    rgba(27, 40, 64, 0.18) 0%,
+    rgba(27, 40, 64, 0.48) 42%,
+    rgba(27, 40, 64, 0.92) 100%
+  );
+}
+
+.ap-hero-content {
+  padding-bottom: 28px;
+}
+
+.ap-hero-eyebrow {
+  font: 700 11px / 1 Inter, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: var(--teal);
+  margin: 0 0 16px;
+  display: block;
+}
+
+.ap-hero-title {
+  font: 700 clamp(42px, 5.5vw, 80px) / 1.04 Montserrat, sans-serif;
+  letter-spacing: -0.036em;
+  margin: 0 0 18px;
+  max-width: 900px;
+}
+
+.ap-hero-sub {
+  font-size: clamp(16px, 1.4vw, 19px);
+  line-height: 1.68;
+  max-width: 640px;
+  color: rgba(220, 232, 246, 0.88);
+  margin: 0;
+}
+
+/* KPI cards row — frosted glass panels at the hero bottom */
+.ap-hero-kpis {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding-bottom: 56px;
+  align-items: end;
+}
+
+.ap-kpi-card {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  border-radius: 16px;
+  padding: 26px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: background 0.25s ease;
+}
+
+.ap-kpi-card:hover {
+  background: rgba(255, 255, 255, 0.17);
+}
+
+.ap-kpi-number {
+  font: 700 clamp(38px, 4.5vw, 58px) / 1 Montserrat, sans-serif;
+  color: #fff;
+  letter-spacing: -0.03em;
+  display: block;
+}
+
+.ap-kpi-placeholder {
+  color: rgba(255, 255, 255, 0.38);
+}
+
+.ap-kpi-label {
+  font: 600 11px / 1.45 Inter, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: rgba(255, 255, 255, 0.70);
+}
+
+.ap-kpi-coming {
+  font: 500 10px / 1 Inter, sans-serif;
+  color: var(--teal);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 2px;
+}
+
+/* ── 3. SHARED SECTION STYLES ───────────────────────────────── */
+
+.ap-section {
+  padding: 88px 0;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 700ms ease-out, transform 700ms ease-out;
+}
+
+.ap-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ap-section-heading {
+  margin-bottom: 52px;
+}
+
+.ap-section-heading h2 {
+  font: 700 clamp(28px, 3.2vw, 44px) / 1.14 Montserrat, sans-serif;
+  letter-spacing: -0.03em;
+  color: var(--navy);
+  margin: 8px 0 12px;
+}
+
+.ap-section-sub {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.66;
+  max-width: 700px;
+  margin: 0;
+}
+
+/* ── 4. ACADEMIC PROGRAMS GRID ──────────────────────────────── */
+
+.ap-programs-section {
+  background: #fff;
+}
+
+.ap-programs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.ap-program-card {
+  border-radius: 16px;
+  padding: 32px 28px;
+  border-top: 2px solid var(--teal);
+  box-shadow: var(--shadow);
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 210px;
+  /* individual card reveal (staggered) */
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 620ms ease-out,
+    transform 620ms ease-out,
+    box-shadow 260ms ease;
+}
+
+.ap-section.is-visible .ap-program-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ap-program-card:hover {
+  box-shadow: var(--raised);
+  transform: translateY(-5px) !important;
+}
+
+/* Dark accent variant (cards 1 & 4) */
+.ap-program-card--dark {
+  background: var(--navy);
+}
+
+.ap-program-type {
+  font: 700 10px / 1 Inter, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--teal);
+  display: block;
+}
+
+.ap-program-card--dark .ap-program-type {
+  color: rgba(168, 197, 181, 0.85);
+}
+
+.ap-program-title {
+  font: 600 clamp(16px, 1.55vw, 20px) / 1.33 Montserrat, sans-serif;
+  color: var(--navy);
+  margin: 0;
+  flex: 1;
+}
+
+.ap-program-card--dark .ap-program-title {
+  color: #fff;
+}
+
+.ap-program-divider {
+  width: 28px;
+  height: 2px;
+  background: var(--teal);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.ap-program-desc {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.62;
+}
+
+.ap-program-card--dark .ap-program-desc {
+  color: rgba(255, 255, 255, 0.50);
+}
+
+/* ── 5. WORKSHOPS & CERTIFICATE PROGRAMS ────────────────────── */
+
+.ap-workshops-section {
+  background: var(--soft);
+}
+
+.ap-workshops-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-bottom: 52px;
+}
+
+.ap-workshop-group {
+  background: #fff;
+  border-radius: 16px;
+  border-top: 2px solid var(--teal);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 620ms ease-out, transform 620ms ease-out;
+}
+
+.ap-section.is-visible .ap-workshop-group {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ap-workshop-group-header {
+  background: var(--navy);
+  padding: 18px 24px;
+}
+
+.ap-workshop-group-title {
+  font: 600 16px / 1.3 Montserrat, sans-serif;
+  color: #fff;
+  margin: 0;
+}
+
+.ap-workshop-list {
+  list-style: none;
+  margin: 0;
+  padding: 8px 24px 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ap-workshop-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 13px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+.ap-workshop-item:last-child {
+  border-bottom: none;
+}
+
+.ap-workshop-bullet {
+  color: var(--green);
+  font-size: 14px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* Partner logo row */
+.ap-workshop-partners {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 620ms ease-out, transform 620ms ease-out;
+}
+
+.ap-section.is-visible .ap-workshop-partners {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ap-partners-label {
+  display: block;
+  margin-bottom: 18px;
+}
+
+.ap-partners-row {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid #e5ebe7;
+  border-top: 2px solid var(--teal);
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+
+.ap-partner-tile {
+  flex: 1 1 0;
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 12px;
+  border-right: 1px solid #eee;
+}
+
+.ap-partner-tile:last-child {
+  border-right: none;
+}
+
+.ap-partner-tile img {
+  max-height: 54px;
+  max-width: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.ap-partner-text {
+  font: 700 12px / 1.2 Montserrat, sans-serif;
+  color: var(--navy);
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+/* ── 6. SUSTAINABILITY PATHWAY ──────────────────────────────── */
+
+.ap-pathway-section {
+  background: linear-gradient(to bottom, #deeade, #d4e6d5);
+  padding-bottom: 0;
+  overflow: hidden;
+}
+
+.ap-pathway-section .ap-section-heading {
+  margin-bottom: 36px;
+}
+
+/* Road canvas */
+.ap-road-outer {
+  position: relative;
+  width: 100%;
+}
+
+.ap-road-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1300 / 480;
+  overflow: visible;
+}
+
+.ap-road-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+/* Pin markers (SVG <g> elements) */
+.ap-road-pin {
+  cursor: pointer;
+  outline: none;
+}
+
+.ap-road-pin:focus-visible > circle {
+  filter: drop-shadow(0 0 0 3px #2d6a4f);
+}
+
+/* Vehicle — HTML element positioned over SVG via left/top % */
+.ap-vehicle {
+  position: absolute;
+  transform: translate(-50%, -62%);
+  z-index: 20;
+  pointer-events: none;
+  transition:
+    left  1.15s cubic-bezier(0.45, 0.01, 0.55, 1.0),
+    top   1.15s cubic-bezier(0.45, 0.01, 0.55, 1.0);
+  filter: drop-shadow(0 5px 12px rgba(27, 40, 64, 0.38));
+}
+
+/* Stop name labels — HTML elements positioned over SVG */
+.ap-stop-label {
+  position: absolute;
+  font: 700 10px / 1.38 Inter, sans-serif;
+  color: #1b2840;
+  text-align: center;
+  pointer-events: none;
+  max-width: 92px;
+  opacity: 0.50;
+  transition: opacity 0.35s ease, color 0.35s ease, background 0.35s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.055em;
+  background: rgba(240, 247, 242, 0.88);
+  padding: 4px 8px;
+  border-radius: 5px;
+  z-index: 10;
+  white-space: normal;
+  border: 1px solid rgba(27,40,64,0.08);
+}
+
+.ap-stop-label.is-active {
+  opacity: 1;
+  color: #1b2840;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 2px 10px rgba(27, 40, 64, 0.14);
+  border-color: rgba(108,140,124,0.30);
+}
+
+.ap-stop-label.is-visited {
+  opacity: 0.80;
+  color: #2d5a3d;
+  background: rgba(200, 225, 210, 0.90);
+  border-color: rgba(74,124,90,0.25);
+}
+
+/* Info card — floats near the active pin */
+.ap-info-card {
+  position: absolute;
+  z-index: 30;
+  width: 228px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 16px 18px;
+  box-shadow:
+    0 14px 40px rgba(27, 40, 64, 0.18),
+    0 2px 6px rgba(27, 40, 64, 0.07);
+  border-top: 2px solid var(--teal);
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.88) translateY(10px);
+  transition:
+    opacity 300ms ease,
+    transform 300ms cubic-bezier(0.34, 1.5, 0.64, 1);
+}
+
+.ap-info-card.is-visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.ap-info-stop-num {
+  font: 700 10px / 1 Inter, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: var(--teal);
+  display: block;
+  margin-bottom: 7px;
+}
+
+.ap-info-title {
+  font: 700 14px / 1.32 Montserrat, sans-serif;
+  color: var(--navy);
+  display: block;
+  margin-bottom: 9px;
+}
+
+.ap-info-desc {
+  font: 400 12px / 1.58 Inter, sans-serif;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* Static fallback — mobile & prefers-reduced-motion */
+.ap-pathway-static {
+  display: grid;
+  gap: 14px;
+  padding-bottom: 88px;
+}
+
+.ap-static-stop {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 20px;
+  align-items: start;
+  padding: 20px 24px;
+  background: #fff;
+  border-radius: 12px;
+  border-left: 3px solid var(--teal);
+  box-shadow: var(--shadow);
+}
+
+.ap-static-number {
+  font: 700 24px / 1 Montserrat, sans-serif;
+  color: var(--teal);
+  letter-spacing: -0.02em;
+}
+
+.ap-static-title {
+  font: 600 16px / 1.3 Montserrat, sans-serif;
+  color: var(--navy);
+  margin: 0 0 7px;
+}
+
+.ap-static-desc {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.62;
+}
+
+/* ── 7. RESPONSIVE ──────────────────────────────────────────── */
+
+@media (max-width: 1050px) {
+  .ap-info-card {
+    width: 196px;
+  }
+  .ap-stop-label {
+    font-size: 9px;
+    max-width: 76px;
+  }
+}
+
+@media (max-width: 900px) {
+  .ap-programs-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .ap-workshops-grid {
+    grid-template-columns: 1fr;
+  }
+  .ap-partners-row {
+    flex-wrap: wrap;
+  }
+  .ap-partner-tile {
+    flex: 1 1 30%;
+  }
+}
+
+@media (max-width: 700px) {
+  .ap-hero {
+    padding-top: 96px;
+    min-height: 100svh;
+  }
+  .ap-hero-kpis {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding-bottom: 36px;
+  }
+  .ap-kpi-card {
+    padding: 18px 22px;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+  }
+  .ap-kpi-number {
+    font-size: 40px;
+    min-width: 72px;
+  }
+  .ap-programs-grid {
+    grid-template-columns: 1fr;
+  }
+  .ap-section {
+    padding: 64px 0;
+  }
+  .ap-pathway-section {
+    padding-bottom: 64px;
+  }
+  /* Road hidden on mobile — static fallback shown instead */
+  .ap-road-outer {
+    display: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .ap-hero-title {
+    font-size: 36px;
+  }
+  .ap-section-heading h2 {
+    font-size: 26px;
+  }
+  .ap-kpi-card {
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px 18px;
+  }
+  .ap-partner-tile {
+    flex: 1 1 45%;
+    border-right: none;
+    border-bottom: 1px solid #eee;
+  }
+  .ap-partner-tile:last-child {
+    border-bottom: none;
+  }
+  .ap-static-stop {
+    grid-template-columns: 48px 1fr;
+    padding: 16px 18px;
+  }
+  .ap-static-number {
+    font-size: 20px;
+  }
+}
+
+/* Respect reduced motion: disable all transitions/reveals */
+@media (prefers-reduced-motion: reduce) {
+  .ap-section,
+  .ap-program-card,
+  .ap-workshop-group,
+  .ap-workshop-partners,
+  .ap-vehicle,
+  .ap-info-card {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+  /* Road hidden — static list shown instead (handled in JSX) */
+  .ap-road-outer {
+    display: none;
+  }
+}
