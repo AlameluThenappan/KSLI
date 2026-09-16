@@ -1,12 +1,165 @@
-.nav-group:hover .dropdown { display: grid; }
-.nav-group button b { display: none; }
+/* Header refinements: presentation only; navigation routes and menu behavior remain unchanged. */
+.site-header {
+  top: 18px;
+}
+
+.site-header.scrolled {
+  top: 10px;
+}
+
+.nav {
+  height: 70px;
+  padding: 0 20px 0 24px;
+  gap: 30px;
+  background: rgba(20, 34, 53, 0.76);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 12px 30px rgba(11, 22, 37, 0.18);
+  backdrop-filter: blur(16px) saturate(135%);
+}
+
+.site-header.scrolled .nav {
+  background: rgba(255, 255, 255, 0.94);
+  border-color: rgba(27, 40, 64, 0.08);
+  box-shadow: 0 10px 28px rgba(27, 40, 64, 0.12);
+}
+
+.brand img {
+  height: 39px;
+}
+
+.nav-links {
+  gap: 7px;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.nav-links > a,
+.nav-group > a,
+.nav-group > button {
+  position: relative;
+  padding: 10px 11px;
+  border-radius: 999px;
+  font-size: 11px;
+  letter-spacing: 0.045em;
+}
+
+.nav-links > a:hover,
+.nav-group > a:hover,
+.nav-group > button:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.site-header.scrolled .nav-links > a:hover,
+.site-header.scrolled .nav-group > a:hover,
+.site-header.scrolled .nav-group > button:hover {
+  color: var(--navy);
+  background: rgba(108, 140, 124, 0.14);
+}
+
+.nav-links .active,
+.nav-group > a.active,
+.nav-group > button.active {
+  color: #fff;
+  background: rgba(108, 140, 124, 0.45);
+}
+
+.site-header.scrolled .nav-links .active,
+.site-header.scrolled .nav-group > a.active,
+.site-header.scrolled .nav-group > button.active {
+  color: var(--navy);
+  background: rgba(108, 140, 124, 0.2);
+}
+
+.nav-group button b {
+  display: inline-block;
+  margin-left: 5px;
+  font-size: 13px;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.nav-group button[aria-expanded="true"] b {
+  transform: rotate(180deg);
+}
+
+.nav-group { position: relative; }
+
+.nav-group {
+  display: flex;
+  align-items: center;
+}
+
+.nav-group > a {
+  background: transparent;
+  border: 0;
+  color: rgba(255, 255, 255, 0.9);
+  font: 700 12px Inter;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+.site-header.scrolled .nav-group > a {
+  color: var(--muted);
+}
 
 @media (min-width: 801px) {
-  .nav-group { padding: 28px 0; }
-  .dropdown { top: 68px; }
+  .nav-group:hover .dropdown {
+    display: grid;
+  }
+}
+
+.dropdown {
+  /* Keep the panel connected to its trigger so pointer movement cannot close it. */
+  top: 100%;
+  left: 0;
+  width: 235px;
+  padding: 8px;
+  border: 1px solid rgba(27, 40, 64, 0.1);
+  border-radius: 14px;
+  box-shadow: 0 16px 36px rgba(27, 40, 64, 0.16);
+}
+
+.dropdown a {
+  padding: 10px 12px;
+  border-radius: 9px;
+  font-size: 13px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.dropdown a:hover {
+  background: rgba(108, 140, 124, 0.13);
+}
+
+@media (max-width: 1050px) {
+  .nav { gap: 14px; }
+  .nav-links { margin-left: auto; }
+  .nav-links > a, .nav-group > a, .nav-group > button { padding-inline: 8px; }
 }
 
 @media (max-width: 800px) {
-  .nav-group:hover .dropdown { display: none; }
-  .nav-group .dropdown.open { display: grid; }
+  .nav { height: 62px; padding: 0 16px 0 20px; }
+  .brand img { height: 34px; }
+  .menu-button { color: #fff; }
+  .site-header.scrolled .menu-button { color: var(--navy); }
+  .nav-links {
+    top: 72px;
+    margin: 0;
+    padding: 12px;
+    border: 1px solid rgba(27, 40, 64, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 16px 36px rgba(27, 40, 64, 0.16);
+  }
+  .nav-links > a, .nav-group > a, .nav-group > button {
+    color: var(--navy);
+    text-align: left;
+    font-size: 12px;
+  }
+  .nav-group { display: block; }
+  .nav-group .dropdown { display: none; }
+  .nav-links > a:hover, .nav-group > a:hover, .nav-group > button:hover { color: var(--navy); background: rgba(108, 140, 124, 0.13); }
+  .nav-links .active, .nav-group > a.active, .nav-group > button.active { color: var(--navy); background: rgba(108, 140, 124, 0.2); }
+  .nav-group .dropdown { position: static; width: 100%; margin: 4px 0 0; box-shadow: none; }
 }
