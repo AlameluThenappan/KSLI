@@ -1,0 +1,367 @@
+/* ── Team Member Profile Page Styling ── */
+
+.profile-page {
+  padding-top: 86px;
+  background: #FFFFFF;
+  min-height: 100vh;
+}
+
+.profile-hero {
+  background: linear-gradient(135deg, #0A2A5C 0%, #113870 55%, #1856A5 100%);
+  color: #FFFFFF;
+  padding: 54px 0 60px;
+  border-bottom: 1px solid rgba(220, 233, 248, 0.2);
+}
+
+.profile-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #8CC2FC;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-decoration: none;
+  margin-bottom: 28px;
+  transition: all 0.2s ease;
+}
+
+.profile-back-link:hover {
+  color: #FFFFFF;
+  transform: translateX(-3px);
+}
+
+.profile-header-grid {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 36px;
+  align-items: center;
+}
+
+.profile-avatar-wrap {
+  width: 200px;
+  height: 220px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #11284D;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 12px 32px rgba(10, 42, 92, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.profile-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.profile-placeholder-icon {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, #1856A5, #0A2A5C);
+  color: #DCE9F8;
+}
+
+.profile-header-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.profile-category-pill {
+  display: inline-block;
+  align-self: flex-start;
+  background: rgba(255, 255, 255, 0.15);
+  color: #8CC2FC;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 4px 14px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.profile-name {
+  font: 700 clamp(32px, 3.8vw, 48px) / 1.12 Montserrat, sans-serif;
+  color: #FFFFFF;
+  margin: 4px 0 0;
+  letter-spacing: -0.025em;
+}
+
+.profile-role {
+  font-size: 18px;
+  font-weight: 600;
+  color: #DCE9F8;
+  margin: 0 0 6px;
+}
+
+.profile-intro {
+  font-size: 16px;
+  line-height: 1.62;
+  color: rgba(220, 233, 248, 0.92);
+  margin: 0;
+  max-width: 760px;
+}
+
+/* ── Content Body ── */
+.profile-body {
+  padding: 64px 0 88px;
+  background: #EEF4FC;
+}
+
+.profile-content-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 40px;
+  align-items: start;
+}
+
+.profile-main-col {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.profile-card {
+  background: #FFFFFF;
+  border-radius: 20px;
+  border: 1.5px solid #DCE9F8;
+  padding: 36px;
+  box-shadow: 0 4px 20px rgba(10, 42, 92, 0.05);
+}
+
+.profile-card-title {
+  font: 700 22px / 1.25 Montserrat, sans-serif;
+  color: #0A2A5C;
+  margin: 0 0 16px;
+  padding-bottom: 12px;
+  border-bottom: 1.5px solid #EEF4FC;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-text {
+  font-size: 15.5px;
+  line-height: 1.68;
+  color: #4F617D;
+  margin: 0;
+}
+
+.profile-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.profile-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: #1D2D44;
+}
+
+.profile-bullet-icon {
+  width: 20px;
+  height: 20px;
+  color: #1856A5;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ── Projects & Research Grids ── */
+.profile-projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.profile-project-item {
+  border: 1px solid #DCE9F8;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #FFFFFF;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  transition: all 0.25s ease;
+}
+
+.profile-project-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(10, 42, 92, 0.08);
+  border-color: #1856A5;
+}
+
+.profile-project-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  min-height: 140px;
+}
+
+.profile-project-copy {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.profile-project-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.profile-project-title {
+  font: 700 17px / 1.3 Montserrat, sans-serif;
+  color: #0A2A5C;
+  margin: 0;
+}
+
+.profile-project-desc {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #4F617D;
+  margin: 0;
+}
+
+.profile-project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #1856A5;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  margin-top: 4px;
+}
+
+.profile-project-link:hover {
+  color: #0A2A5C;
+}
+
+/* ── Research Cards ── */
+.profile-research-item {
+  border: 1px solid #DCE9F8;
+  border-radius: 16px;
+  padding: 22px;
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all 0.25s ease;
+}
+
+.profile-research-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(10, 42, 92, 0.08);
+  border-color: #1856A5;
+}
+
+.profile-research-title {
+  font: 700 17px / 1.35 Montserrat, sans-serif;
+  color: #0A2A5C;
+  margin: 0;
+}
+
+.profile-research-meta {
+  font-size: 12.5px;
+  color: #1A8FBF;
+  font-weight: 600;
+}
+
+/* ── Sidebar Column ── */
+.profile-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.profile-side-card {
+  background: #FFFFFF;
+  border-radius: 20px;
+  border: 1.5px solid #DCE9F8;
+  padding: 26px;
+  box-shadow: 0 4px 16px rgba(10, 42, 92, 0.04);
+}
+
+.profile-side-card h4 {
+  font: 700 16px / 1.25 Montserrat, sans-serif;
+  color: #0A2A5C;
+  margin: 0 0 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #EEF4FC;
+}
+
+.profile-related-members {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.profile-related-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: #EEF4FC;
+  border-radius: 12px;
+  text-decoration: none;
+  color: #0A2A5C;
+  font-weight: 600;
+  font-size: 13.5px;
+  transition: all 0.2s ease;
+}
+
+.profile-related-link:hover {
+  background: #1856A5;
+  color: #FFFFFF;
+  transform: translateX(3px);
+}
+
+.profile-empty-state {
+  padding: 24px;
+  background: #EEF4FC;
+  border-radius: 14px;
+  color: #4F617D;
+  font-size: 14px;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .profile-content-grid {
+    grid-template-columns: 1fr;
+  }
+  .profile-header-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .profile-avatar-wrap {
+    margin: 0 auto;
+  }
+  .profile-category-pill {
+    align-self: center;
+  }
+  .profile-project-item {
+    grid-template-columns: 1fr;
+  }
+}

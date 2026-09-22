@@ -1,76 +1,19 @@
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { advisoryCouncil, teamMembers, teamFilters } from '../data/teamData.js';
 import '../styles/AboutKSLI.css';
 
-const thrustAreas = [
-  ['01', 'Development Projects', 'Place-based initiatives that translate institutional intent into sustained community work.', 'Sustainability'],
-  ['02', 'Research & Field Innovation', 'Applied inquiry and field innovation that inform practical, scalable solutions.', 'Research'],
-  ['03', 'Entrepreneurship Development', 'Entrepreneurship-focused pathways that create value across sustainability and livelihood ecosystems.', 'Livelihood'],
-  ['04', 'Education & Capacity Building', 'Practice-oriented education and capacity building connected to real environmental and livelihood challenges.', 'Education'],
-];
-
-const teamMembers = [
-  // Dairy
-  { name: 'Dr. Thanammal', role: '', category: 'Dairy' },
-  { name: 'Nethaji Subash', role: 'Program Management', category: 'Dairy' },
-  { name: 'Kavin', role: 'Program Associate', category: 'Dairy' },
-  { name: 'Arun Kumar', role: 'Field', category: 'Dairy' },
-  { name: 'Bharani', role: 'Admin Support', category: 'Dairy' },
-
-  // Sugarcane
-  { name: 'Dr. Hemalatha', role: '', category: 'Sugarcane' },
-  { name: 'Boopathy', role: 'JRF', category: 'Sugarcane' },
-  { name: 'Bhuvaneshwari', role: 'JRF', category: 'Sugarcane' },
-  { name: 'Sujeeth', role: 'Field Coordinator', category: 'Sugarcane' },
-  { name: 'Gokulraj', role: 'Field Coordinator', category: 'Sugarcane' },
-
-  // Farmer 360
-  { name: 'Mr. Sezhian', role: '', category: 'Farmer 360' },
-  { name: 'Dr. Gopi', role: '', category: 'Farmer 360' },
-  { name: 'Dr. Sudhakar', role: '', category: 'Farmer 360' },
-  { name: 'Mr. Amarendran', role: '', category: 'Farmer 360' },
-  { name: 'Ms. Sangeetha', role: '', category: 'Farmer 360' },
-
-  // Campus Sustainability
-  { name: 'Keerthana', role: '', category: 'Campus Sustainability' },
-  { name: 'Jeevesh', role: '', category: 'Campus Sustainability' },
-  { name: 'Paramaguru', role: '', category: 'Campus Sustainability' },
-
-  // Farmer Producer Organization
-  { name: 'Shanthra', role: 'CEO', category: 'Farmer Producer Organization' },
-  { name: 'Gowsika', role: 'Accountant', category: 'Farmer Producer Organization' },
-  { name: 'Karthika', role: 'Extension Officer', category: 'Farmer Producer Organization' },
-  { name: 'Nithya', role: 'Business Executive', category: 'Farmer Producer Organization' },
-];
-
-const teamFilters = [
-  'All',
-  'Dairy',
-  'Sugarcane',
-  'Farmer 360',
-  'Campus Sustainability',
-  'Farmer Producer Organization',
-];
-
-function ImagePlaceholder({ label, className = '' }) {
+function ImagePlaceholder({ label, className = '', imageSrc }) {
+  if (imageSrc) {
+    return (
+      <div className={`aboutksli-image-card ${className}`} role="img" aria-label={label} style={{ borderRadius: '16px', overflow: 'hidden', height: '100%', minHeight: '340px' }}>
+        <img src={imageSrc} alt={label} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+      </div>
+    );
+  }
   return (
     <div className={`aboutksli-image-placeholder ${className}`} role="img" aria-label={label}>
       <span>{label}</span>
-    </div>
-  );
-}
-
-function ThrustPlaceholder({ number, title }) {
-  return (
-    <div className="aboutksli-thrust-visual" role="img" aria-label={`${title} graphic placeholder`}>
-      <span className="aboutksli-thrust-visual-number">{number}</span>
-      <svg viewBox="0 0 320 320" aria-hidden="true" focusable="false">
-        <circle cx="160" cy="160" r="94" />
-        <circle cx="160" cy="160" r="61" />
-        <path d="M74 221C122 173 166 142 250 100" />
-        <path d="M105 93C138 143 174 185 223 239" />
-      </svg>
-      <span className="aboutksli-thrust-visual-label">KSLI</span>
     </div>
   );
 }
@@ -106,20 +49,22 @@ function TeamMemberPhoto({ photo, name }) {
   );
 }
 
-function RevealSection({ eyebrow, title, children, direction, imageLabel, reverse = false }) {
+function RevealSection({ eyebrow, title, children, direction, imageLabel, imageSrc, reverse = false }) {
   const ref = useRef(null);
   useEffect(() => {
     const node = ref.current;
+    if (!node) return;
     const observer = new IntersectionObserver(([entry]) => {
       node.classList.toggle('is-visible', entry.isIntersecting);
     }, { threshold: 0.18 });
     observer.observe(node);
     return () => observer.disconnect();
   }, []);
+
   return (
     <section ref={ref} className={`aboutksli-story ${reverse ? 'aboutksli-story--reverse' : ''}`}>
       <div className="shell aboutksli-story-grid">
-        <ImagePlaceholder className="aboutksli-story-image aboutksli-reveal-image" label={imageLabel} />
+        <ImagePlaceholder className="aboutksli-story-image aboutksli-reveal-image" label={imageLabel} imageSrc={imageSrc} />
         <div className={`aboutksli-story-copy aboutksli-reveal-text aboutksli-reveal-text--${direction}`}>
           <p className="eyebrow teal">{eyebrow}</p>
           <h2>{title}</h2>
@@ -137,14 +82,8 @@ export default function AboutKSLI() {
   const [cardStep, setCardStep] = useState(0);
   const [visibleCardsCount, setVisibleCardsCount] = useState(5);
   const [isFilterSwitching, setIsFilterSwitching] = useState(false);
-  const [thrustIndex, setThrustIndex] = useState(0);
-  const [thrustVisible, setThrustVisible] = useState(false);
-  const [thrustPaused, setThrustPaused] = useState(false);
-  const [reducedMotion, setReducedMotion] = useState(false);
 
   const carouselViewport = useRef(null);
-  const thrustSection = useRef(null);
-  const thrustResumeTimer = useRef(null);
 
   const visibleMembers = activeFilter === 'All'
     ? teamMembers
@@ -166,7 +105,7 @@ export default function AboutKSLI() {
     setVisibleCardsCount(count);
 
     if (carouselViewport.current) {
-      const firstCard = carouselViewport.current.querySelector('.aboutksli-person');
+      const firstCard = carouselViewport.current.querySelector('.aboutksli-person-link');
       if (firstCard) {
         const rect = firstCard.getBoundingClientRect();
         setCardStep(rect.width + 18);
@@ -180,57 +119,7 @@ export default function AboutKSLI() {
     return () => window.removeEventListener('resize', updateCardMetrics);
   }, [updateCardMetrics, activeFilter]);
 
-  useEffect(() => {
-    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const syncMotionPreference = () => {
-      setReducedMotion(media.matches);
-      if (media.matches) setThrustIndex(0);
-    };
-    syncMotionPreference();
-    media.addEventListener('change', syncMotionPreference);
-    return () => media.removeEventListener('change', syncMotionPreference);
-  }, []);
-
-  useEffect(() => {
-    const node = thrustSection.current;
-    if (!node || reducedMotion) {
-      if (reducedMotion) setThrustVisible(true);
-      return undefined;
-    }
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        setThrustVisible(true);
-        observer.disconnect();
-      }
-    }, { threshold: 0.2 });
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, [reducedMotion]);
-
-  useEffect(() => {
-    if (!thrustVisible || thrustPaused || reducedMotion) return undefined;
-    const interval = window.setInterval(() => {
-      setThrustIndex((current) => (current + 1) % thrustAreas.length);
-    }, 4000);
-    return () => window.clearInterval(interval);
-  }, [thrustVisible, thrustPaused, reducedMotion]);
-
-  useEffect(() => () => window.clearTimeout(thrustResumeTimer.current), []);
-
-  const pauseThrustCarousel = () => {
-    window.clearTimeout(thrustResumeTimer.current);
-    setThrustPaused(true);
-  };
-
-  const selectThrust = (index) => {
-    setThrustIndex(index);
-    pauseThrustCarousel();
-    thrustResumeTimer.current = window.setTimeout(() => setThrustPaused(false), 5000);
-  };
-
-  // The counter represents the leading card in the track. Allow it to advance
-  // through the final member, even when the final viewport has fewer cards.
-  // This keeps navigation and its disabled state tied to the active dataset.
+  // The counter represents the leading card in the track.
   const maxIndex = Math.max(0, visibleMembers.length - 1);
   const isPaginationNeeded = visibleMembers.length > visibleCardsCount;
 
@@ -277,8 +166,9 @@ export default function AboutKSLI() {
 
   return (
     <article className="aboutksli-page">
+      {/* ── HERO SECTION ── */}
       <section className="aboutksli-hero">
-        <ImagePlaceholder className="aboutksli-hero-image" label="HERO IMAGE PLACEHOLDER" />
+        <div className="aboutksli-hero-bg-img" />
         <div className="aboutksli-hero-overlay" />
         <div className="shell">
           <div className="aboutksli-hero-content">
@@ -289,63 +179,76 @@ export default function AboutKSLI() {
         </div>
       </section>
 
-      <RevealSection eyebrow="Vision" title="Advancing sustainability and livelihoods." direction="right" imageLabel="VISION IMAGE PLACEHOLDER">
+      {/* ── VISION ── */}
+      <RevealSection
+        eyebrow="Vision"
+        title="Advancing sustainability and livelihoods."
+        direction="right"
+        imageLabel="KSLI Vision: Living Landscapes"
+        imageSrc="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&auto=format&fit=crop&q=80"
+      >
         <p>Through research, education, entrepreneurship, and community transformation.</p>
       </RevealSection>
 
-      <RevealSection eyebrow="Mission" title="Integrated solutions for lasting change." direction="left" reverse imageLabel="MISSION IMAGE PLACEHOLDER">
+      {/* ── MISSION ── */}
+      <RevealSection
+        eyebrow="Mission"
+        title="Integrated solutions for lasting change."
+        direction="left"
+        reverse
+        imageLabel="KSLI Mission: Agrarian Resilience"
+        imageSrc="https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?w=800&auto=format&fit=crop&q=80"
+      >
         <p>To design and deliver integrated solutions that advance sustainability and strengthen rural livelihoods by combining applied research, practice-oriented education, entrepreneurship incubation, and long-term partnerships with farmers, industry, and institutions.</p>
       </RevealSection>
 
-      <RevealSection eyebrow="Purpose" title="One platform. Shared direction." direction="right" imageLabel="PURPOSE IMAGE PLACEHOLDER">
+      {/* ── PURPOSE ── */}
+      <RevealSection
+        eyebrow="Purpose"
+        title="One platform. Shared direction."
+        direction="right"
+        imageLabel="KSLI Purpose: Research & Action"
+        imageSrc="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&auto=format&fit=crop&q=80"
+      >
         <p>KSLI is proposed to consolidate, lead, and scale sustainability- and livelihood-focused initiatives, aligning academic programs, research, partnerships, flagship events, and community engagement under a single governance and identity.</p>
       </RevealSection>
 
-      <section ref={thrustSection} className={`aboutksli-thrust ${thrustVisible ? 'is-visible' : ''}`} aria-labelledby="thrust-title">
-        <div className="aboutksli-thrust-shell">
-          <p className="eyebrow teal">Thrust Areas</p>
-          <div
-            className="aboutksli-thrust-viewport"
-            onMouseEnter={pauseThrustCarousel}
-            onMouseLeave={() => {
-              thrustResumeTimer.current = window.setTimeout(() => setThrustPaused(false), 3000);
-            }}
-          >
-            <div className="aboutksli-thrust-track" style={{ transform: `translateX(-${thrustIndex * 100}%)` }}>
-              {thrustAreas.map(([number, title, description, tag]) => (
-                <article className="aboutksli-thrust-card" key={title} aria-hidden={thrustIndex !== Number(number) - 1}>
-                  <ThrustPlaceholder number={number} title={title} />
-                  <div className="aboutksli-thrust-card-copy">
-                    <div className="aboutksli-thrust-card-meta">
-                      <span>Thrust Areas · KSLI</span>
-                      <strong>{tag}</strong>
-                    </div>
-                    <span className="aboutksli-thrust-counter">{number} / 04</span>
-                    <h3>{title}</h3>
-                    <p>{description}</p>
-                    <Link to="/sustainability" className="aboutksli-thrust-link" tabIndex={thrustIndex === Number(number) - 1 ? 0 : -1}>Learn more <span aria-hidden="true">→</span></Link>
-                  </div>
-                </article>
-              ))}
-            </div>
+      {/* ── ADVISORY COUNCIL SECTION (Immediately before Team Members) ── */}
+      <section className="aboutksli-advisory" aria-label="Advisory Council Section">
+        <div className="shell">
+          <div className="aboutksli-section-head">
+            <span className="eyebrow" style={{ color: '#1856A5' }}>Governance & Strategic Guidance</span>
+            <h2 style={{ fontSize: 'clamp(28px, 3.2vw, 42px)', color: '#0A2A5C', margin: '8px 0 14px', fontWeight: 700 }}>
+              Advisory Council
+            </h2>
+            <p style={{ color: '#4F617D', fontSize: '16px', lineHeight: 1.6, maxWidth: '720px', margin: '0 0 36px' }}>
+              Distinguished advisors offering strategic guidance across ecological stewardship, rural livelihoods, scientific research, and community partnerships.
+            </p>
           </div>
-          <div className="aboutksli-thrust-dots" role="group" aria-label="Thrust area slides">
-            {thrustAreas.map(([, title], index) => (
-              <button
-                key={title}
-                type="button"
-                className={index === thrustIndex ? 'is-active' : ''}
-                aria-label={`Show ${title}`}
-                aria-current={index === thrustIndex ? 'true' : undefined}
-                onClick={() => selectThrust(index)}
-              />
+
+          <div className="aboutksli-advisory-grid">
+            {advisoryCouncil.map((advisor) => (
+              <article key={advisor.id} className="aboutksli-advisory-card">
+                <div className="aboutksli-advisory-avatar">
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                  </svg>
+                </div>
+                <div className="aboutksli-advisory-content">
+                  <span className="aboutksli-advisory-focus">{advisor.focusArea}</span>
+                  <h3 className="aboutksli-advisory-name">{advisor.name}</h3>
+                  <p className="aboutksli-advisory-role">{advisor.role}</p>
+                  <p className="aboutksli-advisory-desc">{advisor.description}</p>
+                </div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="aboutksli-team" onKeyDown={handleKeyDown} tabIndex="0" aria-label="Our Team Section">
+      {/* ── TEAM SECTION (With Clickable Team Member Cards) ── */}
+      <section id="team" className="aboutksli-team" onKeyDown={handleKeyDown} tabIndex="0" aria-label="Our Team Section">
         <div className="aboutksli-team-shell">
           <div className="aboutksli-team-topline">
             <div className="aboutksli-team-heading-group">
@@ -409,18 +312,28 @@ export default function AboutKSLI() {
                 style={{ transform: `translateX(-${carouselIndex * cardStep}px)` }}
               >
                 {visibleMembers.map((member) => (
-                  <article
-                    className="aboutksli-person"
+                  <Link
+                    to={`/team/${member.id}`}
                     key={`${member.category}-${member.name}`}
+                    className="aboutksli-person-link"
+                    aria-label={`View profile of ${member.name}, ${member.role || member.category}`}
                   >
-                    <TeamMemberPhoto photo={member.photo} name={member.name} />
-                    <div className="aboutksli-person-meta">
-                      <h3 className="aboutksli-person-name">{member.name}</h3>
-                      <p className="aboutksli-person-role">
-                        {member.role || ''}
-                      </p>
-                    </div>
-                  </article>
+                    <article className="aboutksli-person">
+                      <TeamMemberPhoto photo={member.photo} name={member.name} />
+                      <div className="aboutksli-person-meta">
+                        <span style={{ fontSize: '11px', color: '#1A8FBF', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                          {member.category}
+                        </span>
+                        <h3 className="aboutksli-person-name">{member.name}</h3>
+                        <p className="aboutksli-person-role">
+                          {member.role || 'Program Fellow'}
+                        </p>
+                        <span className="aboutksli-person-cta">
+                          View Profile <span>→</span>
+                        </span>
+                      </div>
+                    </article>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -430,7 +343,7 @@ export default function AboutKSLI() {
           <div className="aboutksli-team-hiring">
             <p>
               Looking to create meaningful impact in sustainability and rural livelihoods?{' '}
-              <Link to="/contact" className="aboutksli-hiring-link">
+              <Link to="/get-involved" className="aboutksli-hiring-link">
                 We're hiring — Explore open opportunities <span>→</span>
               </Link>
             </p>
@@ -438,12 +351,13 @@ export default function AboutKSLI() {
         </div>
       </section>
 
+      {/* ── PARTNERS / CTA ── */}
       <section className="aboutksli-cta">
         <div className="shell">
           <p className="eyebrow teal">KSLI</p>
           <h2>Research. Learning. Partnership. Action.</h2>
           <p>Explore how KSLI connects academic inquiry, field practice, and long-term collaboration.</p>
-          <Link className="primary" to="/sustainability">Explore Our Work <span>→</span></Link>
+          <Link className="primary" to="/domains">Explore Our Work <span>→</span></Link>
         </div>
       </section>
     </article>
