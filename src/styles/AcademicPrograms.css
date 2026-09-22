@@ -43,9 +43,9 @@
   z-index: -1;
   background: linear-gradient(
     to bottom,
-    rgba(27, 40, 64, 0.18) 0%,
-    rgba(27, 40, 64, 0.48) 42%,
-    rgba(27, 40, 64, 0.92) 100%
+    rgba(10, 42, 92, 0.90) 0%,
+    rgba(10, 42, 92, 0.82) 42%,
+    rgba(10, 42, 92, 0.96) 100%
   );
 }
 
@@ -54,12 +54,16 @@
 }
 
 .ap-hero-eyebrow {
-  font: 700 11px / 1 Inter, sans-serif;
+  font: 700 12px / 1 Inter, sans-serif;
   text-transform: uppercase;
-  letter-spacing: 0.13em;
-  color: var(--teal);
+  letter-spacing: 0.12em;
+  color: #8CC2FC !important;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  display: inline-block;
+  padding: 5px 14px;
+  border-radius: 9999px;
   margin: 0 0 16px;
-  display: block;
 }
 
 .ap-hero-title {
@@ -67,14 +71,17 @@
   letter-spacing: -0.036em;
   margin: 0 0 18px;
   max-width: 900px;
+  color: #FFFFFF !important;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
 }
 
 .ap-hero-sub {
   font-size: clamp(16px, 1.4vw, 19px);
   line-height: 1.68;
-  max-width: 640px;
-  color: rgba(220, 232, 246, 0.88);
+  max-width: 660px;
+  color: #DCE9F8 !important;
   margin: 0;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.25);
 }
 
 /* KPI cards row — frosted glass panels at the hero bottom */
@@ -118,14 +125,14 @@
   font: 600 11px / 1.45 Inter, sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.09em;
-  color: rgba(255, 255, 255, 0.70);
+  color: #DCE9F8 !important;
 }
 
 .ap-kpi-coming {
-  font: 500 10px / 1 Inter, sans-serif;
-  color: var(--teal);
+  font: 600 10px / 1 Inter, sans-serif;
+  color: #8CC2FC !important;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   margin-top: 2px;
 }
 
