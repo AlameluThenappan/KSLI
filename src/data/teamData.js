@@ -56,7 +56,7 @@ export const teamMembers = [
         description: 'Building farmer-led dairy enterprises with climate-resilient practices, hygienic milking machines, and collective chilling infrastructure.',
         partner: 'ABT Foods & Aavin',
         image: 'https://images.unsplash.com/photo-1527153857715-3908f2ae5e81?w=600&auto=format&fit=crop&q=80',
-        link: '/domains?domain=livelihood'
+        link: '/domains/livelihood'
       }
     ],
     research: [
@@ -93,7 +93,7 @@ export const teamMembers = [
         description: '72-hour experiential journey connecting agriculture scholars with automated milking sheds, silage fermenters, and cooperative chilling centers.',
         partner: 'Aavin & Kongu Dairy Clusters',
         image: 'https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=600&auto=format&fit=crop&q=80',
-        link: '/domains?domain=livelihood'
+        link: '/domains/livelihood'
       }
     ],
     research: [
@@ -130,7 +130,7 @@ export const teamMembers = [
         description: 'Demonstration trials of automated single-bucket milking units and stainless steel cans for micro-dairies.',
         partner: 'Centre of Excellence – Dairy',
         image: 'https://images.unsplash.com/photo-1527153857715-3908f2ae5e81?w=600&auto=format&fit=crop&q=80',
-        link: '/domains?domain=livelihood'
+        link: '/domains/livelihood'
       }
     ],
     research: []
@@ -157,7 +157,7 @@ export const teamMembers = [
         description: 'Promoting green fodder preservation in airtight bales to maintain milk output during dry summer seasons.',
         partner: 'KSLI & Dairy CoE',
         image: 'https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=600&auto=format&fit=crop&q=80',
-        link: '/domains?domain=livelihood'
+        link: '/domains/livelihood'
       }
     ],
     research: []
@@ -202,7 +202,7 @@ export const teamMembers = [
         description: 'Comprehensive farmer-engaged initiative cutting synthetic fertilizer use while boosting brix sugar percentage and grower net margins.',
         partner: 'Sakthi Sugars & Univ. of Hohenheim',
         image: 'https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?w=600&auto=format&fit=crop&q=80',
-        link: '/domains?domain=sustainability'
+        link: '/domains/sustainability'
       }
     ],
     research: [
@@ -239,7 +239,7 @@ export const teamMembers = [
         description: 'Benchmarking topsoil organic matter across irrigated cane belts to quantify carbon sequestration.',
         partner: 'Sugarcane CoE',
         image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&auto=format&fit=crop&q=80',
-        link: '/domains?domain=sustainability'
+        link: '/domains/sustainability'
       }
     ],
     research: []
@@ -266,7 +266,7 @@ export const teamMembers = [
         description: 'Evaluating microbial sprays that accelerate residue decomposition into humus without open-field burning.',
         partner: 'Sugarcane CoE',
         image: 'https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?w=600&auto=format&fit=crop&q=80',
-        link: '/domains?domain=sustainability'
+        link: '/domains/sustainability'
       }
     ],
     research: []
@@ -327,7 +327,7 @@ export const teamMembers = [
         description: 'End-to-end smallholder advisory combining agronomy guidance, weather forecasting, input cost audits, and institutional credit linkages.',
         partner: 'Uzhavan Foundation & KSLI',
         image: 'https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?w=600&auto=format&fit=crop&q=80',
-        link: '/domains?domain=livelihood'
+        link: '/domains/livelihood'
       }
     ],
     research: []
@@ -420,7 +420,7 @@ export const teamMembers = [
         description: 'Using the 150-acre educational campus as an empirical test-bed for circular water treatment, rooftop solar arrays, and organic composting.',
         partner: 'IGBC & KSLI',
         image: 'https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?w=600&auto=format&fit=crop&q=80',
-        link: '/domains?domain=sustainability'
+        link: '/domains/sustainability'
       }
     ],
     research: [
@@ -491,7 +491,7 @@ export const teamMembers = [
         description: 'A 400-farmer collective strengthening market access, bargaining power, bulk input procurement, and turmeric value addition.',
         partner: 'StartupTN & NABARD',
         image: 'https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?w=600&auto=format&fit=crop&q=80',
-        link: '/domains?domain=livelihood'
+        link: '/domains/livelihood'
       }
     ],
     research: [

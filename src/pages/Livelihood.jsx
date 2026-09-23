@@ -174,6 +174,11 @@ export default function Livelihood() {
         />
         <div className="shell" style={{ position: 'relative', zIndex: 1 }}>
           <div style={{ maxWidth: '820px' }}>
+            <div style={{ marginBottom: '14px', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <Link to="/domains" style={{ color: '#8CC2FC', textDecoration: 'none', fontWeight: 600 }}>Domains</Link>
+              <span style={{ color: 'rgba(255,255,255,0.5)' }}>/</span>
+              <span style={{ color: '#FFFFFF', fontWeight: 600 }}>Livelihood</span>
+            </div>
             <span
               style={{
                 display: 'inline-block',

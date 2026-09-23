@@ -59,7 +59,9 @@ function Header() {
   const [mobile, setMobile] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
-  const close = () => setMobile(false);
+  const close = () => {
+    setMobile(false);
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -90,6 +92,49 @@ function Header() {
               : item.exact
               ? location.pathname === item.to
               : location.pathname.startsWith(item.to);
+
+            if (item.label === 'Domains') {
+              return (
+                <div
+                  key="Domains"
+                  className="nav-dropdown"
+                >
+                  <Link
+                    to="/domains"
+                    onClick={(e) => {
+                      e.currentTarget.blur();
+                      close();
+                    }}
+                    className={`nav-link-item ${isActive ? 'active' : ''}`}
+                  >
+                    Domains
+                  </Link>
+                  <div className="nav-dropdown-menu">
+                    <Link
+                      to="/domains/sustainability"
+                      onClick={(e) => {
+                        e.currentTarget.blur();
+                        close();
+                      }}
+                      className={`nav-dropdown-item ${location.pathname === '/domains/sustainability' ? 'active' : ''}`}
+                    >
+                      Sustainability
+                    </Link>
+                    <Link
+                      to="/domains/livelihood"
+                      onClick={(e) => {
+                        e.currentTarget.blur();
+                        close();
+                      }}
+                      className={`nav-dropdown-item ${location.pathname === '/domains/livelihood' ? 'active' : ''}`}
+                    >
+                      Livelihood
+                    </Link>
+                  </div>
+                </div>
+              );
+            }
+
             return (
               <Link
                 key={item.label}
@@ -662,13 +707,13 @@ function Home() {
             <CtaCard
               title="Sustainability Initiatives"
               text="Advancing resource efficiency, sustainable agriculture, nature conservation, and sustainable human settlements through applied research and green infrastructure."
-              to="/domains?domain=sustainability"
+              to="/domains/sustainability"
               image={img.sustainability}
             />
             <CtaCard
               title="Livelihood Development"
               text="Strengthening farm-based, off-farm, and non-farm livelihoods through capacity building, entrepreneurship, and market linkages."
-              to="/domains?domain=livelihood"
+              to="/domains/livelihood"
               image={img.pathway}
             />
           </div>
@@ -699,37 +744,6 @@ function Home() {
             location="Coimbatore"
             text="Connecting young agrarian innovators and FPO heads with precision agriculture robotics and seed capital."
           />
-        </div>
-      </section>
-
-      {/* ACADEMIC PROGRAMS */}
-      <section className="section muted" style={{ background: '#EEF4FC' }}>
-        <div className="shell">
-          <SectionHeading title="Academic & Learning Programs" eyebrow="Practice-Oriented Education" center={true}>
-            Equipping future professionals with systemic knowledge and field-ready competencies.
-          </SectionHeading>
-          <div className="entry-grid">
-            <EntryCard
-              title="MBA – Agri Business Management"
-              type="ACADEMIC PROGRAM"
-              text="Specialized degree integrating farm economics, agri supply chain logistics, and rural cooperative management."
-            />
-            <EntryCard
-              title="MBA – Sustainability Management"
-              type="ACADEMIC PROGRAM"
-              text="Training corporate sustainability leaders in carbon accounting, ESG compliance, and circular economy design."
-            />
-            <EntryCard
-              title="MSW – Master of Social Work"
-              type="ACADEMIC PROGRAM"
-              text="Community development training focused on agrarian resilience, tribal welfare, and participatory rural appraisal."
-            />
-          </div>
-          <div style={{ textAlign: 'center', marginTop: '36px' }}>
-            <Link to="/learning" className="primary" style={{ padding: '12px 28px' }}>
-              Explore All Learning Pathways →
-            </Link>
-          </div>
         </div>
       </section>
 
@@ -827,7 +841,12 @@ function App() {
           {/* Main 7-Item Navigation Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<AboutKSLI />} />
+          {/* Dedicated Domain Routes */}
           <Route path="/domains" element={<Domains />} />
+          <Route path="/domains/sustainability" element={<Sustainability />} />
+          <Route path="/domains/livelihood" element={<Livelihood />} />
+
+          {/* Other Main Navigation Routes */}
           <Route path="/learning" element={<AcademicPrograms />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/stories" element={<Stories />} />
@@ -835,13 +854,11 @@ function App() {
           <Route path="/team/:id" element={<TeamMemberProfile />} />
           <Route path="/about/team/:id" element={<TeamMemberProfile />} />
 
-          {/* Single continuous Domains page routes */}
-          <Route path="/domains/sustainability" element={<Navigate to="/domains?domain=sustainability" replace />} />
-          <Route path="/domains/livelihood" element={<Navigate to="/domains?domain=livelihood" replace />} />
-          <Route path="/sustainability" element={<Navigate to="/domains?domain=sustainability" replace />} />
-          <Route path="/sustainability/*" element={<Navigate to="/domains?domain=sustainability" replace />} />
-          <Route path="/livelihood" element={<Navigate to="/domains?domain=livelihood" replace />} />
-          <Route path="/livelihood/*" element={<Navigate to="/domains?domain=livelihood" replace />} />
+          {/* Legacy Aliases & Redirects */}
+          <Route path="/sustainability" element={<Navigate to="/domains/sustainability" replace />} />
+          <Route path="/sustainability/*" element={<Navigate to="/domains/sustainability" replace />} />
+          <Route path="/livelihood" element={<Navigate to="/domains/livelihood" replace />} />
+          <Route path="/livelihood/*" element={<Navigate to="/domains/livelihood" replace />} />
 
           {/* Aliases & Complementary Routes */}
           <Route path="/academic-programs" element={<AcademicPrograms />} />
