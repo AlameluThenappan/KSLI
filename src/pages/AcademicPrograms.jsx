@@ -491,13 +491,23 @@ function SustainabilityPathway() {
   const currentStageIndex = milestones.findIndex(
     (m) => scrollProgress >= m.frac - 0.02 && scrollProgress < m.frac + 0.055
   );
+  const focusedStageIndex = milestones.reduce((bestIndex, milestone, index) => {
+    if (scrollProgress >= milestone.frac - 0.025) return index;
+    return bestIndex;
+  }, 0);
+  const activeStage = milestones[focusedStageIndex] || PATHWAY_STOPS[0];
+  const progressPercent = Math.round(scrollProgress * 100);
   const displayStageNum = currentStageIndex >= 0 ? currentStageIndex + 1 : Math.min(
     Math.max(1, Math.round(scrollProgress * PATHWAY_STOPS.length)),
     PATHWAY_STOPS.length
   );
 
   return (
-    <section className="ap-pathway-root" aria-labelledby="ap-pathway-heading">
+    <section
+      className="ap-pathway-root"
+      aria-labelledby="ap-pathway-heading"
+      style={{ '--pathway-progress': `${progressPercent}%` }}
+    >
       {/* ── Accessible Static Fallback (for prefers-reduced-motion) ── */}
       {prefersReducedMotion ? (
         <div className="shell ap-pathway-static-mode">
@@ -530,12 +540,15 @@ function SustainabilityPathway() {
         /* ── Scroll-Driven Scrollytelling Track (500vh distance for smooth pacing) ── */
         <div className="ap-pathway-scroll-track" ref={trackRef}>
           <div className="ap-pathway-sticky-stage">
+            <div className="ap-pathway-ambient" aria-hidden="true" />
+            <div className="ap-pathway-grid" aria-hidden="true" />
+
             {/* Minimalist Fixed Header */}
             <div className="ap-pathway-fixed-header shell">
               <div className="ap-pathway-eyebrow-row">
                 <span className="eyebrow teal">KSLI Curriculum Journey</span>
                 <span className="ap-pathway-progress-badge">
-                  Stage 0{displayStageNum} / 0{PATHWAY_STOPS.length}
+                  {progressPercent}% mapped
                 </span>
               </div>
               <div className="ap-pathway-header-meta">
@@ -555,9 +568,25 @@ function SustainabilityPathway() {
                         onClick={() => handleMilestoneSelect(si)}
                         title={`Jump to 0${st.id} ${st.name}`}
                         aria-label={`Milestone 0${st.id}: ${st.name}`}
-                      />
+                      >
+                        <span className="ap-stepper-index">0{st.id}</span>
+                        <span className="ap-stepper-label">{st.short}</span>
+                      </button>
                     );
                   })}
+                </div>
+              </div>
+              <div className="ap-pathway-command-panel" aria-live="polite">
+                <div>
+                  <span className="ap-command-kicker">Live stage</span>
+                  <strong>0{displayStageNum} - {activeStage.name}</strong>
+                </div>
+                <div>
+                  <span className="ap-command-kicker">Focus</span>
+                  <strong>{activeStage.takeForward}</strong>
+                </div>
+                <div className="ap-command-meter" aria-label={`Journey progress ${progressPercent}%`}>
+                  <span />
                 </div>
               </div>
             </div>
@@ -580,6 +609,26 @@ function SustainabilityPathway() {
                   }
                   preserveAspectRatio="xMidYMid meet"
                 >
+                  <defs>
+                    <linearGradient id="apPathGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="#0A2A5C" />
+                      <stop offset="46%" stopColor="#1856A5" />
+                      <stop offset="100%" stopColor="#1A8FBF" />
+                    </linearGradient>
+                    <filter id="apPathGlow" x="-20%" y="-80%" width="140%" height="260%">
+                      <feGaussianBlur stdDeviation="7" result="blur" />
+                      <feColorMatrix
+                        in="blur"
+                        type="matrix"
+                        values="0 0 0 0 0.10 0 0 0 0 0.34 0 0 0 0 0.65 0 0 0 0.34 0"
+                      />
+                      <feMerge>
+                        <feMergeNode />
+                        <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                    </filter>
+                  </defs>
+
                   {/* Invisible measurement path for Desktop */}
                   <path
                     ref={desktopPathRef}
@@ -596,6 +645,12 @@ function SustainabilityPathway() {
                   />
 
                   {/* 1. Base Pathway Curve (Subtle neutral line ahead of dot) */}
+                  <path
+                    d={isMobile ? MOBILE_CURVE_D : DESKTOP_CURVE_D}
+                    className="ap-curve-glow-line"
+                    fill="none"
+                    strokeLinecap="round"
+                  />
                   <path
                     d={isMobile ? MOBILE_CURVE_D : DESKTOP_CURVE_D}
                     className="ap-curve-base-line"
@@ -630,6 +685,14 @@ function SustainabilityPathway() {
                     return (
                       <g key={m.id} className="ap-milestone-group">
                         {/* Simple milestone dot - clean circular marker (NO checkmark, NO moving pulse) */}
+                        <circle
+                          cx={m.x}
+                          cy={m.y}
+                          r={isActive ? 22 : isPassed ? 15 : 12}
+                          className={`ap-milestone-halo ${
+                            isActive ? 'is-active' : isPassed ? 'is-passed' : 'is-upcoming'
+                          }`}
+                        />
                         <circle
                           cx={m.x}
                           cy={m.y}
@@ -677,6 +740,7 @@ function SustainabilityPathway() {
                     transform={`translate(${markerPos.x}, ${markerPos.y})`}
                     className="ap-student-marker"
                   >
+                    <circle r="18" className="ap-student-orbit" />
                     <circle r="7" className="ap-student-core" />
                     <circle r="2.5" fill="#ffffff" opacity="0.9" />
                   </g>
@@ -791,4 +855,3 @@ export default function AcademicPrograms() {
     </div>
   );
 }
-
