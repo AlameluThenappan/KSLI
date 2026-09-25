@@ -38,6 +38,7 @@ import Resources from './pages/Resources.jsx';
 import Stories from './pages/Stories.jsx';
 import GetInvolved from './pages/GetInvolved.jsx';
 import TeamMemberProfile from './pages/TeamMemberProfile.jsx';
+import Manage from './pages/Manage.jsx';
 
 const img = {
   hero: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCcrwWa2o5nAozqqQvUmytqo_H5g2TNutO1HQaexxVhNVGMzd3EHQZtW5NrJ4Cau1x28EfnmfV7FLRNk_crjxfahtdYIl39mroK_JR1pn-2xZtPD8Q5o8RzXmyu6SuAx0dhw0Yl8nVgSXWreMpqyX_b77lBnQvpjfmG6KyVtScBb_v3DpyQjGkP0CIjm1sZeLkJKX-5Oy6ibBeWkEKIOk8iga-55mgEpkqn4m3Ay4DVhgnYc2cZNOQ0Vw',
@@ -217,6 +218,8 @@ function Footer() {
 }
 
 function Layout({ children }) {
+  const { pathname } = useLocation();
+  if (pathname.startsWith('/manage')) return <main>{children}</main>;
   return (
     <>
       <Header />
@@ -851,6 +854,7 @@ function App() {
           <Route path="/resources" element={<Resources />} />
           <Route path="/stories" element={<Stories />} />
           <Route path="/get-involved" element={<GetInvolved />} />
+          <Route path="/manage" element={<Manage />} />
           <Route path="/team/:id" element={<TeamMemberProfile />} />
           <Route path="/about/team/:id" element={<TeamMemberProfile />} />
 
