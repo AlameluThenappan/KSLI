@@ -1,0 +1,55 @@
+.sustainability-hero {
+  position: relative;
+  min-height: 100vh !important;
+  min-height: 100svh !important;
+  padding: 0 !important;
+  overflow: hidden;
+  isolation: isolate;
+  background-position: center !important;
+  background-size: cover !important;
+}
+
+/* Replaces the former decorative blue wash with a subtle neutral overlay. */
+.sustainability-hero > div:first-of-type {
+  display: none;
+}
+
+.sustainability-hero::after {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  content: '';
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(8, 16, 10, 0.58) 0%, rgba(8, 16, 10, 0.32) 52%, rgba(8, 16, 10, 0.12) 100%);
+}
+
+.sustainability-hero > .shell {
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding-top: 120px;
+  padding-bottom: 72px;
+}
+
+.sustainability-hero h1 {
+  font-size: clamp(42px, 5.5vw, 80px) !important;
+  line-height: 1.04 !important;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
+}
+
+.sustainability-hero p {
+  color: #fff !important;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.35);
+}
+
+.sustainability-hero a {
+  color: #fff !important;
+}
+
+@media (max-width: 768px) {
+  .sustainability-hero > .shell {
+    padding-top: 96px;
+    padding-bottom: 56px;
+  }
+}
