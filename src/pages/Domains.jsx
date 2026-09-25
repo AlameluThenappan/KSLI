@@ -889,7 +889,7 @@ export default function Domains() {
               </p>
               <div style={{ padding: '10px 14px', background: '#EEF4FC', borderRadius: '8px', fontSize: '12.5px', color: '#4F617D' }}>
                 <a href="#thrust-areas" style={{ color: '#1856A5', fontWeight: 700 }}>Development Projects</a> →{' '}
-                <Link to="/resources" style={{ color: '#1856A5', fontWeight: 600 }}>Whitepapers & Reports</Link> →{' '}
+                <Link to="/research-realities" style={{ color: '#1856A5', fontWeight: 600 }}>Whitepapers & Reports</Link> →{' '}
                 <Link to="/get-involved" style={{ color: '#0A2A5C', fontWeight: 700 }}>Partner With KSLI</Link>
               </div>
             </div>

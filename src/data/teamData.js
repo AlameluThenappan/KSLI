@@ -67,7 +67,7 @@ export const teamMembers = [
         summary: 'Field manual and empirical analysis evaluating automated heat detection, clean milk handling benchmarks, and community chilling optimization across smallholder cooperatives.',
         partner: 'Centre of Excellence – Dairy & NITARA Research',
         year: '2025',
-        link: '/resources'
+        link: '/research-realities'
       }
     ]
   },
@@ -104,7 +104,7 @@ export const teamMembers = [
         summary: 'Market analysis assessing smallholder bio-slurry packaging, organic manures, and value-added dairy derivatives for secondary rural income.',
         partner: 'NDDB Mrida & KSLI',
         year: '2024',
-        link: '/resources'
+        link: '/research-realities'
       }
     ]
   },
@@ -213,7 +213,7 @@ export const teamMembers = [
         summary: 'Quantitative study of 5,000+ farmer plots in Western Tamil Nadu evaluating reduced synthetic fertilizer usage, yield stabilization, and soil carbon retention.',
         partner: 'KSLI Sugarcane CoE & University of Hohenheim',
         year: '2025',
-        link: '/resources'
+        link: '/research-realities'
       }
     ]
   },
@@ -431,7 +431,7 @@ export const teamMembers = [
         summary: 'Institutional review recording 1.2 MLD wastewater recycling efficiency, rooftop PV generation metrics, and endemic tree biodiversity census.',
         partner: 'KSLI Campus Living Lab & IGBC Working Group',
         year: '2025',
-        link: '/resources'
+        link: '/research-realities'
       }
     ]
   },
@@ -502,7 +502,7 @@ export const teamMembers = [
         summary: 'Econometric case study of the Pariyur FPO model evaluating aggregation margins, input price resilience, and post-harvest grain storage economics.',
         partner: 'KSLI Livelihood Vertical & StartupTN',
         year: '2024',
-        link: '/resources'
+        link: '/research-realities'
       }
     ]
   },

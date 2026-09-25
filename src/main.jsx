@@ -36,6 +36,7 @@ import Sustainability from './pages/Sustainability.jsx';
 import Livelihood from './pages/Livelihood.jsx';
 import Resources from './pages/Resources.jsx';
 import Stories from './pages/Stories.jsx';
+import ResearchRealities from './pages/ResearchRealities.jsx';
 import GetInvolved from './pages/GetInvolved.jsx';
 import TeamMemberProfile from './pages/TeamMemberProfile.jsx';
 import Manage from './pages/Manage.jsx';
@@ -46,14 +47,13 @@ const img = {
   pathway: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAltNZbzl24YOhTpyttO8MN3RtWjYr-alPnC9UZze6fpMLYgP7ErFYMDI02fNXQqeuuO2J_7fuc4cHqS7AoFxoMawEioD_qgxCw-QrED4P2FZfSrejylmvv3IwZy2qHGmLApJK8CRPO6vzjSlD3eS0ZZphrqUUfnqa7bRCn0KMJPT_42IeDN0Izvr4d00FaRlu6bFwiB9jtFPrqdV3oxLMxyRXh7zpQeMevtVjKc9-gbxBa9tUViiG0aQ'
 };
 
-// 7-Item Navigation Bar
+// Main navigation
 const navItems = [
   { label: 'Home', to: '/', exact: true },
   { label: 'About KSLI', to: '/about' },
   { label: 'Domains', to: '/domains', activeCheck: (path) => path.startsWith('/domains') || path.startsWith('/sustainability') || path.startsWith('/livelihood') },
   { label: 'Learning', to: '/learning', activeCheck: (path) => path.startsWith('/learning') || path.startsWith('/academic-programs') },
-  { label: 'Resources', to: '/resources' },
-  { label: 'Stories', to: '/stories' },
+  { label: 'Research & Realities', to: '/research-realities' },
 ];
 
 function Header() {
@@ -183,8 +183,7 @@ function Footer() {
           <Link to="/about">About KSLI</Link>
           <Link to="/domains">Domains</Link>
           <Link to="/learning">Learning</Link>
-          <Link to="/resources">Resources</Link>
-          <Link to="/stories">Stories</Link>
+          <Link to="/research-realities">Research &amp; Realities</Link>
         </div>
 
         <div className="footer-nav-col">
@@ -841,7 +840,7 @@ function App() {
       <ScrollHandler />
       <Layout>
         <Routes>
-          {/* Main 7-Item Navigation Routes */}
+          {/* Main navigation routes */}
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<AboutKSLI />} />
           {/* Dedicated Domain Routes */}
@@ -851,8 +850,9 @@ function App() {
 
           {/* Other Main Navigation Routes */}
           <Route path="/learning" element={<AcademicPrograms />} />
-          <Route path="/resources" element={<Resources />} />
-          <Route path="/stories" element={<Stories />} />
+          <Route path="/research-realities" element={<ResearchRealities />} />
+          <Route path="/resources" element={<Navigate to="/research-realities" replace />} />
+          <Route path="/stories" element={<Navigate to="/research-realities" replace />} />
           <Route path="/get-involved" element={<GetInvolved />} />
           <Route path="/manage" element={<Manage />} />
           <Route path="/team/:id" element={<TeamMemberProfile />} />

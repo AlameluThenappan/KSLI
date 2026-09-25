@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-
-export default function Stories() {
+export default function Stories({ embedded = false }) {
   const [activeTab, setActiveTab] = useState('all');
 
   const categories = [
@@ -66,9 +64,9 @@ export default function Stories() {
   const filtered = activeTab === 'all' ? stories : stories.filter((s) => s.type === activeTab);
 
   return (
-    <div className="stories-page" style={{ paddingTop: '86px' }}>
+    <div className="stories-page" style={{ paddingTop: embedded ? 0 : '86px' }}>
       {/* HEADER */}
-      <section
+      {!embedded && <section
         style={{
           background: 'linear-gradient(135deg, #0A2A5C 0%, #114383 60%, #1856A5 100%)',
           color: '#FFFFFF',
@@ -108,11 +106,20 @@ export default function Stories() {
             </p>
           </div>
         </div>
-      </section>
+      </section>}
 
       {/* FILTER BUTTONS & STORIES GRID */}
-      <section style={{ padding: '60px 0', background: '#EEF4FC', minHeight: '600px' }}>
+      <section aria-labelledby={embedded ? 'stories-heading' : undefined} style={{ padding: '60px 0', background: '#EEF4FC', minHeight: '600px' }}>
         <div className="shell">
+          {embedded && (
+            <div style={{ maxWidth: '760px', marginBottom: '32px' }}>
+              <p className="eyebrow">Voices &amp; Transformations</p>
+              <h2 id="stories-heading" style={{ color: '#0A2A5C', fontSize: 'clamp(28px, 3vw, 38px)', margin: '0 0 12px' }}>Stories</h2>
+              <p style={{ color: '#4F617D', fontSize: '16px', lineHeight: 1.6, margin: 0 }}>
+                Real accounts of people, landscapes, project journeys, and field experiences from the frontlines of sustainability and rural livelihoods.
+              </p>
+            </div>
+          )}
           <div
             style={{
               display: 'flex',
