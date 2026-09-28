@@ -305,11 +305,12 @@ export default function Domains() {
     <div className="domains-landing-page" style={{ background: '#FFFFFF' }}>
       {/* ─── REALISTIC HERO SECTION ─── */}
       <section
+        className="viewport-hero"
         style={{
           position: 'relative',
           paddingTop: '140px',
           paddingBottom: '60px',
-          background: 'linear-gradient(180deg, rgba(10, 42, 92, 0.94) 0%, rgba(10, 42, 92, 0.85) 65%, rgba(10, 42, 92, 0.72) 100%), url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1600&auto=format&fit=crop&q=80") center/cover no-repeat',
+          background: 'linear-gradient(rgba(24, 86, 165, 0.50), rgba(24, 86, 165, 0.50)), url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1600&auto=format&fit=crop&q=80") center/cover no-repeat',
           color: '#FFFFFF',
           borderBottom: '1px solid rgba(220, 233, 248, 0.2)'
         }}

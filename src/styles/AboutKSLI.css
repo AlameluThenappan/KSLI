@@ -8,7 +8,7 @@
    ========================================================================= */
 
 .aboutksli-hero {
-  min-height: 560px;
+  min-height: 100vh;
   position: relative;
   isolation: isolate;
   color: #fff;
@@ -32,7 +32,7 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(135deg, rgba(10, 42, 92, 0.96) 0%, rgba(10, 42, 92, 0.88) 50%, rgba(10, 42, 92, 0.95) 100%);
+  background: rgba(24, 86, 165, 0.50);
 }
 
 .aboutksli-image-placeholder {
@@ -709,7 +709,7 @@
 
 @media (max-width: 800px) {
   .aboutksli-hero {
-    min-height: 620px;
+    min-height: 100svh;
     padding-top: 100px;
   }
 
@@ -887,3 +887,4 @@
     animation: none;
   }
 }
+

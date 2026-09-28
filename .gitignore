@@ -4,3 +4,4 @@ build/
 .env
 .DS_Store
 *.md
+KSLI_Pitch.pdf

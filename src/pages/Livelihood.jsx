@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import TallImageCard from '../components/TallImageCard.jsx';
 
 export default function Livelihood() {
   const focusAreas = [
@@ -53,22 +54,28 @@ export default function Livelihood() {
       title: 'Fertilizer Optimization (N-Balancing) in Sugarcane',
       focus: 'Farm-Based Livelihood',
       location: 'Sakthi Nagar & Erode',
-      desc: 'An integrated research and extension program supporting over 5,000 farmers supplying Sakthi Sugars, combining scientific nitrogen-balancing with field capacity building.',
-      partner: 'Univ. of Hohenheim & Sakthi Sugars'
+      desc: 'Integrated research supporting over 5,000 farmers combining scientific nitrogen balancing with capacity building.',
+      partner: 'Univ. of Hohenheim & Sakthi Sugars',
+      image: 'https://images.unsplash.com/photo-1592982537447-7440770cbfc9?w=800&auto=format&fit=crop&q=80',
+      to: '/research-realities'
     },
     {
       title: 'Climate Smart Dairy Digital Extension Model',
       focus: 'Farm-Based Livelihood',
       location: 'Coimbatore & Tiruppur',
-      desc: 'Focused on productivity enhancement through entrepreneurship and farmer training, alongside a digital, evidence-based extension platform for smallholder dairy herds.',
-      partner: 'NITARA & Aavin'
+      desc: 'Digital evidence-based extension platform optimizing cattle nutrition and smallholder herd yields.',
+      partner: 'NITARA & Aavin',
+      image: 'https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=800&auto=format&fit=crop&q=80',
+      to: '/research-realities'
     },
     {
       title: 'Dutch Fund for Climate Action (DFCD) Livelihood Grant',
       focus: 'Off-Farm Livelihood',
       location: 'Western Ghats Landscape',
-      desc: 'A ~₹5 crore climate adaptation grant implemented in partnership with WWF India, focused on scalable, nature-based enterprise solutions for forest-fringe communities.',
-      partner: 'WWF India & DFCD'
+      desc: 'A ~₹5 crore climate adaptation grant focused on scalable nature-based enterprise solutions.',
+      partner: 'WWF India & DFCD',
+      image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&auto=format&fit=crop&q=80',
+      to: '/research-realities'
     }
   ];
 
@@ -77,29 +84,37 @@ export default function Livelihood() {
       title: 'Climate Smart Dairy Entrepreneurship Program',
       focus: 'Farm-Based Livelihood',
       location: 'Western Tamil Nadu',
-      desc: 'Building farmer-led dairy enterprises with climate-resilient practices, clean milking systems, and collective chilling infrastructure.',
-      partner: 'ABT Foods & Aavin'
+      desc: 'Building farmer-led dairy enterprises with climate-resilient practices and chilling infrastructure.',
+      partner: 'ABT Foods & Aavin',
+      image: 'https://images.unsplash.com/photo-1527153857715-3908f2ae5e81?w=800&auto=format&fit=crop&q=80',
+      to: '/domains/livelihood#projects'
     },
     {
       title: 'Pariyur Farmer Producer Organization (FPO)',
       focus: 'Off-Farm Livelihood',
       location: 'Gobichettipalayam',
-      desc: 'A farmer-owned collective strengthening direct market access, bulk agricultural input procurement, and shared post-harvest facilities.',
-      partner: 'StartupTN & NABARD'
+      desc: 'Farmer-owned collective strengthening market access and shared post-harvest facilities.',
+      partner: 'StartupTN & NABARD',
+      image: 'https://images.unsplash.com/photo-1605000797499-95a51c5269ae?w=800&auto=format&fit=crop&q=80',
+      to: '/domains/livelihood#projects'
     },
     {
       title: 'Farmer 360 Holistic Advisory Initiative',
       focus: 'Farm-Based Livelihood',
       location: 'Regional Clusters',
-      desc: 'A comprehensive support model addressing the full spectrum of farmer needs from soil testing and credit counseling to weather risk mitigation.',
-      partner: 'Kisan Konnect'
+      desc: 'Holistic support model providing continuous soil testing, credit guidance, and crop advisory.',
+      partner: 'Kisan Konnect',
+      image: 'https://images.unsplash.com/photo-1589923188900-85dae523342b?w=800&auto=format&fit=crop&q=80',
+      to: '/domains/livelihood#projects'
     },
     {
       title: 'Young Farmers Forum',
       focus: 'Farm-Based Livelihood',
       location: 'Kongu Region',
-      desc: 'Engaging and equipping the next generation of rural youth in modern, tech-enabled, sustainable agriculture and precision farming.',
-      partner: 'Kumaraguru AgTech Hub'
+      desc: 'Equipping rural youth in modern tech-enabled precision farming and agri-business management.',
+      partner: 'Kumaraguru AgTech Hub',
+      image: 'https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?w=800&auto=format&fit=crop&q=80',
+      to: '/domains/livelihood#projects'
     }
   ];
 
@@ -108,22 +123,28 @@ export default function Livelihood() {
       title: 'Uzhavan Foundation Community Project',
       focus: 'Farm-Based Livelihood',
       location: 'Manapparai, Tiruchirappalli',
-      desc: 'CSR-funded initiative revitalizing rainfed agrarian communities through farm pond networks and drought-hardy millet cultivation.',
-      partner: 'Uzhavan Foundation'
+      desc: 'CSR-funded initiative revitalizing rainfed agrarian communities through farm pond networks.',
+      partner: 'Uzhavan Foundation',
+      image: 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=800&auto=format&fit=crop&q=80',
+      to: '/domains/livelihood#projects'
     },
     {
       title: 'Armour Steel Buildings Vocational Hub',
       focus: 'Non-Farm Livelihood',
       location: 'Salem',
-      desc: 'Funded technical skills training in precision metal fabrication, structural fabrication, and rural industrial enterprise development.',
-      partner: 'Armour Steel'
+      desc: 'Technical skills training in precision fabrication and rural industrial enterprise development.',
+      partner: 'Armour Steel',
+      image: 'https://images.unsplash.com/photo-1504917599217-d4dc5ebe6122?w=800&auto=format&fit=crop&q=80',
+      to: '/domains/livelihood#projects'
     },
     {
       title: 'Centres of Excellence (CoE Network)',
       focus: 'Cross-Pathway',
       location: 'Coimbatore & Erode',
-      desc: 'Anchoring these projects are the dedicated CoE for Dairy, CoE for Sugarcane, and CoE for Social Development.',
-      partner: 'Sakthi Sugars & Ashok Leyland'
+      desc: 'Dedicated CoEs for Dairy, Sugarcane, and Social Development driving sector impact.',
+      partner: 'Sakthi Sugars & Ashok Leyland',
+      image: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&auto=format&fit=crop&q=80',
+      to: '/coe-partners/centres-of-excellence'
     }
   ];
 
@@ -132,30 +153,37 @@ export default function Livelihood() {
       title: 'Young Farmers Conclave',
       focus: 'Farm-Based Livelihood',
       location: 'Coimbatore',
-      desc: 'A statewide platform for emerging farmers, agri-entrepreneurs, and researchers to connect, showcase technologies, and network.'
+      desc: 'Statewide platform for emerging farmers, agri-entrepreneurs, and researchers to connect.',
+      image: 'https://images.unsplash.com/photo-1544531586-fde5298cdd40?w=800&auto=format&fit=crop&q=80',
+      to: '/get-involved'
     },
     {
       title: 'Sugarcane Innovation & Sustainability Conference',
       focus: 'Farm-Based Livelihood',
       location: 'Sakthi Nagar',
-      desc: 'Bringing together sugarcane researchers, mill leaders, agronomists, and over 1,000 progressive cane growers around soil health.'
+      desc: 'Gathering sugarcane researchers, mill leaders, agronomists, and growers around soil health.',
+      image: 'https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&auto=format&fit=crop&q=80',
+      to: '/get-involved'
     },
     {
       title: 'Kongunadu Velan Matrum Kaalnadai Thiruvizha',
       focus: 'Farm-Based Livelihood',
       location: 'Tiruppur',
-      desc: 'A regional farmer and livestock festival celebrating indigenous cattle breeds, local agricultural heritage, and organic inputs.'
+      desc: 'Regional farmer and livestock festival celebrating indigenous breeds and local heritage.',
+      image: 'https://images.unsplash.com/photo-1570042225831-d98fa7577f1e?w=800&auto=format&fit=crop&q=80',
+      to: '/get-involved'
     }
   ];
 
   return (
-    <div className="livelihood-page" style={{ paddingTop: '86px' }}>
+    <div className="livelihood-page">
       {/* ─── HERO BANNER ─── */}
       <section
+        className="viewport-hero"
         style={{
           background: 'linear-gradient(135deg, #0A2A5C 0%, #114383 60%, #1856A5 100%)',
           color: '#FFFFFF',
-          padding: '70px 0 60px',
+          padding: '156px 0 60px',
           position: 'relative',
           overflow: 'hidden'
         }}
@@ -420,91 +448,17 @@ export default function Livelihood() {
             </span>
           </div>
 
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(310px, 1fr))',
-              gap: '24px'
-            }}
-          >
+          <div className="tall-image-grid tall-image-grid-3">
             {research.map((item) => (
-              <div
+              <TallImageCard
                 key={item.title}
-                style={{
-                  background: '#FFFFFF',
-                  borderRadius: '18px',
-                  padding: '26px',
-                  border: '1.5px solid #DCE9F8',
-                  boxShadow: '0 6px 20px rgba(10, 42, 92, 0.05)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between'
-                }}
-              >
-                <div>
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      marginBottom: '12px'
-                    }}
-                  >
-                    <span
-                      style={{
-                        background: '#EEF4FC',
-                        color: '#1856A5',
-                        fontSize: '11px',
-                        fontWeight: 700,
-                        padding: '4px 10px',
-                        borderRadius: '999px',
-                        border: '1px solid #DCE9F8'
-                      }}
-                    >
-                      {item.focus}
-                    </span>
-                    <span style={{ fontSize: '12.5px', color: '#1A8FBF', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-                        <circle cx="12" cy="10" r="3" />
-                      </svg>
-                      {item.location}
-                    </span>
-                  </div>
-                  <h3
-                    style={{
-                      fontSize: '17px',
-                      color: '#0A2A5C',
-                      margin: '4px 0 10px',
-                      fontWeight: 700,
-                      lineHeight: 1.35
-                    }}
-                  >
-                    {item.title}
-                  </h3>
-                  <p
-                    style={{
-                      fontSize: '14px',
-                      color: '#4F617D',
-                      lineHeight: 1.55,
-                      margin: '0 0 16px'
-                    }}
-                  >
-                    {item.desc}
-                  </p>
-                </div>
-                <div
-                  style={{
-                    borderTop: '1px solid #EEF4FC',
-                    paddingTop: '12px',
-                    fontSize: '12.5px',
-                    color: '#1856A5',
-                    fontWeight: 600
-                  }}
-                >
-                  Partner: {item.partner}
-                </div>
-              </div>
+                title={item.title}
+                desc={item.desc}
+                image={item.image}
+                to={item.to}
+                tag={item.focus}
+                location={item.location}
+              />
             ))}
           </div>
         </div>
@@ -541,138 +495,19 @@ export default function Livelihood() {
           </div>
 
           <h3 style={{ fontSize: '18px', color: '#1856A5', marginBottom: '18px', fontWeight: 700 }}>
-            Core Livelihood Initiatives
-          </h3>
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-              gap: '22px',
-              marginBottom: '44px'
-            }}
-          >
-            {coreProjects.map((item) => (
-              <div
-                key={item.title}
-                style={{
-                  background: '#FFFFFF',
-                  borderRadius: '18px',
-                  padding: '24px',
-                  border: '1.5px solid #DCE9F8',
-                  boxShadow: '0 4px 16px rgba(10, 42, 92, 0.05)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between'
-                }}
-              >
-                <div>
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      marginBottom: '10px'
-                    }}
-                  >
-                    <span
-                      style={{
-                        background: '#EEF4FC',
-                        color: '#1856A5',
-                        fontSize: '11px',
-                        fontWeight: 700,
-                        padding: '3px 10px',
-                        borderRadius: '999px'
-                      }}
-                    >
-                      {item.focus}
-                    </span>
-                    <span style={{ fontSize: '12px', color: '#1A8FBF', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-                        <circle cx="12" cy="10" r="3" />
-                      </svg>
-                      {item.location}
-                    </span>
-                  </div>
-                  <h4 style={{ fontSize: '16px', color: '#0A2A5C', margin: '4px 0 8px', fontWeight: 700 }}>
-                    {item.title}
-                  </h4>
-                  <p style={{ fontSize: '13.5px', color: '#4F617D', lineHeight: 1.5, margin: '0 0 14px' }}>
-                    {item.desc}
-                  </p>
-                </div>
-                <div style={{ fontSize: '12px', color: '#1856A5', borderTop: '1px solid #EEF4FC', paddingTop: '10px', fontWeight: 600 }}>
-                  Partner: {item.partner}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <h3 style={{ fontSize: '18px', color: '#1856A5', marginBottom: '18px', fontWeight: 700 }}>
             CSR-Funded Projects & Centres of Excellence
           </h3>
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-              gap: '22px'
-            }}
-          >
+          <div className="tall-image-grid tall-image-grid-3">
             {csrProjects.map((item) => (
-              <div
+              <TallImageCard
                 key={item.title}
-                style={{
-                  background: '#EEF4FC',
-                  borderRadius: '18px',
-                  padding: '24px',
-                  border: '1px solid #DCE9F8',
-                  boxShadow: '0 4px 16px rgba(10, 42, 92, 0.04)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between'
-                }}
-              >
-                <div>
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      marginBottom: '10px'
-                    }}
-                  >
-                    <span
-                      style={{
-                        background: '#FFFFFF',
-                        color: '#0A2A5C',
-                        fontSize: '11px',
-                        fontWeight: 700,
-                        padding: '3px 10px',
-                        borderRadius: '999px',
-                        border: '1px solid #DCE9F8'
-                      }}
-                    >
-                      {item.focus}
-                    </span>
-                    <span style={{ fontSize: '12px', color: '#1A8FBF', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-                        <circle cx="12" cy="10" r="3" />
-                      </svg>
-                      {item.location}
-                    </span>
-                  </div>
-                  <h4 style={{ fontSize: '16px', color: '#0A2A5C', margin: '4px 0 8px', fontWeight: 700 }}>
-                    {item.title}
-                  </h4>
-                  <p style={{ fontSize: '13.5px', color: '#4F617D', lineHeight: 1.5, margin: '0 0 14px' }}>
-                    {item.desc}
-                  </p>
-                </div>
-                <div style={{ fontSize: '12px', color: '#0A2A5C', borderTop: '1px solid #DCE9F8', paddingTop: '10px', fontWeight: 600 }}>
-                  Partner: {item.partner}
-                </div>
-              </div>
+                title={item.title}
+                desc={item.desc}
+                image={item.image}
+                to={item.to}
+                tag={item.focus}
+                location={item.location}
+              />
             ))}
           </div>
         </div>
@@ -717,75 +552,17 @@ export default function Livelihood() {
             </span>
           </div>
 
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(310px, 1fr))',
-              gap: '24px'
-            }}
-          >
+          <div className="tall-image-grid tall-image-grid-3">
             {events.map((item) => (
-              <div
+              <TallImageCard
                 key={item.title}
-                style={{
-                  background: '#FFFFFF',
-                  borderRadius: '18px',
-                  padding: '26px',
-                  border: '1.5px solid #DCE9F8',
-                  boxShadow: '0 6px 20px rgba(10, 42, 92, 0.05)'
-                }}
-              >
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    marginBottom: '12px'
-                  }}
-                >
-                  <span
-                    style={{
-                      background: '#EEF4FC',
-                      color: '#1856A5',
-                      fontSize: '11px',
-                      fontWeight: 700,
-                      padding: '4px 10px',
-                      borderRadius: '999px',
-                      border: '1px solid #DCE9F8'
-                    }}
-                  >
-                    {item.focus}
-                  </span>
-                  <span style={{ fontSize: '12.5px', color: '#1A8FBF', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-                      <circle cx="12" cy="10" r="3" />
-                    </svg>
-                    {item.location}
-                  </span>
-                </div>
-                <h3
-                  style={{
-                    fontSize: '17px',
-                    color: '#0A2A5C',
-                    margin: '4px 0 10px',
-                    fontWeight: 700,
-                    lineHeight: 1.35
-                  }}
-                >
-                  {item.title}
-                </h3>
-                <p
-                  style={{
-                    fontSize: '14px',
-                    color: '#4F617D',
-                    lineHeight: 1.55,
-                    margin: 0
-                  }}
-                >
-                  {item.desc}
-                </p>
-              </div>
+                title={item.title}
+                desc={item.desc}
+                image={item.image}
+                to={item.to}
+                tag={item.focus}
+                location={item.location}
+              />
             ))}
           </div>
 

@@ -56,7 +56,12 @@ a {
 }
 
 /* Base Headings & Typography */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: var(--deep-navy);
   font-family: Montserrat, Inter, sans-serif;
   font-weight: 700;
@@ -69,12 +74,16 @@ h1, h2, h3, h4, h5, h6 {
 .ap-hero-title,
 .aboutksli-hero h1,
 .domains-continuous-page section:first-of-type h1,
-.footer h1, .footer h2, .footer h3, .footer h4 {
+.footer h1,
+.footer h2,
+.footer h3,
+.footer h4 {
   color: #FFFFFF !important;
 }
 
 /* Buttons & Interactive Elements */
-.primary, .btn-primary {
+.primary,
+.btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -91,14 +100,16 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 4px 12px rgba(24, 86, 165, 0.25);
 }
 
-.primary:hover, .btn-primary:hover {
+.primary:hover,
+.btn-primary:hover {
   background: #114383;
   transform: translateY(-1px);
   box-shadow: 0 6px 16px rgba(24, 86, 165, 0.32);
   color: #fff;
 }
 
-.secondary, .btn-secondary {
+.secondary,
+.btn-secondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -113,7 +124,8 @@ h1, h2, h3, h4, h5, h6 {
   transition: all 0.25s ease;
 }
 
-.secondary:hover, .btn-secondary:hover {
+.secondary:hover,
+.btn-secondary:hover {
   background: var(--pale-blue);
   border-color: var(--ksli-blue);
 }
@@ -145,7 +157,8 @@ h1, h2, h3, h4, h5, h6 {
   padding: 76px 0;
 }
 
-.section.muted, .section-soft {
+.section.muted,
+.section-soft {
   background: var(--pale-blue);
 }
 
@@ -167,14 +180,14 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.02em;
 }
 
-.section-heading > p {
+.section-heading>p {
   color: var(--muted);
   max-width: 680px;
   font-size: 16px;
   margin: 0;
 }
 
-.section-heading.center > p {
+.section-heading.center>p {
   margin-left: auto;
   margin-right: auto;
 }
@@ -194,8 +207,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Hero Elements */
-.home-hero, .domain-hero {
-  min-height: 90vh;
+.home-hero,
+.domain-hero {
+  min-height: 100vh;
   padding-top: 130px;
   padding-bottom: 60px;
   background-position: center;
@@ -206,14 +220,26 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
 }
 
-.home-hero h1, .domain-hero h1 {
+.viewport-hero {
+  min-height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .viewport-hero {
+    min-height: 100svh;
+  }
+}
+
+.home-hero h1,
+.domain-hero h1 {
   font: 800 clamp(36px, 4.4vw, 56px)/1.14 Montserrat, sans-serif;
   margin: 12px 0 20px;
   letter-spacing: -0.03em;
   color: #fff;
 }
 
-.home-hero p:not(.intro-label), .domain-hero p {
+.home-hero p:not(.intro-label),
+.domain-hero p {
   font-size: 18px;
   line-height: 1.6;
   max-width: 660px;
@@ -356,7 +382,8 @@ h1, h2, h3, h4, h5, h6 {
   border-color: #bad3f5;
 }
 
-.entry-card img, .card-art {
+.entry-card img,
+.card-art {
   height: 190px;
   width: 100%;
   object-fit: cover;
@@ -417,7 +444,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: 10px 0 14px;
 }
 
-.page-intro > div > p:last-child {
+.page-intro>div>p:last-child {
   max-width: 720px;
   font-size: 17px;
   color: var(--muted);
@@ -464,8 +491,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @keyframes scrollMarquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 /* Core Purpose Arch */
@@ -615,8 +647,15 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Animations */
 @keyframes slideInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Responsive */
@@ -624,12 +663,15 @@ h1, h2, h3, h4, h5, h6 {
   .entry-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
   .cards-2 {
     grid-template-columns: 1fr;
   }
+
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
   .footer-grid {
     grid-template-columns: 1fr 1fr;
   }
@@ -639,17 +681,31 @@ h1, h2, h3, h4, h5, h6 {
   .entry-grid {
     grid-template-columns: 1fr;
   }
+
   .stats-grid {
     grid-template-columns: 1fr;
   }
+
   .footer-grid {
     grid-template-columns: 1fr;
   }
+
   .actions {
     flex-direction: column;
     align-items: stretch;
   }
-  .arch-content h2 { font-size: 22px; }
-  .arch-content p { font-size: 14.5px; }
-  .arch-node { width: 50px; height: 50px; font-size: 20px; }
+
+  .arch-content h2 {
+    font-size: 22px;
+  }
+
+  .arch-content p {
+    font-size: 14.5px;
+  }
+
+  .arch-node {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+  }
 }

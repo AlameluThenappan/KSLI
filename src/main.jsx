@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Link, NavLink, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import './styles.css';
@@ -38,8 +38,12 @@ import Resources from './pages/Resources.jsx';
 import Stories from './pages/Stories.jsx';
 import ResearchRealities from './pages/ResearchRealities.jsx';
 import GetInvolved from './pages/GetInvolved.jsx';
+import DedicatedFormPage from './pages/DedicatedFormPage.jsx';
 import TeamMemberProfile from './pages/TeamMemberProfile.jsx';
 import Manage from './pages/Manage.jsx';
+import TallImageCard from './components/TallImageCard.jsx';
+import { navConfig } from './data/navConfig.js';
+import FloatingNavPanel from './components/FloatingNavPanel.jsx';
 
 const img = {
   hero: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCcrwWa2o5nAozqqQvUmytqo_H5g2TNutO1HQaexxVhNVGMzd3EHQZtW5NrJ4Cau1x28EfnmfV7FLRNk_crjxfahtdYIl39mroK_JR1pn-2xZtPD8Q5o8RzXmyu6SuAx0dhw0Yl8nVgSXWreMpqyX_b77lBnQvpjfmG6KyVtScBb_v3DpyQjGkP0CIjm1sZeLkJKX-5Oy6ibBeWkEKIOk8iga-55mgEpkqn4m3Ay4DVhgnYc2cZNOQ0Vw',
@@ -47,37 +51,267 @@ const img = {
   pathway: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAltNZbzl24YOhTpyttO8MN3RtWjYr-alPnC9UZze6fpMLYgP7ErFYMDI02fNXQqeuuO2J_7fuc4cHqS7AoFxoMawEioD_qgxCw-QrED4P2FZfSrejylmvv3IwZy2qHGmLApJK8CRPO6vzjSlD3eS0ZZphrqUUfnqa7bRCn0KMJPT_42IeDN0Izvr4d00FaRlu6bFwiB9jtFPrqdV3oxLMxyRXh7zpQeMevtVjKc9-gbxBa9tUViiG0aQ'
 };
 
-// Main navigation
-const navItems = [
-  { label: 'Home', to: '/', exact: true },
-  { label: 'About KSLI', to: '/about' },
-  { label: 'Domains', to: '/domains', activeCheck: (path) => path.startsWith('/domains') || path.startsWith('/sustainability') || path.startsWith('/livelihood') },
-  { label: 'Learning', to: '/learning', activeCheck: (path) => path.startsWith('/learning') || path.startsWith('/academic-programs') },
-  { label: 'Research & Realities', to: '/research-realities' },
-];
-
 function Header() {
   const [mobile, setMobile] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const location = useLocation();
-  const close = () => {
-    setMobile(false);
-  };
+  const [activePanelId, setActivePanelId] = useState(null);
+  const [triggerRect, setTriggerRect] = useState(null);
+  const [navRect, setNavRect] = useState(null);
+  const [mobileAccordion, setMobileAccordion] = useState(null);
+  const [mobileNestedAccordion, setMobileNestedAccordion] = useState(null);
 
+  const headerRef = useRef(null);
+  const navRef = useRef(null);
+  const triggerRefs = useRef({});
+  const leaveTimerRef = useRef(null);
+  const location = useLocation();
+
+  // Preload panel images so switching items never flashes
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 30);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
+    navConfig.forEach((item) => {
+      item.items?.forEach((sub) => {
+        if (sub.image) {
+          const img = new Image();
+          img.src = sub.image;
+        }
+      });
+    });
   }, []);
 
+  const close = () => {
+    setMobile(false);
+    setActivePanelId(null);
+    setMobileAccordion(null);
+    setMobileNestedAccordion(null);
+  };
+
+  // Close menus on route navigation
+  useEffect(() => {
+    close();
+  }, [location.pathname]);
+
+  // Scroll detection
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 30);
+      if (activePanelId) setActivePanelId(null);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [activePanelId]);
+
+  // Click outside to close floating panel
+  useEffect(() => {
+    if (!activePanelId) return;
+    const handleClickOutside = (e) => {
+      if (headerRef.current && !headerRef.current.contains(e.target)) {
+        setActivePanelId(null);
+      }
+    };
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [activePanelId]);
+
+  // Update measurements of active trigger and nav bar
+  const updateMeasurements = (id) => {
+    if (navRef.current && triggerRefs.current[id]) {
+      setNavRect(navRef.current.getBoundingClientRect());
+      setTriggerRect(triggerRefs.current[id].getBoundingClientRect());
+    }
+  };
+
+  const handleMouseEnterTrigger = (item) => {
+    if (!item.items) {
+      if (leaveTimerRef.current) clearTimeout(leaveTimerRef.current);
+      leaveTimerRef.current = setTimeout(() => {
+        setActivePanelId(null);
+      }, 120);
+      return;
+    }
+    if (leaveTimerRef.current) {
+      clearTimeout(leaveTimerRef.current);
+      leaveTimerRef.current = null;
+    }
+    updateMeasurements(item.id);
+    setActivePanelId(item.id);
+  };
+
+  const handleMouseLeaveTrigger = () => {
+    if (leaveTimerRef.current) clearTimeout(leaveTimerRef.current);
+    leaveTimerRef.current = setTimeout(() => {
+      setActivePanelId(null);
+    }, 150);
+  };
+
+  const handlePanelMouseEnter = () => {
+    if (leaveTimerRef.current) {
+      clearTimeout(leaveTimerRef.current);
+      leaveTimerRef.current = null;
+    }
+  };
+
+  const handlePanelMouseLeave = () => {
+    if (leaveTimerRef.current) clearTimeout(leaveTimerRef.current);
+    leaveTimerRef.current = setTimeout(() => {
+      setActivePanelId(null);
+    }, 150);
+  };
+
+  const handleTriggerClick = (e, item) => {
+    if (item.items) {
+      if (window.innerWidth >= 1200) {
+        if (activePanelId === item.id) {
+          setActivePanelId(null);
+        } else {
+          updateMeasurements(item.id);
+          setActivePanelId(item.id);
+        }
+      }
+    } else {
+      close();
+    }
+  };
+
+  const activePanelConfig = navConfig.find((item) => item.id === activePanelId);
   const isHome = location.pathname === '/';
 
+  const centerNavItems = navConfig.filter((item) => item.id !== 'get-involved' && !item.isCta);
+  const ctaNavItem = navConfig.find((item) => item.id === 'get-involved' || item.isCta);
+
   return (
-    <header className={`site-header ${scrolled ? 'scrolled' : ''} ${isHome ? 'transparent-hero' : ''}`}>
-      <nav className="nav shell" aria-label="Main navigation">
-        <Link className="brand" to="/" onClick={close} aria-label="Kumaraguru Sustainability and Livelihood Institute">
-          <img src={ksliLogo} alt="Kumaraguru Sustainability and Livelihood Institute" width="275" height="52" />
-        </Link>
+    <header className={`site-header ${scrolled ? 'scrolled' : ''} ${isHome ? 'transparent-hero' : ''}`} ref={headerRef}>
+      <nav className="nav" ref={navRef} aria-label="Main navigation">
+        {/* Left Zone: KSLI Logo */}
+        <div className="nav-left-zone">
+          <Link className="brand" to="/" onClick={close} aria-label="Kumaraguru Sustainability and Livelihood Institute">
+            <img src={ksliLogo} alt="Kumaraguru Sustainability and Livelihood Institute" width="275" height="52" />
+          </Link>
+        </div>
+
+        {/* Center Zone: Page Links (Truly centered in the bar) */}
+        <div className="nav-center-zone">
+          {centerNavItems.map((item) => {
+            const isActive = item.activeCheck
+              ? item.activeCheck(location.pathname)
+              : item.exact
+                ? location.pathname === item.to
+                : location.pathname.startsWith(item.to);
+
+            const hasPanel = Boolean(item.items && item.items.length > 0);
+            const isOpen = activePanelId === item.id;
+
+            if (hasPanel) {
+              return (
+                <div
+                  key={item.id}
+                  className={`nav-trigger-wrapper ${isOpen ? 'is-open' : ''}`}
+                  ref={(el) => (triggerRefs.current[item.id] = el)}
+                  onMouseEnter={() => handleMouseEnterTrigger(item)}
+                  onMouseLeave={handleMouseLeaveTrigger}
+                >
+                  <Link
+                    to={item.to}
+                    onClick={(e) => handleTriggerClick(e, item)}
+                    className={`nav-link-item ${isActive ? 'active' : ''}`}
+                    aria-expanded={isOpen}
+                    aria-haspopup="true"
+                  >
+                    <span>{item.label}</span>
+                    <svg
+                      className="nav-trigger-chevron"
+                      width="10"
+                      height="6"
+                      viewBox="0 0 10 6"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M1 1.25L5 4.75L9 1.25" />
+                    </svg>
+                  </Link>
+                </div>
+              );
+            }
+
+            return (
+              <Link
+                key={item.id}
+                to={item.to}
+                onClick={close}
+                onMouseEnter={() => handleMouseEnterTrigger(item)}
+                className={`nav-link-item ${isActive ? 'active' : ''}`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+        </div>
+
+        {/* Right Zone: Prominent Get Involved Button */}
+        <div className="nav-right-zone">
+          {ctaNavItem && (() => {
+            const isActive = ctaNavItem.activeCheck
+              ? ctaNavItem.activeCheck(location.pathname)
+              : ctaNavItem.exact
+                ? location.pathname === ctaNavItem.to
+                : location.pathname.startsWith(ctaNavItem.to);
+
+            const hasPanel = Boolean(ctaNavItem.items && ctaNavItem.items.length > 0);
+            const isOpen = activePanelId === ctaNavItem.id;
+
+            if (hasPanel) {
+              return (
+                <div
+                  key={ctaNavItem.id}
+                  className={`nav-trigger-wrapper ${isOpen ? 'is-open' : ''}`}
+                  ref={(el) => (triggerRefs.current[ctaNavItem.id] = el)}
+                  onMouseEnter={() => handleMouseEnterTrigger(ctaNavItem)}
+                  onMouseLeave={handleMouseLeaveTrigger}
+                >
+                  <Link
+                    to={ctaNavItem.to}
+                    onClick={(e) => handleTriggerClick(e, ctaNavItem)}
+                    className={`nav-cta-button ${isActive ? 'active' : ''}`}
+                    aria-expanded={isOpen}
+                    aria-haspopup="true"
+                  >
+                    <span>{ctaNavItem.label}</span>
+                    <svg
+                      className="nav-trigger-chevron"
+                      width="10"
+                      height="6"
+                      viewBox="0 0 10 6"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M1 1.25L5 4.75L9 1.25" />
+                    </svg>
+                  </Link>
+                </div>
+              );
+            }
+
+            return (
+              <Link
+                key={ctaNavItem.id}
+                to={ctaNavItem.to}
+                onClick={close}
+                className={`nav-cta-button ${isActive ? 'active' : ''}`}
+              >
+                {ctaNavItem.label}
+              </Link>
+            );
+          })()}
+        </div>
+
+        {/* Mobile Toggle Button (< 1024px) */}
         <button
           className="menu-button"
           aria-label="Toggle navigation"
@@ -86,77 +320,111 @@ function Header() {
         >
           {mobile ? '✕' : '☰'}
         </button>
-        <div className={`nav-links ${mobile ? 'show' : ''}`}>
-          {navItems.map((item) => {
-            const isActive = item.activeCheck
-              ? item.activeCheck(location.pathname)
-              : item.exact
-              ? location.pathname === item.to
-              : location.pathname.startsWith(item.to);
 
-            if (item.label === 'Domains') {
-              return (
-                <div
-                  key="Domains"
-                  className="nav-dropdown"
-                >
+        {/* Mobile navigation drawer (< 1024px) */}
+        <div className={`nav-links ${mobile ? 'show' : ''}`}>
+          <div className="nav-mobile-drawer-body">
+            {navConfig.map((item) => {
+              const isActive = item.activeCheck
+                ? item.activeCheck(location.pathname)
+                : item.exact
+                  ? location.pathname === item.to
+                  : location.pathname.startsWith(item.to);
+
+              if (!item.items) {
+                return (
                   <Link
-                    to="/domains"
-                    onClick={(e) => {
-                      e.currentTarget.blur();
-                      close();
-                    }}
-                    className={`nav-link-item ${isActive ? 'active' : ''}`}
+                    key={item.id}
+                    to={item.to}
+                    onClick={close}
+                    className={`nav-mobile-link ${item.isCta ? 'nav-cta-button' : ''} ${isActive ? 'active' : ''}`}
                   >
-                    Domains
+                    {item.label}
                   </Link>
-                  <div className="nav-dropdown-menu">
-                    <Link
-                      to="/domains/sustainability"
-                      onClick={(e) => {
-                        e.currentTarget.blur();
-                        close();
-                      }}
-                      className={`nav-dropdown-item ${location.pathname === '/domains/sustainability' ? 'active' : ''}`}
-                    >
-                      Sustainability
-                    </Link>
-                    <Link
-                      to="/domains/livelihood"
-                      onClick={(e) => {
-                        e.currentTarget.blur();
-                        close();
-                      }}
-                      className={`nav-dropdown-item ${location.pathname === '/domains/livelihood' ? 'active' : ''}`}
-                    >
-                      Livelihood
-                    </Link>
-                  </div>
+                );
+              }
+
+              const isAccordionOpen = mobileAccordion === item.id;
+
+              return (
+                <div key={item.id} className="nav-mobile-accordion">
+                  <button
+                    type="button"
+                    className={`nav-mobile-accordion-trigger ${isAccordionOpen ? 'is-open' : ''}`}
+                    onClick={() => setMobileAccordion(isAccordionOpen ? null : item.id)}
+                    aria-expanded={isAccordionOpen}
+                  >
+                    <span>{item.label}</span>
+                    <span className={`nav-mobile-chevron ${isAccordionOpen ? 'is-open' : ''}`} aria-hidden="true">▾</span>
+                  </button>
+
+                  {isAccordionOpen && (
+                    <div className="nav-mobile-accordion-content">
+                      <Link
+                        to={item.to}
+                        onClick={close}
+                        className="nav-mobile-link"
+                        style={{ fontWeight: 700, color: '#1856A5' }}
+                      >
+                        {item.label} Overview →
+                      </Link>
+
+                      {item.layoutType === 'two-level' ? (
+                        item.items.map((sub) => {
+                          const isNestedOpen = mobileNestedAccordion === sub.id;
+                          return (
+                            <div key={sub.id} className="nav-mobile-nested-accordion">
+                              <button
+                                type="button"
+                                className="nav-mobile-nested-trigger"
+                                onClick={() => setMobileNestedAccordion(isNestedOpen ? null : sub.id)}
+                                aria-expanded={isNestedOpen}
+                              >
+                                <span>{sub.label}</span>
+                                <span className={`nav-mobile-chevron ${isNestedOpen ? 'is-open' : ''}`} aria-hidden="true">▾</span>
+                              </button>
+                              {isNestedOpen && (
+                                <div className="nav-mobile-nested-content">
+                                  <Link to={sub.to} onClick={close} className="nav-mobile-link">
+                                    {sub.label} Overview →
+                                  </Link>
+                                  {sub.chips?.map((chip) => (
+                                    <Link key={chip.label} to={chip.to} onClick={close} className="nav-mobile-link">
+                                      {chip.label}
+                                    </Link>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })
+                      ) : (
+                        item.items.map((sub) => (
+                          <Link key={sub.id} to={sub.to} onClick={close} className="nav-mobile-link">
+                            {sub.label}
+                          </Link>
+                        ))
+                      )}
+                    </div>
+                  )}
                 </div>
               );
-            }
-
-            return (
-              <Link
-                key={item.label}
-                to={item.to}
-                onClick={close}
-                className={`nav-link-item ${isActive ? 'active' : ''}`}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
-          {/* Prominent 'Get Involved' Button */}
-          <Link
-            to="/get-involved"
-            onClick={close}
-            className={`nav-cta-button ${location.pathname === '/get-involved' ? 'active' : ''}`}
-          >
-            Get Involved <span>→</span>
-          </Link>
+            })}
+          </div>
         </div>
       </nav>
+
+      {/* Large Floating morphing mega-menu panel (desktop, centered under navbar) */}
+      {!mobile && (
+        <FloatingNavPanel
+          isOpen={Boolean(activePanelId)}
+          panelConfig={activePanelConfig}
+          triggerRect={triggerRect}
+          onClose={() => setActivePanelId(null)}
+          onMouseEnter={handlePanelMouseEnter}
+          onMouseLeave={handlePanelMouseLeave}
+        />
+      )}
     </header>
   );
 }
@@ -201,10 +469,10 @@ function Footer() {
         <div className="footer-nav-col">
           <p className="eyebrow" style={{ color: '#8CC2FC' }}>Action & Connect</p>
           <Link to="/get-involved">Get Involved</Link>
-          <Link to="/get-involved#form">Volunteer</Link>
-          <Link to="/get-involved#form">Student Internships</Link>
-          <Link to="/get-involved#form">CSR Collaboration</Link>
-          <Link to="/get-involved#form">Contact Secretariat</Link>
+          <Link to="/get-involved/volunteer">Volunteer</Link>
+          <Link to="/get-involved/student-internship">Student Internships</Link>
+          <Link to="/get-involved/industry-csr-partnership">CSR Collaboration</Link>
+          <Link to="/get-involved/contact">Contact Secretariat</Link>
         </div>
       </div>
 
@@ -354,30 +622,27 @@ function Stats() {
   );
 }
 
-function EntryCard({ title, type = 'RESEARCH', text = 'Content details will be added.', location, image }) {
+function EntryCard({ title, type = 'RESEARCH', text = 'Content details will be added.', location, image, to = '/domains' }) {
+  const defaultImages = {
+    'LIVELIHOOD EVENT': 'https://images.unsplash.com/photo-1527153857715-3908f2ae5e81?w=800&auto=format&fit=crop&q=80',
+    'SUSTAINABILITY EVENT': 'https://images.unsplash.com/photo-1544531586-fde5298cdd40?w=800&auto=format&fit=crop&q=80',
+    'APPLIED RESEARCH': 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&auto=format&fit=crop&q=80',
+    'DEVELOPMENT PROJECT': 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=800&auto=format&fit=crop&q=80',
+    'RESEARCH': 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&auto=format&fit=crop&q=80',
+    'CENTRE OF EXCELLENCE': 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&auto=format&fit=crop&q=80'
+  };
+
+  const cardImg = image || defaultImages[type] || 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&auto=format&fit=crop&q=80';
+
   return (
-    <article className="entry-card">
-      {image ? <img src={image} alt="" /> : <div className="card-art" />}
-      <div className="card-copy">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-          <p className="eyebrow" style={{ margin: 0 }}>{type}</p>
-          {location && (
-            <span style={{ fontSize: '12px', color: '#1A8FBF', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-                <circle cx="12" cy="10" r="3" />
-              </svg>
-              {location.replace(/^📍\s*/, '')}
-            </span>
-          )}
-        </div>
-        <h3>{title}</h3>
-        <p>{text}</p>
-        <Link to="/domains" className="text-link">
-          Explore Detail <span>→</span>
-        </Link>
-      </div>
-    </article>
+    <TallImageCard
+      title={title}
+      tag={type}
+      desc={text}
+      location={location}
+      image={cardImg}
+      to={to}
+    />
   );
 }
 
@@ -670,8 +935,7 @@ function Home() {
             width: '100%',
             height: '100%',
             zIndex: -1,
-            backgroundImage:
-              'linear-gradient(90deg, rgba(10, 42, 92, 0.98) 0%, rgba(10, 42, 92, 0.88) 45%, rgba(10, 42, 92, 0.5) 75%, transparent 100%)'
+            background: 'rgba(24, 86, 165, 0.50)'
           }}
         />
         <div className="shell" style={{ position: 'relative', zIndex: 1 }}>
@@ -683,7 +947,7 @@ function Home() {
             </p>
             <div className="actions">
               <Link className="primary" to="/domains">
-                Explore Domains →
+                Explore KSLI Learning pathway→
               </Link>
               <Link className="btn-navy" to="/get-involved">
                 Partner With Us
@@ -725,26 +989,40 @@ function Home() {
       {/* LATEST UPDATES & FLAGSHIP EVENTS */}
       <section className="section shell">
         <SectionHeading title="Latest Flagship Initiatives" eyebrow="Updates & Conclaves">
-          Recent flagship events and research breakthroughs across Tamil Nadu.
+          Recent flagship events, projects, and research breakthroughs across Tamil Nadu.
         </SectionHeading>
-        <div className="entry-grid">
+        <div className="tall-image-grid tall-image-grid-4">
           <EntryCard
-            title="Dairy Yatra: Value Addition Immersion"
+            title="Dairy Yatra: Immersion"
             type="LIVELIHOOD EVENT"
             location="Western Tamil Nadu"
-            text="Field immersion connecting smallholder dairy farmers with automated chilling technologies and milk cooperatives."
+            text="Connecting dairy farmers with automated chilling technologies and milk cooperatives."
+            image="https://images.unsplash.com/photo-1527153857715-3908f2ae5e81?w=800&auto=format&fit=crop&q=80"
+            to="/domains/livelihood#events"
           />
           <EntryCard
-            title="Student Conclave for Climate Action (SCCA)"
+            title="Climate Action Conclave (SCCA)"
             type="SUSTAINABILITY EVENT"
             location="Coimbatore"
-            text="Over 600 higher-ed students gathered to prototype campus decarbonization frameworks and renewable micro-grids."
+            text="Over 600 students prototyping campus decarbonization frameworks and renewable micro-grids."
+            image="https://images.unsplash.com/photo-1544531586-fde5298cdd40?w=800&auto=format&fit=crop&q=80"
+            to="/domains/sustainability#events"
           />
           <EntryCard
-            title="Young Farmers Conclave & Startup Expo"
-            type="LIVELIHOOD EVENT"
-            location="Coimbatore"
-            text="Connecting young agrarian innovators and FPO heads with precision agriculture robotics and seed capital."
+            title="Watershed Resilience Study"
+            type="APPLIED RESEARCH"
+            location="Bhavani Basin"
+            text="A ~₹5 crore grant assessing micro-catchment habitats and hydrological resilience."
+            image="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&auto=format&fit=crop&q=80"
+            to="/domains/sustainability#research"
+          />
+          <EntryCard
+            title="Urban Wetland Restoration"
+            type="DEVELOPMENT PROJECT"
+            location="Singanallur Lake"
+            text="Revitalizing wetlands through bio-treatment islands and citizen biodiversity audits."
+            image="https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=800&auto=format&fit=crop&q=80"
+            to="/domains/sustainability#projects"
           />
         </div>
       </section>
@@ -769,7 +1047,7 @@ function Partners({ centres = false }) {
       </header>
       <section className="section shell">
         {centres ? (
-          <div className="entry-grid">
+          <div className="tall-image-grid tall-image-grid-3">
             <EntryCard title="Centre of Excellence – Dairy" type="CENTRE OF EXCELLENCE" text="Driving productivity enhancement, clean milk hygiene, and youth dairy entrepreneurship." />
             <EntryCard title="Centre of Excellence – Sugarcane" type="CENTRE OF EXCELLENCE" text="Partnering with Sakthi Sugars to deliver precision N-balancing and soil carbon rejuvenation." />
             <EntryCard title="Centre of Excellence – Social Development" type="CENTRE OF EXCELLENCE" text="Anchoring community water projects, rural livelihoods, and social work fieldwork." />
@@ -817,6 +1095,11 @@ function NotFound() {
 
 function ScrollHandler() {
   const { pathname, hash } = useLocation();
+
+  useEffect(() => {
+    document.title = 'KSLI';
+  }, [pathname]);
+
   useEffect(() => {
     if (hash) {
       const element = document.getElementById(hash.replace('#', ''));
@@ -854,6 +1137,19 @@ function App() {
           <Route path="/resources" element={<Navigate to="/research-realities" replace />} />
           <Route path="/stories" element={<Navigate to="/research-realities" replace />} />
           <Route path="/get-involved" element={<GetInvolved />} />
+          <Route path="/get-involved/volunteer" element={<DedicatedFormPage formKey="volunteer" />} />
+          <Route path="/get-involved/student-internship" element={<DedicatedFormPage formKey="student-internship" />} />
+          <Route path="/get-involved/academic-collaboration" element={<DedicatedFormPage formKey="academic-collaboration" />} />
+          <Route path="/get-involved/industry-csr-partnership" element={<DedicatedFormPage formKey="industry-csr-partnership" />} />
+          <Route path="/get-involved/contact" element={<DedicatedFormPage formKey="contact" />} />
+
+          {/* Form aliases and redirects */}
+          <Route path="/get-involved/internships" element={<Navigate to="/get-involved/student-internship" replace />} />
+          <Route path="/get-involved/internship" element={<Navigate to="/get-involved/student-internship" replace />} />
+          <Route path="/get-involved/partnerships" element={<Navigate to="/get-involved/industry-csr-partnership" replace />} />
+          <Route path="/get-involved/csr" element={<Navigate to="/get-involved/industry-csr-partnership" replace />} />
+          <Route path="/get-involved/collaboration" element={<Navigate to="/get-involved/academic-collaboration" replace />} />
+
           <Route path="/manage" element={<Manage />} />
           <Route path="/team/:id" element={<TeamMemberProfile />} />
           <Route path="/about/team/:id" element={<TeamMemberProfile />} />
@@ -866,7 +1162,7 @@ function App() {
 
           {/* Aliases & Complementary Routes */}
           <Route path="/academic-programs" element={<AcademicPrograms />} />
-          <Route path="/contact" element={<GetInvolved />} />
+          <Route path="/contact" element={<Navigate to="/get-involved/contact" replace />} />
           <Route path="/coe-partners" element={<Partners />} />
           <Route path="/coe-partners/centres-of-excellence" element={<Partners centres />} />
           <Route path="/coe-partners/our-partners" element={<OurPartners />} />

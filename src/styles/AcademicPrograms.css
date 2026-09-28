@@ -36,17 +36,12 @@
   z-index: -2;
 }
 
-/* Lighter at top, darker at bottom so KPI cards stay readable */
+/* Uniform KSLI-blue treatment for the photographic hero. */
 .ap-hero-overlay {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(
-    to bottom,
-    rgba(10, 42, 92, 0.90) 0%,
-    rgba(10, 42, 92, 0.82) 42%,
-    rgba(10, 42, 92, 0.96) 100%
-  );
+  background: rgba(24, 86, 165, 0.50);
 }
 
 .ap-hero-content {
@@ -565,7 +560,7 @@
   backdrop-filter: blur(16px);
 }
 
-.ap-pathway-command-panel > div {
+.ap-pathway-command-panel>div {
   min-width: 0;
   padding: 4px 8px;
 }
@@ -936,10 +931,12 @@
     opacity: 0.78;
     transform: scale(0.86);
   }
+
   70% {
     opacity: 0.2;
     transform: scale(1.18);
   }
+
   100% {
     opacity: 0;
     transform: scale(1.22);
@@ -951,6 +948,7 @@
     opacity: 0.9;
     transform: scale(0.78);
   }
+
   100% {
     opacity: 0;
     transform: scale(1.28);
@@ -1005,26 +1003,33 @@
   .ap-programs-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
   .ap-workshops-grid {
     grid-template-columns: 1fr;
   }
+
   .ap-partners-row {
     flex-wrap: wrap;
   }
+
   .ap-partner-tile {
     flex: 1 1 30%;
   }
+
   .ap-pathway-header-meta {
     align-items: flex-start;
     flex-direction: column;
   }
+
   .ap-pathway-stepper {
     grid-template-columns: repeat(4, minmax(72px, 1fr));
     width: 100%;
   }
+
   .ap-pathway-command-panel {
     grid-template-columns: 1fr;
   }
+
   .ap-command-meter {
     width: 100%;
   }
@@ -1035,24 +1040,29 @@
     padding-top: 96px;
     min-height: 100svh;
   }
+
   .ap-hero-kpis {
     grid-template-columns: 1fr;
     gap: 12px;
     padding-bottom: 36px;
   }
+
   .ap-kpi-card {
     padding: 18px 22px;
     flex-direction: row;
     align-items: center;
     gap: 16px;
   }
+
   .ap-kpi-number {
     font-size: 40px;
     min-width: 72px;
   }
+
   .ap-programs-grid {
     grid-template-columns: 1fr;
   }
+
   .ap-section {
     padding: 64px 0;
   }
@@ -1131,19 +1141,23 @@
   .ap-hero-title {
     font-size: 36px;
   }
+
   .ap-section-heading h2 {
     font-size: 26px;
   }
+
   .ap-kpi-card {
     flex-direction: column;
     gap: 8px;
     padding: 16px 18px;
   }
+
   .ap-partner-tile {
     flex: 1 1 45%;
     border-right: none;
     border-bottom: 1px solid #eee;
   }
+
   .ap-partner-tile:last-child {
     border-bottom: none;
   }
@@ -1181,6 +1195,7 @@
 
 /* Respect reduced motion: disable all transitions/reveals */
 @media (prefers-reduced-motion: reduce) {
+
   .ap-section,
   .ap-program-card,
   .ap-workshop-group,
@@ -1194,6 +1209,7 @@
     transition: none !important;
     animation: none !important;
   }
+
   .ap-curve-traveled-line {
     transition: none !important;
   }
