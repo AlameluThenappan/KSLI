@@ -372,15 +372,6 @@ export default function AboutKSLI() {
         </div>
       </section>
 
-      {/* ── PARTNERS / CTA ── */}
-      <section className="aboutksli-cta">
-        <div className="shell">
-          <p className="eyebrow teal">KSLI</p>
-          <h2>Research. Learning. Partnership. Action.</h2>
-          <p>Explore how KSLI connects academic inquiry, field practice, and long-term collaboration.</p>
-          <Link className="primary" to="/domains">Explore Our Work <span>→</span></Link>
-        </div>
-      </section>
     </article>
   );
 }

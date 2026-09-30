@@ -79,29 +79,35 @@ export default function GetInvolved() {
   ];
 
   return (
-    <div className="get-involved-page" style={{ paddingTop: '86px' }}>
-      {/* HEADER */}
+    <div className="get-involved-page">
+      {/* FULL SCREEN HERO BANNER */}
       <section
+        className="viewport-hero"
         style={{
-          background: 'linear-gradient(135deg, #0A2A5C 0%, #114383 60%, #1856A5 100%)',
-          color: '#FFFFFF',
-          padding: '64px 0 54px'
+          minHeight: '100vh',
+          display: 'flex',
+          alignItems: 'center',
+          position: 'relative',
+          overflow: 'hidden',
+          padding: '140px 0 70px',
+          background: 'linear-gradient(135deg, rgba(10, 42, 92, 0.72) 0%, rgba(17, 67, 131, 0.58) 60%, rgba(24, 86, 165, 0.48) 100%), url("https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1920&auto=format&fit=crop&q=85") center/cover no-repeat',
+          color: '#FFFFFF'
         }}
       >
-        <div className="shell">
-          <div style={{ maxWidth: '780px' }}>
+        <div className="shell" style={{ position: 'relative', zIndex: 1 }}>
+          <div style={{ maxWidth: '820px' }}>
             <span
               style={{
                 display: 'inline-block',
                 background: 'rgba(255, 255, 255, 0.15)',
                 color: '#DCE9F8',
-                padding: '5px 14px',
+                padding: '6px 16px',
                 borderRadius: '999px',
                 fontSize: '12px',
                 fontWeight: 700,
                 letterSpacing: '0.08em',
                 textTransform: 'uppercase',
-                marginBottom: '14px',
+                marginBottom: '16px',
                 border: '1px solid rgba(255, 255, 255, 0.2)'
               }}
             >
@@ -109,16 +115,16 @@ export default function GetInvolved() {
             </span>
             <h1
               style={{
-                fontSize: 'clamp(34px, 4vw, 48px)',
+                fontSize: 'clamp(38px, 4.8vw, 54px)',
                 color: '#FFFFFF',
-                margin: '0 0 14px',
+                margin: '0 0 16px',
                 fontWeight: 800,
                 lineHeight: 1.15
               }}
             >
               Get Involved
             </h1>
-            <p style={{ fontSize: '17px', color: '#DCE9F8', lineHeight: 1.6, margin: 0 }}>
+            <p style={{ fontSize: '18px', color: '#DCE9F8', lineHeight: 1.6, margin: 0, maxWidth: '720px' }}>
               Whether you are an aspiring student, a dedicated volunteer, an academic researcher, or an industry partner, KSLI provides structured avenues to create lasting environmental and rural impact.
             </p>
           </div>

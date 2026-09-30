@@ -1,13 +1,12 @@
 /* ============================================================
-   KSLI FLOATING NAV PANEL (Large 3-Zone Mega-Menu Spec)
-   - Large floating panel (near full screen, centered under navbar)
-   - Width: min(calc(100vw - 64px), 1400px)
-   - Height: clamp(440px, 65vh, 660px)
-   - Three-zone layout: Left Column (28%), Details Column (34%), Image (38%)
-   - Enhanced fluid typography with clamp()
-   - Real clickable Link rows on left with hover preview
-   - Pinned 2-column pill chips at bottom of details column
-   - Sliding caret pointing at active trigger
+   KSLI DOMAINS FLOATING NAV PANEL (Enhanced ProClime Reference)
+   - Width: Starts from Domains navbar item, ends at Get Involved button right
+   - 4-column layout strictly contained inside panel:
+     * Col 1: 4 Thrust Areas (navigable links)
+     * Col 2: Sustainability + 4 focus areas
+     * Col 3: Livelihood + 3 focus areas
+     * Vertical divider line
+     * Col 4: Kumaraguru Microcosm + description + Explore button
    ============================================================ */
 
 /* ── Trigger Wrapper & Chevron ── */
@@ -19,504 +18,231 @@
 
 .nav-trigger-chevron {
   display: inline-block;
-  margin-left: 5px;
+  margin-left: 6px;
   font-size: 10px;
   line-height: 1;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  opacity: 0.85;
+  opacity: 0.9;
 }
 
 .nav-trigger-wrapper.is-open .nav-trigger-chevron {
   transform: rotate(180deg);
 }
 
-.nav-trigger-wrapper.is-open .nav-link-item,
-.nav-trigger-wrapper.is-open .nav-cta-button {
-  background: rgba(24, 86, 165, 0.28);
+.nav-trigger-wrapper.is-open .nav-link-item {
   color: #FFFFFF;
 }
 
 .site-header.scrolled .nav-trigger-wrapper.is-open .nav-link-item {
-  background: #EEF4FC;
   color: #1856A5;
 }
 
-/* ── Floating Mega-Menu Panel Portal (Centered under Navbar) ── */
-.nav-floating-portal {
-  position: absolute;
-  top: calc(100% + 12px);
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: center;
+/* ── Floating Portal & Positioning ── */
+.domains-floating-nav-portal {
+  position: fixed;
+  opacity: 0;
+  transform: translateY(-6px);
   pointer-events: none;
-  z-index: 1050;
-}
-
-/* The Large Floating Card */
-.nav-floating-card {
-  position: relative;
-  width: min(calc(100vw - 64px), 1400px);
-  height: clamp(410px, 55vh, 530px);
-  max-height: calc(100vh - 110px);
-  pointer-events: auto;
-  background: #FFFFFF;
-  border: 1px solid #DCE9F8;
-  border-radius: 20px;
-  box-shadow: 0 24px 60px rgba(10, 42, 92, 0.18), 0 4px 16px rgba(10, 42, 92, 0.08);
-  overflow: visible;
-  display: flex;
-  flex-direction: column;
-  transition:
-    opacity 0.22s ease,
-    transform 0.22s ease;
+  transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
-/* Caret / Notch pointing to active trigger */
-.nav-floating-caret {
-  position: absolute;
-  top: -8px;
-  width: 16px;
-  height: 16px;
-  background: #FFFFFF;
-  border-left: 1px solid #DCE9F8;
-  border-top: 1px solid #DCE9F8;
-  transform: rotate(45deg);
-  transition: left 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 1052;
-  border-top-left-radius: 3px;
-  will-change: left;
-}
-
-/* Content Box (Clips corners cleanly without scrollbars) */
-.nav-floating-content-box {
-  flex: 1;
-  overflow: hidden;
-  border-radius: 20px;
-  display: flex;
-  height: 100%;
-  width: 100%;
-}
-
-/* ─────────────────────────────────────────────────────────────
-   THREE-ZONE LAYOUT (Left Column, Details Column, Image Column)
-   ───────────────────────────────────────────────────────────── */
-
-.nav-panel-grid {
-  display: grid;
-  grid-template-columns: 28% 72%;
-  width: 100%;
-  height: 100%;
-  min-height: 0;
-  box-sizing: border-box;
-}
-
-/* ── Zone 1: Left Column (Master List) ── */
-.nav-panel-left {
-  background: #F7FAFD;
-  border-right: 1px solid #E8F0FA;
-  padding: 28px 20px;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  overflow-y: auto;
-}
-
-.nav-panel-group-label {
-  font-size: 12.5px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #1A8FBF;
-  padding: 0 14px 12px;
-  margin: 0;
-}
-
-.nav-panel-menu-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-/* Left Item Link (Real navigable <a> / Link) */
-.nav-panel-item-link {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  min-height: 56px;
-  padding: 14px 18px;
-  border-radius: 12px;
-  background: transparent;
-  color: #0A2A5C;
-  font-family: Inter, sans-serif;
-  font-size: clamp(20px, 1.35vw, 24px);
-  font-weight: 600;
-  line-height: 1.3;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
-  box-sizing: border-box;
-}
-
-.nav-panel-item-link:hover,
-.nav-panel-item-link:focus-visible,
-.nav-panel-item-link.is-active {
-  background: #FFFFFF;
-  color: #1856A5;
-  box-shadow: 0 4px 16px rgba(10, 42, 92, 0.08);
-  opacity: 1 !important;
-}
-
-.nav-panel-item-link:focus-visible {
-  outline: 2px solid #1856A5;
-  outline-offset: 2px;
-}
-
-/* Dim non-hovered left items when hovering */
-.nav-panel-menu-list.has-active .nav-panel-item-link:not(.is-active) {
-  opacity: 0.55;
-}
-
-/* Arrow affordance (→) on active/hovered row */
-.nav-panel-arrow-affordance {
-  display: inline-block;
-  opacity: 0;
-  transform: translateX(-4px);
-  transition: all 0.18s ease;
-  font-size: 18px;
-  color: #1856A5;
-  margin-left: 8px;
-}
-
-.nav-panel-item-link:hover .nav-panel-arrow-affordance,
-.nav-panel-item-link:focus-visible .nav-panel-arrow-affordance,
-.nav-panel-item-link.is-active .nav-panel-arrow-affordance {
+.domains-floating-nav-portal.is-open {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
-/* ─────────────────────────────────────────────────────────────
-   Zones 2 & 3: Live Preview Area (Details + Image)
-   ───────────────────────────────────────────────────────────── */
+/* Invisible hover bridge to prevent cursor gap drop */
+.domains-floating-nav-bridge {
+  position: absolute;
+  top: -16px;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background: transparent;
+}
 
-.nav-panel-preview-area {
+/* ── The Floating Card Container ── */
+.domains-floating-nav-card {
+  position: relative;
+  background: #FFFFFF;
+  border-radius: 16px;
+  border: 1px solid rgba(220, 233, 248, 0.95);
+  box-shadow: 0 20px 48px -10px rgba(10, 42, 92, 0.16), 0 8px 24px -4px rgba(10, 42, 92, 0.08);
+  padding: clamp(22px, 2.2vw, 30px) clamp(22px, 2.5vw, 32px);
   display: grid;
-  grid-template-columns: 46% 54%;
-  width: 100%;
-  height: 100%;
-  min-height: 0;
-  box-sizing: border-box;
-  animation: navPreviewCrossfade 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@keyframes navPreviewCrossfade {
-  from {
-    opacity: 0;
-    transform: translateY(3px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ── Zone 2: Details Column ── */
-.nav-panel-details {
-  padding: 30px 24px 30px 36px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  box-sizing: border-box;
-  height: 100%;
-  min-height: 0;
-  overflow-y: auto;
-}
-
-.nav-details-top {
-  display: flex;
-  flex-direction: column;
-}
-
-.nav-details-category-label {
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: #1A8FBF;
-  margin: 0 0 12px 0;
-  display: block;
-}
-
-/* Details Title Link with Scaled Arrow */
-.nav-details-title-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-family: Montserrat, Inter, sans-serif;
-  font-size: clamp(28px, 2vw, 36px);
-  font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-  color: #0A2A5C;
-  text-decoration: none;
-  text-wrap: balance;
-  transition: color 0.18s ease;
-}
-
-.nav-details-title-link:hover,
-.nav-details-title-link:focus-visible {
-  color: #1856A5;
-}
-
-.nav-details-title-link:focus-visible {
-  outline: 2px solid #1856A5;
-  outline-offset: 4px;
-  border-radius: 4px;
-}
-
-.nav-details-arrow {
-  display: inline-block;
-  font-size: clamp(24px, 1.8vw, 30px);
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.nav-details-title-link:hover .nav-details-arrow,
-.nav-details-title-link:focus-visible .nav-details-arrow {
-  transform: translateX(6px);
-}
-
-/* Description */
-.nav-details-desc {
-  margin: 14px 0 0 0;
-  font-family: Inter, sans-serif;
-  font-size: clamp(15px, 0.95vw, 17px);
-  font-weight: 400;
-  line-height: 1.55;
-  color: #4F617D;
-  max-width: 44ch;
-  text-wrap: pretty;
-}
-
-/* ── Pinned Bottom Widgets (No arrows, premium capsules like reference image) ── */
-.nav-details-widgets-bottom {
-  margin-top: auto;
-  padding-top: 24px;
-}
-
-.nav-details-widgets-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 10px;
-  align-items: center;
-}
-
-.nav-premium-pill,
-.nav-clickable-widget,
-.nav-pill-chip {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 9px 18px;
-  border-radius: 9999px;
-  background: #F0F4FA;
-  border: 1px solid rgba(24, 86, 165, 0.08);
-  color: #0A2A5C;
-  font-family: Inter, sans-serif;
-  font-size: 13.5px;
-  font-weight: 500;
-  line-height: 1.4;
-  text-decoration: none;
-  white-space: nowrap;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  box-sizing: border-box;
-}
-
-.nav-premium-pill:hover,
-.nav-premium-pill:focus-visible,
-.nav-clickable-widget:hover,
-.nav-clickable-widget:focus-visible,
-.nav-pill-chip:hover,
-.nav-pill-chip:focus-visible {
-  background: #1856A5;
-  border-color: #1856A5;
-  color: #FFFFFF;
-  transform: translateY(-1.5px);
-  box-shadow: 0 4px 14px rgba(24, 86, 165, 0.22);
-}
-
-.nav-premium-pill:focus-visible,
-.nav-clickable-widget:focus-visible,
-.nav-pill-chip:focus-visible {
-  outline: 2px solid #1856A5;
-  outline-offset: 2px;
-}
-
-/* ── Zone 3: Large Image Column (EQUAL MARGIN SPACE ON 4 SIDES) ── */
-.nav-panel-image-column {
-  padding: 24px;
-  /* Equal margin on top, right, bottom, left */
-  display: flex;
+  /* 3-column layout: Col 1 (Thrust Areas), Col 2 (Our Domains), Divider, Col 3 (Kumaraguru Microcosm) */
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) auto minmax(0, 1.35fr);
+  gap: clamp(18px, 2vw, 28px);
   align-items: stretch;
-  justify-content: stretch;
-  height: 100%;
   width: 100%;
   box-sizing: border-box;
-  min-height: 0;
+  min-height: 236px;
+}
+
+/* ── Common Columns ── */
+.domains-panel-col {
+  display: flex;
+  flex-direction: column;
   min-width: 0;
 }
 
-.nav-panel-image-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid #DCE9F8;
-  box-shadow: 0 4px 18px rgba(10, 42, 92, 0.08);
-  background: #EEF4FC;
-}
-
-.nav-panel-large-image {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-  border-radius: 16px;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.nav-panel-image-wrapper:hover .nav-panel-large-image {
-  transform: scale(1.03);
-}
-
-/* ── Reduced Motion ── */
-@media (prefers-reduced-motion: reduce) {
-
-  .nav-floating-card,
-  .nav-floating-caret,
-  .nav-panel-preview-area,
-  .nav-panel-item-link,
-  .nav-details-title-link,
-  .nav-pill-chip {
-    transition: none !important;
-    animation: none !important;
-    transform: none !important;
-  }
-}
-
-/* ── Mobile Accordion Styles (< 1024px) ── */
-.nav-mobile-drawer-body {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  width: 100%;
-}
-
-.nav-mobile-accordion {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.nav-mobile-accordion-trigger {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  min-height: 44px;
-  padding: 10px 16px;
-  border-radius: 12px;
-  border: 0;
-  background: transparent;
+.domains-panel-heading {
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
   color: #0A2A5C;
-  font-size: 14.5px;
-  font-weight: 600;
-  font-family: inherit;
-  cursor: pointer;
-  text-align: left;
-  transition: background 0.2s ease;
+  margin: 0 0 16px;
+  line-height: 1.25;
 }
 
-.nav-mobile-accordion-trigger:hover,
-.nav-mobile-accordion-trigger.is-open {
-  background: #EEF4FC;
+.domains-panel-heading--clickable {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: color 0.18s ease;
+}
+
+.domains-panel-heading--clickable svg {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.18s ease;
   color: #1856A5;
 }
 
-.nav-mobile-chevron {
-  font-size: 11px;
-  transition: transform 0.25s ease;
-}
-
-.nav-mobile-chevron.is-open {
-  transform: rotate(180deg);
-}
-
-.nav-mobile-accordion-content {
-  display: flex;
-  flex-direction: column;
-  padding: 4px 0 6px 14px;
-  gap: 4px;
-  background: #F8FAFD;
-  border-radius: 10px;
-  margin: 4px 0 8px 6px;
-  border-left: 2px solid #DCE9F8;
-}
-
-.nav-mobile-link {
-  display: flex;
-  align-items: center;
-  min-height: 44px;
-  padding: 6px 12px;
-  font-size: 13.5px;
-  font-weight: 600;
-  color: #0A2A5C;
+.domains-panel-heading-link {
   text-decoration: none;
-  border-radius: 8px;
-  transition: background 0.18s ease;
+  display: inline-block;
 }
 
-.nav-mobile-link:hover,
-.nav-mobile-link:focus-visible {
-  background: #EEF4FC;
+.domains-panel-heading-link:hover .domains-panel-heading--clickable {
   color: #1856A5;
 }
 
-.nav-mobile-nested-accordion {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+.domains-panel-heading-link:hover .domains-panel-heading--clickable svg {
+  transform: translateX(4px);
 }
 
-.nav-mobile-nested-trigger {
+.domains-panel-links-list {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 44px;
-  padding: 6px 12px;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.domains-panel-link {
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
   font-size: 13.5px;
-  font-weight: 700;
-  color: #1856A5;
-  background: transparent;
-  border: 0;
-  cursor: pointer;
-  text-align: left;
-  width: 100%;
+  font-weight: 500;
+  color: #4A5D78;
+  text-decoration: none;
+  line-height: 1.4;
+  padding: 4px 8px;
+  margin: -4px -8px;
+  border-radius: 6px;
+  transition: color 0.18s ease, background-color 0.18s ease, transform 0.18s ease;
+  display: block;
+  word-break: normal;
 }
 
-.nav-mobile-nested-content {
+.domains-panel-link:hover {
+  color: #1856A5;
+  background-color: rgba(24, 86, 165, 0.06);
+  transform: translateX(3px);
+}
+
+/* ── Vertical Divider Line (matching ProClime reference) ── */
+.domains-panel-divider {
+  width: 1px;
+  background: linear-gradient(180deg, rgba(226, 236, 248, 0.3) 0%, rgba(206, 222, 242, 0.85) 20%, rgba(206, 222, 242, 0.85) 80%, rgba(226, 236, 248, 0.3) 100%);
+  align-self: stretch;
+  min-height: 150px;
+  margin: 0 2px;
+}
+
+/* ── Column 4: Kumaraguru Microcosm Spotlight ── */
+.domains-panel-col--spotlight {
   display: flex;
   flex-direction: column;
-  padding-left: 12px;
-  gap: 2px;
-  margin-bottom: 6px;
+  min-width: 0;
+  justify-content: flex-start;
+}
+
+.domains-panel-spotlight-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #1856A5;
+  background: #EEF4FC;
+  padding: 3px 9px;
+  border-radius: 999px;
+  margin-bottom: 11px;
+  width: fit-content;
+}
+
+.domains-panel-spotlight-tag-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #1856A5;
+}
+
+.domains-panel-heading--spotlight {
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #0A2A5C;
+  margin: 0 0 9px;
+  line-height: 1.25;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+.domains-panel-spotlight-desc {
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  font-size: 12.8px;
+  color: #556885;
+  line-height: 1.52;
+  margin: 0 0 18px;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+.domains-panel-explore-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  background: #1856A5;
+  color: #FFFFFF;
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  font-weight: 700;
+  font-size: 13.5px;
+  padding: 8px 20px;
+  border-radius: 7px;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(24, 86, 165, 0.25);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  width: fit-content;
+}
+
+.domains-panel-explore-btn:hover {
+  background: #0A2A5C;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(10, 42, 92, 0.32);
+  color: #FFFFFF;
+}
+
+.domains-panel-explore-btn svg {
+  transition: transform 0.2s ease;
+}
+
+.domains-panel-explore-btn:hover svg {
+  transform: translateX(3px);
 }

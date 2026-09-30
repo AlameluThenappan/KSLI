@@ -31,7 +31,7 @@ import heroVideo from '../assets/Video Project 9.mp4';
 // Pages
 import AboutKSLI from './pages/AboutKSLI.jsx';
 import AcademicPrograms from './pages/AcademicPrograms.jsx';
-import Domains from './pages/Domains.jsx';
+import ThrustAreaDetail from './pages/ThrustAreaDetail.jsx';
 import Sustainability from './pages/Sustainability.jsx';
 import Livelihood from './pages/Livelihood.jsx';
 import Resources from './pages/Resources.jsx';
@@ -41,6 +41,7 @@ import GetInvolved from './pages/GetInvolved.jsx';
 import DedicatedFormPage from './pages/DedicatedFormPage.jsx';
 import TeamMemberProfile from './pages/TeamMemberProfile.jsx';
 import Manage from './pages/Manage.jsx';
+import Domains from './pages/Domains.jsx';
 import TallImageCard from './components/TallImageCard.jsx';
 import { navConfig } from './data/navConfig.js';
 import FloatingNavPanel from './components/FloatingNavPanel.jsx';
@@ -57,12 +58,14 @@ function Header() {
   const [activePanelId, setActivePanelId] = useState(null);
   const [triggerRect, setTriggerRect] = useState(null);
   const [navRect, setNavRect] = useState(null);
+  const [panelBounds, setPanelBounds] = useState(null);
   const [mobileAccordion, setMobileAccordion] = useState(null);
   const [mobileNestedAccordion, setMobileNestedAccordion] = useState(null);
 
   const headerRef = useRef(null);
   const navRef = useRef(null);
   const triggerRefs = useRef({});
+  const ctaRef = useRef(null);
   const leaveTimerRef = useRef(null);
   const location = useLocation();
 
@@ -112,16 +115,57 @@ function Header() {
     return () => document.removeEventListener('click', handleClickOutside);
   }, [activePanelId]);
 
+  // Keep panelBounds synced on window resize or scroll when open
+  useEffect(() => {
+    if (!activePanelId) return;
+    const handleUpdate = () => updateMeasurements(activePanelId);
+    window.addEventListener('resize', handleUpdate);
+    window.addEventListener('scroll', handleUpdate, { passive: true });
+    return () => {
+      window.removeEventListener('resize', handleUpdate);
+      window.removeEventListener('scroll', handleUpdate);
+    };
+  }, [activePanelId]);
+
   // Update measurements of active trigger and nav bar
   const updateMeasurements = (id) => {
     if (navRef.current && triggerRefs.current[id]) {
-      setNavRect(navRef.current.getBoundingClientRect());
-      setTriggerRect(triggerRefs.current[id].getBoundingClientRect());
+      const nRect = navRef.current.getBoundingClientRect();
+      setNavRect(nRect);
+      const tEl = triggerRefs.current[id];
+      const tRect = tEl.getBoundingClientRect();
+      setTriggerRect(tRect);
+
+      if (id === 'domains' && ctaRef.current) {
+        const ctaBtn = ctaRef.current.querySelector('.nav-cta-button') || ctaRef.current;
+        const cRect = ctaBtn.getBoundingClientRect();
+        // Start from domains navbar item and end at get involved button end
+        const left = Math.round(tRect.left);
+        const right = Math.round(cRect.right);
+        let width = right - left;
+
+        // Ensure comfortable layout width on desktop screens
+        if (width < 820 && window.innerWidth >= 1150) {
+          width = 820;
+        }
+
+        // Clamp width so panel never spills past right viewport margin
+        const maxAvailable = window.innerWidth - left - 24;
+        if (width > maxAvailable) {
+          width = maxAvailable;
+        }
+
+        setPanelBounds({
+          left,
+          width,
+          top: Math.round(tRect.bottom + 8)
+        });
+      }
     }
   };
 
   const handleMouseEnterTrigger = (item) => {
-    if (!item.items) {
+    if (!item.hasPanel) {
       if (leaveTimerRef.current) clearTimeout(leaveTimerRef.current);
       leaveTimerRef.current = setTimeout(() => {
         setActivePanelId(null);
@@ -158,14 +202,20 @@ function Header() {
   };
 
   const handleTriggerClick = (e, item) => {
-    if (item.items) {
-      if (window.innerWidth >= 1200) {
-        if (activePanelId === item.id) {
-          setActivePanelId(null);
-        } else {
-          updateMeasurements(item.id);
-          setActivePanelId(item.id);
+    if (item.hasPanel) {
+      if (item.isTriggerOnly) {
+        e.preventDefault();
+        if (window.innerWidth >= 1200) {
+          if (activePanelId === item.id) {
+            setActivePanelId(null);
+          } else {
+            updateMeasurements(item.id);
+            setActivePanelId(item.id);
+          }
         }
+      } else {
+        setActivePanelId(null);
+        close();
       }
     } else {
       close();
@@ -174,12 +224,18 @@ function Header() {
 
   const activePanelConfig = navConfig.find((item) => item.id === activePanelId);
   const isHome = location.pathname === '/';
+  const isDomains = location.pathname === '/domains';
+  const isTransparentHero = isHome || isDomains;
+  const isThrustPage = location.pathname.startsWith('/thrust-areas');
 
   const centerNavItems = navConfig.filter((item) => item.id !== 'get-involved' && !item.isCta);
   const ctaNavItem = navConfig.find((item) => item.id === 'get-involved' || item.isCta);
 
   return (
-    <header className={`site-header ${scrolled ? 'scrolled' : ''} ${isHome ? 'transparent-hero' : ''}`} ref={headerRef}>
+    <header
+      className={`site-header ${scrolled ? 'scrolled' : ''} ${isTransparentHero ? 'transparent-hero' : ''} ${isThrustPage ? 'nav-mild-blue' : ''}`}
+      ref={headerRef}
+    >
       <nav className="nav" ref={navRef} aria-label="Main navigation">
         {/* Left Zone: KSLI Logo */}
         <div className="nav-left-zone">
@@ -197,10 +253,23 @@ function Header() {
                 ? location.pathname === item.to
                 : location.pathname.startsWith(item.to);
 
-            const hasPanel = Boolean(item.items && item.items.length > 0);
+            const hasPanel = Boolean(item.hasPanel || (item.items && item.items.length > 0));
             const isOpen = activePanelId === item.id;
 
             if (hasPanel) {
+              const isTrigger = Boolean(item.isTriggerOnly);
+              const Tag = isTrigger ? 'button' : Link;
+              const tagProps = isTrigger
+                ? {
+                    type: 'button',
+                    onClick: (e) => handleTriggerClick(e, item),
+                    style: { background: 'transparent', border: 'none', font: 'inherit', cursor: 'pointer' }
+                  }
+                : {
+                    to: item.to || '#',
+                    onClick: (e) => handleTriggerClick(e, item)
+                  };
+
               return (
                 <div
                   key={item.id}
@@ -209,9 +278,8 @@ function Header() {
                   onMouseEnter={() => handleMouseEnterTrigger(item)}
                   onMouseLeave={handleMouseLeaveTrigger}
                 >
-                  <Link
-                    to={item.to}
-                    onClick={(e) => handleTriggerClick(e, item)}
+                  <Tag
+                    {...tagProps}
                     className={`nav-link-item ${isActive ? 'active' : ''}`}
                     aria-expanded={isOpen}
                     aria-haspopup="true"
@@ -231,7 +299,7 @@ function Header() {
                     >
                       <path d="M1 1.25L5 4.75L9 1.25" />
                     </svg>
-                  </Link>
+                  </Tag>
                 </div>
               );
             }
@@ -251,7 +319,7 @@ function Header() {
         </div>
 
         {/* Right Zone: Prominent Get Involved Button */}
-        <div className="nav-right-zone">
+        <div className="nav-right-zone" ref={ctaRef}>
           {ctaNavItem && (() => {
             const isActive = ctaNavItem.activeCheck
               ? ctaNavItem.activeCheck(location.pathname)
@@ -332,6 +400,55 @@ function Header() {
                   : location.pathname.startsWith(item.to);
 
               if (!item.items) {
+                if (item.id === 'domains') {
+                  const isAccordionOpen = mobileAccordion === 'domains';
+                  return (
+                    <div key="domains" className="nav-mobile-accordion">
+                      <button
+                        type="button"
+                        className={`nav-mobile-accordion-trigger ${isAccordionOpen ? 'is-open' : ''}`}
+                        onClick={() => setMobileAccordion(isAccordionOpen ? null : 'domains')}
+                        aria-expanded={isAccordionOpen}
+                      >
+                        <span>Domains</span>
+                        <span className={`nav-mobile-chevron ${isAccordionOpen ? 'is-open' : ''}`} aria-hidden="true">▾</span>
+                      </button>
+                      {isAccordionOpen && (
+                        <div className="nav-mobile-accordion-content">
+                          <Link to="/domains" onClick={close} className="nav-mobile-link" style={{ fontWeight: 700, color: '#1856A5' }}>
+                            Domains Overview →
+                          </Link>
+                          <div style={{ padding: '6px 0 4px', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: '#1856A5' }}>
+                            Thrust Areas
+                          </div>
+                          <Link to="/thrust-areas/research-field-innovation" onClick={close} className="nav-mobile-link">
+                            Research &amp; Field Innovation
+                          </Link>
+                          <Link to="/thrust-areas/development-projects" onClick={close} className="nav-mobile-link">
+                            Development Projects
+                          </Link>
+                          <Link to="/thrust-areas/education-capacity-building" onClick={close} className="nav-mobile-link">
+                            Education &amp; Capacity Building
+                          </Link>
+                          <Link to="/thrust-areas/entrepreneurship-development" onClick={close} className="nav-mobile-link">
+                            Entrepreneurship Development
+                          </Link>
+
+                          <div style={{ padding: '12px 0 4px', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: '#1856A5' }}>
+                            Institutional Domains
+                          </div>
+                          <Link to="/domains/sustainability" onClick={close} className="nav-mobile-link" style={{ fontWeight: 700 }}>
+                            Sustainability Domain →
+                          </Link>
+                          <Link to="/domains/livelihood" onClick={close} className="nav-mobile-link" style={{ fontWeight: 700 }}>
+                            Livelihood Domain →
+                          </Link>
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
+
                 return (
                   <Link
                     key={item.id}
@@ -414,12 +531,11 @@ function Header() {
         </div>
       </nav>
 
-      {/* Large Floating morphing mega-menu panel (desktop, centered under navbar) */}
-      {!mobile && (
+      {/* Floating 4-Column Panel for Domains (ProClime reference) */}
+      {!mobile && activePanelId === 'domains' && (
         <FloatingNavPanel
-          isOpen={Boolean(activePanelId)}
-          panelConfig={activePanelConfig}
-          triggerRect={triggerRect}
+          isOpen={activePanelId === 'domains'}
+          panelBounds={panelBounds}
           onClose={() => setActivePanelId(null)}
           onMouseEnter={handlePanelMouseEnter}
           onMouseLeave={handlePanelMouseLeave}
@@ -947,7 +1063,7 @@ function Home() {
             </p>
             <div className="actions">
               <Link className="primary" to="/domains">
-                Explore KSLI Learning pathway→
+                Explore Domains
               </Link>
               <Link className="btn-navy" to="/get-involved">
                 Partner With Us
@@ -1126,10 +1242,16 @@ function App() {
           {/* Main navigation routes */}
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<AboutKSLI />} />
-          {/* Dedicated Domain Routes */}
+          {/* Thrust Area Routes */}
+          <Route path="/thrust-areas/:slug" element={<ThrustAreaDetail />} />
+          <Route path="/thrust-areas" element={<Navigate to="/thrust-areas/research-field-innovation" replace />} />
           <Route path="/domains" element={<Domains />} />
+
+          {/* Dedicated Domain Routes (Unmodified) */}
           <Route path="/domains/sustainability" element={<Sustainability />} />
           <Route path="/domains/livelihood" element={<Livelihood />} />
+
+
 
           {/* Other Main Navigation Routes */}
           <Route path="/learning" element={<AcademicPrograms />} />

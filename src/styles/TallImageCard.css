@@ -82,13 +82,20 @@
 }
 
 .tall-image-card-tag {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: #8CC2FC;
-  margin-bottom: 8px;
+  background: rgba(10, 42, 92, 0.65);
+  border: 1px solid rgba(140, 194, 252, 0.35);
+  padding: 3px 8px;
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  margin-bottom: 10px;
 }
 
 .tall-image-card-title {

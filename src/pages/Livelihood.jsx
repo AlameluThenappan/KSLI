@@ -181,7 +181,7 @@ export default function Livelihood() {
       <section
         className="viewport-hero"
         style={{
-          background: 'linear-gradient(135deg, #0A2A5C 0%, #114383 60%, #1856A5 100%)',
+          background: 'linear-gradient(135deg, rgba(10, 42, 92, 0.70) 0%, rgba(17, 67, 131, 0.55) 60%, rgba(24, 86, 165, 0.45) 100%), url("https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?w=1920&auto=format&fit=crop&q=85") center/cover no-repeat',
           color: '#FFFFFF',
           padding: '156px 0 60px',
           position: 'relative',
