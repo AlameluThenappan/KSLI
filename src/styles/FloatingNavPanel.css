@@ -1,0 +1,248 @@
+/* ============================================================
+   KSLI DOMAINS FLOATING NAV PANEL (Enhanced ProClime Reference)
+   - Width: Starts from Domains navbar item, ends at Get Involved button right
+   - 4-column layout strictly contained inside panel:
+     * Col 1: 4 Thrust Areas (navigable links)
+     * Col 2: Sustainability + 4 focus areas
+     * Col 3: Livelihood + 3 focus areas
+     * Vertical divider line
+     * Col 4: Kumaraguru Microcosm + description + Explore button
+   ============================================================ */
+
+/* ── Trigger Wrapper & Chevron ── */
+.nav-trigger-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-trigger-chevron {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 10px;
+  line-height: 1;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0.9;
+}
+
+.nav-trigger-wrapper.is-open .nav-trigger-chevron {
+  transform: rotate(180deg);
+}
+
+.nav-trigger-wrapper.is-open .nav-link-item {
+  color: #FFFFFF;
+}
+
+.site-header.scrolled .nav-trigger-wrapper.is-open .nav-link-item {
+  color: #1856A5;
+}
+
+/* ── Floating Portal & Positioning ── */
+.domains-floating-nav-portal {
+  position: fixed;
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+  transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.domains-floating-nav-portal.is-open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Invisible hover bridge to prevent cursor gap drop */
+.domains-floating-nav-bridge {
+  position: absolute;
+  top: -16px;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background: transparent;
+}
+
+/* ── The Floating Card Container ── */
+.domains-floating-nav-card {
+  position: relative;
+  background: #FFFFFF;
+  border-radius: 16px;
+  border: 1px solid rgba(220, 233, 248, 0.95);
+  box-shadow: 0 20px 48px -10px rgba(10, 42, 92, 0.16), 0 8px 24px -4px rgba(10, 42, 92, 0.08);
+  padding: clamp(22px, 2.2vw, 30px) clamp(22px, 2.5vw, 32px);
+  display: grid;
+  /* 3-column layout: Col 1 (Thrust Areas), Col 2 (Our Domains), Divider, Col 3 (Kumaraguru Microcosm) */
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) auto minmax(0, 1.35fr);
+  gap: clamp(18px, 2vw, 28px);
+  align-items: stretch;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 236px;
+}
+
+/* ── Common Columns ── */
+.domains-panel-col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.domains-panel-heading {
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #0A2A5C;
+  margin: 0 0 16px;
+  line-height: 1.25;
+}
+
+.domains-panel-heading--clickable {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: color 0.18s ease;
+}
+
+.domains-panel-heading--clickable svg {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.18s ease;
+  color: #1856A5;
+}
+
+.domains-panel-heading-link {
+  text-decoration: none;
+  display: inline-block;
+}
+
+.domains-panel-heading-link:hover .domains-panel-heading--clickable {
+  color: #1856A5;
+}
+
+.domains-panel-heading-link:hover .domains-panel-heading--clickable svg {
+  transform: translateX(4px);
+}
+
+.domains-panel-links-list {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.domains-panel-link {
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #4A5D78;
+  text-decoration: none;
+  line-height: 1.4;
+  padding: 4px 8px;
+  margin: -4px -8px;
+  border-radius: 6px;
+  transition: color 0.18s ease, background-color 0.18s ease, transform 0.18s ease;
+  display: block;
+  word-break: normal;
+}
+
+.domains-panel-link:hover {
+  color: #1856A5;
+  background-color: rgba(24, 86, 165, 0.06);
+  transform: translateX(3px);
+}
+
+/* ── Vertical Divider Line (matching ProClime reference) ── */
+.domains-panel-divider {
+  width: 1px;
+  background: linear-gradient(180deg, rgba(226, 236, 248, 0.3) 0%, rgba(206, 222, 242, 0.85) 20%, rgba(206, 222, 242, 0.85) 80%, rgba(226, 236, 248, 0.3) 100%);
+  align-self: stretch;
+  min-height: 150px;
+  margin: 0 2px;
+}
+
+/* ── Column 4: Kumaraguru Microcosm Spotlight ── */
+.domains-panel-col--spotlight {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  justify-content: flex-start;
+}
+
+.domains-panel-spotlight-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #1856A5;
+  background: #EEF4FC;
+  padding: 3px 9px;
+  border-radius: 999px;
+  margin-bottom: 11px;
+  width: fit-content;
+}
+
+.domains-panel-spotlight-tag-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #1856A5;
+}
+
+.domains-panel-heading--spotlight {
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #0A2A5C;
+  margin: 0 0 9px;
+  line-height: 1.25;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+.domains-panel-spotlight-desc {
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  font-size: 12.8px;
+  color: #556885;
+  line-height: 1.52;
+  margin: 0 0 18px;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+.domains-panel-explore-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  background: #1856A5;
+  color: #FFFFFF;
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  font-weight: 700;
+  font-size: 13.5px;
+  padding: 8px 20px;
+  border-radius: 7px;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(24, 86, 165, 0.25);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  width: fit-content;
+}
+
+.domains-panel-explore-btn:hover {
+  background: #0A2A5C;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(10, 42, 92, 0.32);
+  color: #FFFFFF;
+}
+
+.domains-panel-explore-btn svg {
+  transition: transform 0.2s ease;
+}
+
+.domains-panel-explore-btn:hover svg {
+  transform: translateX(3px);
+}

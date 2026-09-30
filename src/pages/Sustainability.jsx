@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import TallImageCard from '../components/TallImageCard.jsx';
 
 export default function Sustainability() {
   const focusAreas = [
@@ -56,22 +57,28 @@ export default function Sustainability() {
       title: 'Dutch Fund for Climate Action (DFCD) Watershed Resilience Study',
       focus: 'Nature Conservation',
       location: 'Western Ghats & Bhavani Basin',
-      desc: 'A ~₹5 crore climate adaptation grant implemented in partnership with WWF India, assessing vulnerable river catchment micro-habitats and hydrological resilience.',
-      partner: 'WWF India & DFCD'
+      desc: 'A ~₹5 crore climate adaptation grant implemented with WWF India assessing hydrological resilience.',
+      partner: 'WWF India & DFCD',
+      image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&auto=format&fit=crop&q=80',
+      to: '/research-realities'
     },
     {
       title: 'Industrial Energy Audit & Thermal Decarbonization Roadmap',
       focus: 'Resource Efficiency',
       location: 'Coimbatore Industrial Corridor',
-      desc: 'Field modeling of waste heat recovery and rooftop solar integration across regional manufacturing and foundry clusters.',
-      partner: 'CEEW & Schneider Electric'
+      desc: 'Field modeling of waste heat recovery and rooftop solar integration across manufacturing clusters.',
+      partner: 'CEEW & Schneider Electric',
+      image: 'https://images.unsplash.com/photo-1509391365360-2e959784a276?w=800&auto=format&fit=crop&q=80',
+      to: '/research-realities'
     },
     {
       title: 'Regenerative Agriculture & Soil Organic Carbon Mapping',
       focus: 'Sustainable Agriculture',
       location: 'Erode & Tiruppur Districts',
-      desc: 'Multi-year field trials assessing biochar application, multi-tier cropping, and biological nitrogen fixation in tropical soils.',
-      partner: 'Centre for Sustainable Agriculture'
+      desc: 'Multi-year field trials assessing biochar application and biological nitrogen fixation in tropical soils.',
+      partner: 'Centre for Sustainable Agriculture',
+      image: 'https://images.unsplash.com/photo-1592982537447-7440770cbfc9?w=800&auto=format&fit=crop&q=80',
+      to: '/research-realities'
     }
   ];
 
@@ -80,22 +87,28 @@ export default function Sustainability() {
       title: 'Urban Wetland Ecological Restoration & Bird Sanctuary',
       focus: 'Nature Conservation',
       location: 'Singanallur Lake, Coimbatore',
-      desc: 'Establishing indigenous wetland vegetation, floating bio-treatment wetlands, and citizen-science biodiversity audits.',
-      partner: 'BNHS India & Zoo Outreach'
+      desc: 'Establishing indigenous wetland vegetation, floating bio-treatment wetlands, and citizen-science audits.',
+      partner: 'BNHS India & Zoo Outreach',
+      image: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=800&auto=format&fit=crop&q=80',
+      to: '/domains/sustainability#microcosm'
     },
     {
       title: 'Clean Energy & Water Neutrality Infrastructure',
       focus: 'Resource Efficiency',
       location: 'Regional Campus Network',
-      desc: 'Deployment of smart water meters, greywater recycling root-zone systems, and real-time solar tracking micro-grids.',
-      partner: 'Mobitech Wireless & Biome'
+      desc: 'Deployment of smart water meters, greywater recycling root-zone systems, and real-time solar micro-grids.',
+      partner: 'Mobitech Wireless & Biome',
+      image: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&auto=format&fit=crop&q=80',
+      to: '/domains/sustainability#microcosm'
     },
     {
       title: 'Low-Carbon Earth Building & Vernacular Architecture Guild',
       focus: 'Sustainable Human Settlements',
       location: 'Coimbatore & Auroville',
-      desc: 'Prototyping compressed stabilized earth blocks, bamboo tension structures, and natural lime finishes for rural community housing.',
-      partner: 'Thannal & Auroville Botanical Gardens'
+      desc: 'Prototyping compressed stabilized earth blocks, bamboo tension structures, and natural lime finishes.',
+      partner: 'Thannal & Auroville Botanical Gardens',
+      image: 'https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=800&auto=format&fit=crop&q=80',
+      to: '/domains/sustainability#microcosm'
     }
   ];
 
@@ -104,30 +117,37 @@ export default function Sustainability() {
       title: 'Student Conclave for Climate Action (SCCA)',
       focus: 'Nature Conservation',
       location: 'Coimbatore',
-      desc: 'Annual statewide convention gathering over 600 student researchers and youth leaders to pitch institutional decarbonization frameworks.'
+      desc: 'Statewide convention gathering over 600 students to pitch campus decarbonization frameworks.',
+      image: 'https://images.unsplash.com/photo-1544531586-fde5298cdd40?w=800&auto=format&fit=crop&q=80',
+      to: '/get-involved'
     },
     {
       title: 'Western Ghats Bio-Diversity & Forest Culture Festival',
       focus: 'Nature Conservation',
       location: 'Anaimalai Foothills',
-      desc: 'Three-day immersive field festival celebrating the ecological, indigenous, and botanical heritage of the Western Ghats corridor.'
+      desc: 'Three-day field festival celebrating the ecological, indigenous, and botanical heritage of Western Ghats.',
+      image: 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&auto=format&fit=crop&q=80',
+      to: '/get-involved'
     },
     {
       title: 'Agri Yatra: Regenerative Farm Field Demonstrations',
       focus: 'Sustainable Agriculture',
       location: 'Western Tamil Nadu',
-      desc: 'Traveling exhibition and field walk taking agronomists, farmers, and students through zero-budget natural farming demonstration plots.'
+      desc: 'Traveling exhibition and field walk taking farmers and students through zero-budget natural farming.',
+      image: 'https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?w=800&auto=format&fit=crop&q=80',
+      to: '/get-involved'
     }
   ];
 
   return (
-    <div className="sustainability-page" style={{ paddingTop: '86px' }}>
+    <div className="sustainability-page">
       {/* ─── HERO BANNER ─── */}
       <section
+        className="viewport-hero"
         style={{
-          background: 'linear-gradient(135deg, #0A2A5C 0%, #1856A5 65%, #1A8FBF 100%)',
+          background: 'linear-gradient(135deg, rgba(10, 42, 92, 0.70) 0%, rgba(24, 86, 165, 0.55) 65%, rgba(26, 143, 191, 0.40) 100%), url("https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1920&auto=format&fit=crop&q=85") center/cover no-repeat',
           color: '#FFFFFF',
-          padding: '70px 0 60px',
+          padding: '156px 0 60px',
           position: 'relative',
           overflow: 'hidden'
         }}
@@ -520,91 +540,17 @@ export default function Sustainability() {
             </span>
           </div>
 
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(310px, 1fr))',
-              gap: '24px'
-            }}
-          >
+          <div className="tall-image-grid tall-image-grid-3">
             {research.map((item) => (
-              <div
+              <TallImageCard
                 key={item.title}
-                style={{
-                  background: '#FFFFFF',
-                  borderRadius: '18px',
-                  padding: '26px',
-                  border: '1.5px solid #DCE9F8',
-                  boxShadow: '0 6px 20px rgba(10, 42, 92, 0.05)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between'
-                }}
-              >
-                <div>
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      marginBottom: '12px'
-                    }}
-                  >
-                    <span
-                      style={{
-                        background: '#EEF4FC',
-                        color: '#1856A5',
-                        fontSize: '11px',
-                        fontWeight: 700,
-                        padding: '4px 10px',
-                        borderRadius: '999px',
-                        border: '1px solid #DCE9F8'
-                      }}
-                    >
-                      {item.focus}
-                    </span>
-                    <span style={{ fontSize: '12.5px', color: '#1A8FBF', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-                        <circle cx="12" cy="10" r="3" />
-                      </svg>
-                      {item.location}
-                    </span>
-                  </div>
-                  <h3
-                    style={{
-                      fontSize: '17px',
-                      color: '#0A2A5C',
-                      margin: '4px 0 10px',
-                      fontWeight: 700,
-                      lineHeight: 1.35
-                    }}
-                  >
-                    {item.title}
-                  </h3>
-                  <p
-                    style={{
-                      fontSize: '14px',
-                      color: '#4F617D',
-                      lineHeight: 1.55,
-                      margin: '0 0 16px'
-                    }}
-                  >
-                    {item.desc}
-                  </p>
-                </div>
-                <div
-                  style={{
-                    borderTop: '1px solid #EEF4FC',
-                    paddingTop: '12px',
-                    fontSize: '12.5px',
-                    color: '#1856A5',
-                    fontWeight: 600
-                  }}
-                >
-                  Partner: {item.partner}
-                </div>
-              </div>
+                title={item.title}
+                desc={item.desc}
+                image={item.image}
+                to={item.to}
+                tag={item.focus}
+                location={item.location}
+              />
             ))}
           </div>
         </div>
@@ -656,91 +602,17 @@ export default function Sustainability() {
             </span>
           </div>
 
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(310px, 1fr))',
-              gap: '24px'
-            }}
-          >
+          <div className="tall-image-grid tall-image-grid-3">
             {projects.map((item) => (
-              <div
+              <TallImageCard
                 key={item.title}
-                style={{
-                  background: '#FFFFFF',
-                  borderRadius: '18px',
-                  padding: '26px',
-                  border: '1.5px solid #DCE9F8',
-                  boxShadow: '0 6px 20px rgba(10, 42, 92, 0.05)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between'
-                }}
-              >
-                <div>
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      marginBottom: '12px'
-                    }}
-                  >
-                    <span
-                      style={{
-                        background: '#EEF4FC',
-                        color: '#1856A5',
-                        fontSize: '11px',
-                        fontWeight: 700,
-                        padding: '4px 10px',
-                        borderRadius: '999px',
-                        border: '1px solid #DCE9F8'
-                      }}
-                    >
-                      {item.focus}
-                    </span>
-                    <span style={{ fontSize: '12.5px', color: '#1A8FBF', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-                        <circle cx="12" cy="10" r="3" />
-                      </svg>
-                      {item.location}
-                    </span>
-                  </div>
-                  <h3
-                    style={{
-                      fontSize: '17px',
-                      color: '#0A2A5C',
-                      margin: '4px 0 10px',
-                      fontWeight: 700,
-                      lineHeight: 1.35
-                    }}
-                  >
-                    {item.title}
-                  </h3>
-                  <p
-                    style={{
-                      fontSize: '14px',
-                      color: '#4F617D',
-                      lineHeight: 1.55,
-                      margin: '0 0 16px'
-                    }}
-                  >
-                    {item.desc}
-                  </p>
-                </div>
-                <div
-                  style={{
-                    borderTop: '1px solid #EEF4FC',
-                    paddingTop: '12px',
-                    fontSize: '12.5px',
-                    color: '#1856A5',
-                    fontWeight: 600
-                  }}
-                >
-                  Partner: {item.partner}
-                </div>
-              </div>
+                title={item.title}
+                desc={item.desc}
+                image={item.image}
+                to={item.to}
+                tag={item.focus}
+                location={item.location}
+              />
             ))}
           </div>
         </div>
@@ -792,75 +664,17 @@ export default function Sustainability() {
             </span>
           </div>
 
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(310px, 1fr))',
-              gap: '24px'
-            }}
-          >
+          <div className="tall-image-grid tall-image-grid-3">
             {events.map((item) => (
-              <div
+              <TallImageCard
                 key={item.title}
-                style={{
-                  background: '#FFFFFF',
-                  borderRadius: '18px',
-                  padding: '26px',
-                  border: '1.5px solid #DCE9F8',
-                  boxShadow: '0 6px 20px rgba(10, 42, 92, 0.05)'
-                }}
-              >
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    marginBottom: '12px'
-                  }}
-                >
-                  <span
-                    style={{
-                      background: '#EEF4FC',
-                      color: '#1856A5',
-                      fontSize: '11px',
-                      fontWeight: 700,
-                      padding: '4px 10px',
-                      borderRadius: '999px',
-                      border: '1px solid #DCE9F8'
-                    }}
-                  >
-                    {item.focus}
-                  </span>
-                  <span style={{ fontSize: '12.5px', color: '#1A8FBF', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-                      <circle cx="12" cy="10" r="3" />
-                    </svg>
-                    {item.location}
-                  </span>
-                </div>
-                <h3
-                  style={{
-                    fontSize: '17px',
-                    color: '#0A2A5C',
-                    margin: '4px 0 10px',
-                    fontWeight: 700,
-                    lineHeight: 1.35
-                  }}
-                >
-                  {item.title}
-                </h3>
-                <p
-                  style={{
-                    fontSize: '14px',
-                    color: '#4F617D',
-                    lineHeight: 1.55,
-                    margin: 0
-                  }}
-                >
-                  {item.desc}
-                </p>
-              </div>
+                title={item.title}
+                desc={item.desc}
+                image={item.image}
+                to={item.to}
+                tag={item.focus}
+                location={item.location}
+              />
             ))}
           </div>
 

@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-
-export default function Resources() {
+export default function Resources({ embedded = false }) {
   const [activeCategory, setActiveCategory] = useState('all');
 
   const categories = [
@@ -71,9 +69,9 @@ export default function Resources() {
   const filtered = activeCategory === 'all' ? items : items.filter((i) => i.category === activeCategory);
 
   return (
-    <div className="resources-page" style={{ paddingTop: '86px' }}>
+    <div className="resources-page" style={{ paddingTop: embedded ? 0 : '86px' }}>
       {/* HEADER */}
-      <section
+      {!embedded && <section
         style={{
           background: 'linear-gradient(135deg, #0A2A5C 0%, #1856A5 100%)',
           color: '#FFFFFF',
@@ -113,11 +111,20 @@ export default function Resources() {
             </p>
           </div>
         </div>
-      </section>
+      </section>}
 
       {/* FILTER TABS & RESOURCE LIST */}
-      <section style={{ padding: '60px 0', background: '#EEF4FC', minHeight: '600px' }}>
+      <section aria-labelledby={embedded ? 'resources-heading' : undefined} style={{ padding: '60px 0', background: '#EEF4FC', minHeight: '600px' }}>
         <div className="shell">
+          {embedded && (
+            <div style={{ maxWidth: '760px', marginBottom: '32px' }}>
+              <p className="eyebrow">Knowledge Repository</p>
+              <h2 id="resources-heading" style={{ color: '#0A2A5C', fontSize: 'clamp(28px, 3vw, 38px)', margin: '0 0 12px' }}>Resources</h2>
+              <p style={{ color: '#4F617D', fontSize: '16px', lineHeight: 1.6, margin: 0 }}>
+                Access peer-reviewed research papers, technical monographs, policy briefs, and institutional reports published by KSLI and research partners.
+              </p>
+            </div>
+          )}
           {/* CATEGORY BUTTONS */}
           <div
             style={{

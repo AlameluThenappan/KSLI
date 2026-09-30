@@ -49,7 +49,7 @@ function TeamMemberPhoto({ photo, name }) {
   );
 }
 
-function RevealSection({ eyebrow, title, children, direction, imageLabel, imageSrc, reverse = false }) {
+function RevealSection({ id, eyebrow, title, children, direction, imageLabel, imageSrc, reverse = false }) {
   const ref = useRef(null);
   useEffect(() => {
     const node = ref.current;
@@ -62,7 +62,7 @@ function RevealSection({ eyebrow, title, children, direction, imageLabel, imageS
   }, []);
 
   return (
-    <section ref={ref} className={`aboutksli-story ${reverse ? 'aboutksli-story--reverse' : ''}`}>
+    <section id={id} ref={ref} className={`aboutksli-story ${reverse ? 'aboutksli-story--reverse' : ''}`} style={{ scrollMarginTop: '140px' }}>
       <div className="shell aboutksli-story-grid">
         <ImagePlaceholder className="aboutksli-story-image aboutksli-reveal-image" label={imageLabel} imageSrc={imageSrc} />
         <div className={`aboutksli-story-copy aboutksli-reveal-text aboutksli-reveal-text--${direction}`}>
@@ -82,8 +82,25 @@ export default function AboutKSLI() {
   const [cardStep, setCardStep] = useState(0);
   const [visibleCardsCount, setVisibleCardsCount] = useState(5);
   const [isFilterSwitching, setIsFilterSwitching] = useState(false);
-
   const carouselViewport = useRef(null);
+
+  useEffect(() => {
+    const sectionIds = ['vision', 'mission', 'purpose', 'team'];
+
+    if (window.location.hash) {
+      const hashId = window.location.hash.replace('#', '');
+      if (sectionIds.includes(hashId)) {
+        setTimeout(() => {
+          const el = document.getElementById(hashId);
+          if (el) {
+            const yOffset = -140;
+            const y = el.getBoundingClientRect().top + window.scrollY + yOffset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+          }
+        }, 150);
+      }
+    }
+  }, []);
 
   const visibleMembers = activeFilter === 'All'
     ? teamMembers
@@ -167,7 +184,7 @@ export default function AboutKSLI() {
   return (
     <article className="aboutksli-page">
       {/* ── HERO SECTION ── */}
-      <section className="aboutksli-hero">
+      <section className="aboutksli-hero viewport-hero">
         <div className="aboutksli-hero-bg-img" />
         <div className="aboutksli-hero-overlay" />
         <div className="shell">
@@ -179,8 +196,10 @@ export default function AboutKSLI() {
         </div>
       </section>
 
+
       {/* ── VISION ── */}
       <RevealSection
+        id="vision"
         eyebrow="Vision"
         title="Advancing sustainability and livelihoods."
         direction="right"
@@ -192,6 +211,7 @@ export default function AboutKSLI() {
 
       {/* ── MISSION ── */}
       <RevealSection
+        id="mission"
         eyebrow="Mission"
         title="Integrated solutions for lasting change."
         direction="left"
@@ -204,6 +224,7 @@ export default function AboutKSLI() {
 
       {/* ── PURPOSE ── */}
       <RevealSection
+        id="purpose"
         eyebrow="Purpose"
         title="One platform. Shared direction."
         direction="right"
@@ -248,7 +269,7 @@ export default function AboutKSLI() {
       </section>
 
       {/* ── TEAM SECTION (With Clickable Team Member Cards) ── */}
-      <section id="team" className="aboutksli-team" onKeyDown={handleKeyDown} tabIndex="0" aria-label="Our Team Section">
+      <section id="team" className="aboutksli-team" onKeyDown={handleKeyDown} tabIndex="0" aria-label="Our Team Section" style={{ scrollMarginTop: '140px' }}>
         <div className="aboutksli-team-shell">
           <div className="aboutksli-team-topline">
             <div className="aboutksli-team-heading-group">
@@ -351,15 +372,6 @@ export default function AboutKSLI() {
         </div>
       </section>
 
-      {/* ── PARTNERS / CTA ── */}
-      <section className="aboutksli-cta">
-        <div className="shell">
-          <p className="eyebrow teal">KSLI</p>
-          <h2>Research. Learning. Partnership. Action.</h2>
-          <p>Explore how KSLI connects academic inquiry, field practice, and long-term collaboration.</p>
-          <Link className="primary" to="/domains">Explore Our Work <span>→</span></Link>
-        </div>
-      </section>
     </article>
   );
 }
