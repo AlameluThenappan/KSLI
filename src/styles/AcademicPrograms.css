@@ -425,10 +425,8 @@
 
 .ap-pathway-ambient {
   z-index: 0;
-  background:
-    linear-gradient(115deg, transparent 0 32%, rgba(24, 86, 165, 0.075) 32.2% 32.7%, transparent 33% 100%),
-    linear-gradient(68deg, transparent 0 58%, rgba(26, 143, 191, 0.08) 58.2% 58.7%, transparent 59% 100%);
-  opacity: 0.8;
+  background: none;
+  opacity: 0;
 }
 
 .ap-pathway-grid {
@@ -483,7 +481,7 @@
 }
 
 .ap-pathway-stepper {
-  display: grid;
+  display: none;
   grid-template-columns: repeat(4, minmax(86px, 1fr));
   align-items: center;
   gap: 8px;

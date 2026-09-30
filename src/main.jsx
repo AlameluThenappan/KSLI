@@ -40,6 +40,7 @@ import ResearchRealities from './pages/ResearchRealities.jsx';
 import GetInvolved from './pages/GetInvolved.jsx';
 import DedicatedFormPage from './pages/DedicatedFormPage.jsx';
 import TeamMemberProfile from './pages/TeamMemberProfile.jsx';
+import { AdminEntry, AdminProtectedDashboard } from './pages/Admin.jsx';
 import Manage from './pages/Manage.jsx';
 import Domains from './pages/Domains.jsx';
 import TallImageCard from './components/TallImageCard.jsx';
@@ -1275,6 +1276,8 @@ function App() {
           <Route path="/manage" element={<Manage />} />
           <Route path="/team/:id" element={<TeamMemberProfile />} />
           <Route path="/about/team/:id" element={<TeamMemberProfile />} />
+          <Route path="/admin" element={<AdminEntry />} />
+          <Route path="/admin/dashboard" element={<AdminProtectedDashboard />} />
 
           {/* Legacy Aliases & Redirects */}
           <Route path="/sustainability" element={<Navigate to="/domains/sustainability" replace />} />
