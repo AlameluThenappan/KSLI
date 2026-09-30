@@ -9,6 +9,7 @@ import ecosystemImg from '../assets/domains/quadrant_ecosystem.jpg';
 import educationImg from '../assets/domains/quadrant_education.jpg';
 import processingImg from '../assets/domains/quadrant_processing.jpg';
 import rockyHillsBanner from '../assets/domains/rocky_hills_banner.jpg';
+import domainsVideo from '../assets/domains/domains.mp4';
 
 export default function Domains() {
   const kpiStats = [
@@ -144,6 +145,15 @@ export default function Domains() {
         style={{ backgroundImage: `url(${heroBg})` }}
         aria-label="KSLI Domains Hub"
       >
+        <video
+          className="domains-hero-video"
+          src={domainsVideo}
+          poster={heroBg}
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
         <div className="domains-hero-overlay" aria-hidden="true" />
         <div className="domains-hero-vignette" aria-hidden="true" />
 
