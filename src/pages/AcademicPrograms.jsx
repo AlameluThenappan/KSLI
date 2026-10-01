@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import '../styles/AcademicPrograms.css';
-import academicHero from '../assets/academic programs/academic.webp';
+import academicHero from '../assets/academic programs/learning.png';
 import edfLogo from '../../assets/Environmental Defense Fund.png';
 import nddbLogo from '../../assets/NDDB Mrida Limited.png';
 
@@ -10,11 +10,46 @@ import nddbLogo from '../../assets/NDDB Mrida Limited.png';
    ───────────────────────────────────────────────────────────── */
 
 const PROGRAMS = [
-  { id: 1, title: 'MBA – Agri Business Management',                      type: 'MBA', dark: true  },
-  { id: 2, title: 'MSW – Master of Social Work',                         type: 'MSW', dark: false },
-  { id: 3, title: 'M.E – Environmental Engineering',                     type: 'M.E', dark: false },
-  { id: 4, title: 'MBA – Sustainability Management',                     type: 'MBA', dark: true  },
-  { id: 5, title: 'BSW – Bachelor of Social Work (Sustainability Focus)',type: 'BSW', dark: false },
+  {
+    id: 1,
+    title: 'MBA – Agri Business Management',
+    type: 'MBA',
+    dark: true,
+    image: 'https://images.unsplash.com/photo-1589923188900-85dae523342b?w=800&auto=format&fit=crop&q=80',
+    desc: 'Bridging agricultural science and modern business enterprise, market linkages, and rural producer organizations.',
+  },
+  {
+    id: 2,
+    title: 'MSW – Master of Social Work',
+    type: 'MSW',
+    dark: false,
+    image: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&auto=format&fit=crop&q=80',
+    desc: 'Equipping practitioners for community-based participatory development, social policy, and rural grassroots empowerment.',
+  },
+  {
+    id: 3,
+    title: 'M.E – Environmental Engineering',
+    type: 'M.E',
+    dark: false,
+    image: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800&auto=format&fit=crop&q=80',
+    desc: 'Applied engineering solutions addressing wastewater management, air quality, ecological restoration, and environmental compliance.',
+  },
+  {
+    id: 4,
+    title: 'MBA – Sustainability Management',
+    type: 'MBA',
+    dark: true,
+    image: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=800&auto=format&fit=crop&q=80',
+    desc: 'Corporate ESG strategy, clean-tech project management, circular economy models, and sustainable resource economics.',
+  },
+  {
+    id: 5,
+    title: 'BSW – Bachelor of Social Work (Sustainability Focus)',
+    type: 'BSW',
+    dark: false,
+    image: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&auto=format&fit=crop&q=80',
+    desc: 'Foundational social work training integrating ecological resilience, community well-being, and social entrepreneurship.',
+  },
 ];
 
 const WORKSHOP_GROUPS = [
@@ -187,34 +222,16 @@ function HeroSection() {
       />
       <div className="ap-hero-overlay" aria-hidden="true" />
 
-      <div className="ap-hero-content shell">
-        <p className="ap-hero-eyebrow">Learning at KSLI</p>
-        <h1 id="ap-hero-heading" className="ap-hero-title">Academic Programs</h1>
-        <p className="ap-hero-sub">
-          Connecting academic knowledge with responsible practice — from agri-business
-          and social work to sustainability engineering.
-        </p>
-      </div>
-
-      <div className="ap-hero-kpis shell" role="region" aria-label="Program highlights">
-        {/* KPI 1 — sourced from deck "Academic Programs" slide (5 listed programs) */}
-        <div className="ap-kpi-card">
-          <strong className="ap-kpi-number">5</strong>
-          <span className="ap-kpi-label">Total Academic Programs</span>
-        </div>
-
-        {/* KPI 2 — PG Diploma (3) + Exposure Visit (3) + Certificate Programs (4) = 10 */}
-        <div className="ap-kpi-card">
-          <strong className="ap-kpi-number">10+</strong>
-          <span className="ap-kpi-label">Workshops &amp; Certificate Offerings</span>
-        </div>
-
-        {/* KPI 3 — Students Reached: NOT present in source deck.
-            TODO: Replace "—" with actual student count when data is available. */}
-        <div className="ap-kpi-card" aria-label="Students Reached — data not yet available">
-          <strong className="ap-kpi-number ap-kpi-placeholder" aria-label="data not available">—</strong>
-          <span className="ap-kpi-label">Students Reached</span>
-          <span className="ap-kpi-coming" aria-hidden="true">Coming soon</span>
+      <div className="shell ap-hero-shell">
+        <div className="ap-hero-content">
+          <h1 id="ap-hero-heading" className="ap-hero-title">
+            Academic
+            <span className="ap-hero-title-accent">Programs</span>
+          </h1>
+          <p className="ap-hero-sub">
+            Connecting academic knowledge with responsible practice — from agri-business
+            and social work to sustainability engineering.
+          </p>
         </div>
       </div>
     </section>
@@ -250,12 +267,25 @@ function AcademicProgramsSection() {
               className={`ap-program-card${prog.dark ? ' ap-program-card--dark' : ''}`}
               style={{ transitionDelay: inView ? `${i * 85}ms` : '0ms' }}
             >
-              <span className="ap-program-type">{prog.type}</span>
-              <h3 className="ap-program-title">{prog.title}</h3>
-              <div className="ap-program-divider" aria-hidden="true" />
-              <p className="ap-program-desc">
-                Programme details and admissions information will be featured here.
-              </p>
+              {prog.image && (
+                <div className="ap-program-image-wrap">
+                  <img
+                    src={prog.image}
+                    alt={prog.title}
+                    className="ap-program-img"
+                    loading="lazy"
+                  />
+                  <div className="ap-program-img-overlay" aria-hidden="true" />
+                </div>
+              )}
+              <div className="ap-program-body">
+                <span className="ap-program-type">{prog.type}</span>
+                <h3 className="ap-program-title">{prog.title}</h3>
+                <div className="ap-program-divider" aria-hidden="true" />
+                <p className="ap-program-desc">
+                  {prog.desc}
+                </p>
+              </div>
             </article>
           ))}
         </div>
@@ -679,8 +709,8 @@ function SustainabilityPathway() {
                     const titleY = isMobile
                       ? m.y
                       : isAbove
-                      ? m.y + 36
-                      : m.y - 22;
+                        ? m.y + 36
+                        : m.y - 22;
 
                     return (
                       <g key={m.id} className="ap-milestone-group">
@@ -689,17 +719,15 @@ function SustainabilityPathway() {
                           cx={m.x}
                           cy={m.y}
                           r={isActive ? 22 : isPassed ? 15 : 12}
-                          className={`ap-milestone-halo ${
-                            isActive ? 'is-active' : isPassed ? 'is-passed' : 'is-upcoming'
-                          }`}
+                          className={`ap-milestone-halo ${isActive ? 'is-active' : isPassed ? 'is-passed' : 'is-upcoming'
+                            }`}
                         />
                         <circle
                           cx={m.x}
                           cy={m.y}
                           r={isActive ? 8 : isPassed ? 5.5 : 5}
-                          className={`ap-milestone-circle ${
-                            isActive ? 'is-active' : isPassed ? 'is-passed' : 'is-upcoming'
-                          }`}
+                          className={`ap-milestone-circle ${isActive ? 'is-active' : isPassed ? 'is-passed' : 'is-upcoming'
+                            }`}
                           onClick={() => handleMilestoneSelect(i)}
                           style={{ cursor: 'pointer' }}
                           tabIndex={0}
@@ -719,15 +747,14 @@ function SustainabilityPathway() {
                           x={isMobile ? m.x + (i % 2 === 0 ? 22 : -22) : m.x}
                           y={titleY}
                           textAnchor={isMobile ? (i % 2 === 0 ? 'start' : 'end') : 'middle'}
-                          className={`ap-curve-stage-title ${
-                            isActive
-                              ? 'is-active'
-                              : isApproach
+                          className={`ap-curve-stage-title ${isActive
+                            ? 'is-active'
+                            : isApproach
                               ? 'is-approach'
                               : isPassed
-                              ? 'is-passed'
-                              : 'is-upcoming'
-                          }`}
+                                ? 'is-passed'
+                                : 'is-upcoming'
+                            }`}
                         >
                           {`0${m.id} — ${m.name.toUpperCase()}`}
                         </text>
@@ -785,9 +812,8 @@ function SustainabilityPathway() {
                 {/* ── Final Destination: IMPACT (Opens gracefully at 100% canvas end) ── */}
                 {!isMobile && (
                   <div
-                    className={`ap-impact-destination ${
-                      scrollProgress >= 0.89 ? 'is-visible' : ''
-                    }`}
+                    className={`ap-impact-destination ${scrollProgress >= 0.89 ? 'is-visible' : ''
+                      }`}
                     style={{ left: '5160px', top: '100px' }}
                     aria-label="Final Destination: Impact"
                   >

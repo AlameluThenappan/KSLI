@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { advisoryCouncil, teamMembers, teamFilters } from '../data/teamData.js';
 import '../styles/AboutKSLI.css';
+import rockyHillsImg from '../assets/domains/rocky_hills_banner.jpg';
+import sccaImg from '../../assets/SCCA.webp';
 
 function ImagePlaceholder({ label, className = '', imageSrc }) {
   if (imageSrc) {
@@ -204,7 +206,7 @@ export default function AboutKSLI() {
         title="Advancing sustainability and livelihoods."
         direction="right"
         imageLabel="KSLI Vision: Living Landscapes"
-        imageSrc="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&auto=format&fit=crop&q=80"
+        imageSrc={rockyHillsImg}
       >
         <p>Through research, education, entrepreneurship, and community transformation.</p>
       </RevealSection>
@@ -217,7 +219,7 @@ export default function AboutKSLI() {
         direction="left"
         reverse
         imageLabel="KSLI Mission: Agrarian Resilience"
-        imageSrc="https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?w=800&auto=format&fit=crop&q=80"
+        imageSrc="https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?w=1200&auto=format&fit=crop&q=85"
       >
         <p>To design and deliver integrated solutions that advance sustainability and strengthen rural livelihoods by combining applied research, practice-oriented education, entrepreneurship incubation, and long-term partnerships with farmers, industry, and institutions.</p>
       </RevealSection>
@@ -229,7 +231,7 @@ export default function AboutKSLI() {
         title="One platform. Shared direction."
         direction="right"
         imageLabel="KSLI Purpose: Research & Action"
-        imageSrc="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&auto=format&fit=crop&q=80"
+        imageSrc={sccaImg}
       >
         <p>KSLI is proposed to consolidate, lead, and scale sustainability- and livelihood-focused initiatives, aligning academic programs, research, partnerships, flagship events, and community engagement under a single governance and identity.</p>
       </RevealSection>

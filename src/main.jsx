@@ -226,15 +226,17 @@ function Header() {
   const activePanelConfig = navConfig.find((item) => item.id === activePanelId);
   const isHome = location.pathname === '/';
   const isDomains = location.pathname === '/domains';
-  const isTransparentHero = isHome || isDomains;
-  const isThrustPage = location.pathname.startsWith('/thrust-areas');
+  const isNoHeroPage =
+    location.pathname.startsWith('/thrust-areas') ||
+    location.pathname.startsWith('/research-realities') ||
+    location.pathname.startsWith('/get-involved');
 
   const centerNavItems = navConfig.filter((item) => item.id !== 'get-involved' && !item.isCta);
   const ctaNavItem = navConfig.find((item) => item.id === 'get-involved' || item.isCta);
 
   return (
     <header
-      className={`site-header ${scrolled ? 'scrolled' : ''} ${isTransparentHero ? 'transparent-hero' : ''} ${isThrustPage ? 'nav-mild-blue' : ''}`}
+      className={`site-header ${scrolled ? 'scrolled' : ''} ${isNoHeroPage ? 'nav-blue-solid nav-mild-blue' : ''}`}
       ref={headerRef}
     >
       <nav className="nav" ref={navRef} aria-label="Main navigation">
