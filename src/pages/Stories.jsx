@@ -135,16 +135,16 @@ export default function Stories({ embedded = false }) {
                   key={c.id}
                   onClick={() => setActiveTab(c.id)}
                   style={{
-                    background: isActive ? '#1856A5' : '#FFFFFF',
+                    background: isActive ? '#0A2A5C' : '#FFFFFF',
                     color: isActive ? '#FFFFFF' : '#0A2A5C',
-                    border: isActive ? '1px solid #1856A5' : '1px solid #DCE9F8',
+                    border: isActive ? '1px solid #0A2A5C' : '1px solid #DCE9F8',
                     padding: '10px 22px',
                     borderRadius: '999px',
                     fontWeight: 600,
                     fontSize: '13px',
                     cursor: 'pointer',
                     boxShadow: isActive
-                      ? '0 4px 12px rgba(24, 86, 165, 0.25)'
+                      ? '0 4px 14px rgba(10, 42, 92, 0.28)'
                       : '0 2px 6px rgba(10, 42, 92, 0.04)',
                     transition: 'all 0.2s ease'
                   }}

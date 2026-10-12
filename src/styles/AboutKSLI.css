@@ -378,10 +378,10 @@
 }
 
 .aboutksli-arrow-btn.is-active:not(:disabled) {
-  background: var(--teal);
-  border-color: var(--teal);
+  background: var(--navy);
+  border-color: var(--navy);
   color: #ffffff;
-  box-shadow: 0 2px 8px rgba(108, 140, 124, 0.35);
+  box-shadow: 0 2px 8px rgba(10, 42, 92, 0.35);
 }
 
 .aboutksli-arrow-btn:disabled {
@@ -433,11 +433,11 @@
 }
 
 .aboutksli-filter-pill:hover {
-  background: var(--teal);
-  border-color: var(--teal);
+  background: var(--navy);
+  border-color: var(--navy);
   color: #ffffff;
   transform: translateX(3px);
-  box-shadow: 0 3px 10px rgba(108, 140, 124, 0.25);
+  box-shadow: 0 3px 10px rgba(10, 42, 92, 0.25);
 }
 
 .aboutksli-filter-pill.is-active {
@@ -445,7 +445,7 @@
   border-color: var(--navy);
   color: #ffffff;
   font-weight: 700;
-  box-shadow: 0 4px 14px rgba(27, 40, 64, 0.18);
+  box-shadow: 0 4px 14px rgba(10, 42, 92, 0.28);
   transform: none;
 }
 

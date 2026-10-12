@@ -180,7 +180,7 @@
 .admin-approve-button {
   min-height: 48px;
   color: #ffffff;
-  background: var(--ksli-blue);
+  background: var(--navy);
 }
 
 .admin-login-help {
@@ -296,7 +296,7 @@
 
 .admin-filter-tabs button.is-active {
   color: #ffffff;
-  background: var(--ksli-blue);
+  background: var(--navy);
 }
 
 .admin-application-list {

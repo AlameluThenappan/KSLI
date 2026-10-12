@@ -182,12 +182,13 @@ export default function GetInvolved() {
                       alignItems: 'center',
                       gap: '8px',
                       padding: '12px 24px',
-                      background: '#1856A5',
+                      background: '#0A2A5C',
                       color: '#FFFFFF',
                       borderRadius: '9999px',
                       fontWeight: 700,
                       fontSize: '14px',
                       textDecoration: 'none',
+                      boxShadow: '0 4px 14px rgba(10, 42, 92, 0.28)',
                       transition: 'all 0.2s ease'
                     }}
                   >

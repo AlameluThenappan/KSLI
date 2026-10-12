@@ -402,14 +402,14 @@
   width: 100%;
   padding: 15px 28px;
   border-radius: 9999px;
-  background: #1856A5;
+  background: #0A2A5C;
   color: #FFFFFF;
   font-family: Montserrat, Inter, sans-serif;
   font-size: 15px;
   font-weight: 700;
   border: none;
   cursor: pointer;
-  box-shadow: 0 6px 20px rgba(24, 86, 165, 0.28);
+  box-shadow: 0 6px 20px rgba(10, 42, 92, 0.28);
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   align-items: center;
@@ -417,9 +417,9 @@
 }
 
 .form-submit-button:hover:not(:disabled) {
-  background: #0A2A5C;
+  background: #113870;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(10, 42, 92, 0.3);
+  box-shadow: 0 8px 24px rgba(10, 42, 92, 0.35);
 }
 
 .form-submit-button:disabled {

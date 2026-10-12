@@ -202,13 +202,14 @@ export default function ThrustAreaDetail() {
             <Link
               to="/get-involved"
               style={{
-                background: '#1856A5',
+                background: '#0A2A5C',
                 color: '#FFFFFF',
                 padding: '10px 22px',
                 borderRadius: '8px',
                 textDecoration: 'none',
                 fontWeight: 700,
-                fontSize: '13.5px'
+                fontSize: '13.5px',
+                boxShadow: '0 4px 14px rgba(10, 42, 92, 0.25)'
               }}
             >
               Get Involved →

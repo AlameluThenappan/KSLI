@@ -90,21 +90,21 @@ h6 {
   gap: 8px;
   border: 0;
   border-radius: var(--radius-pill);
-  background: var(--ksli-blue);
+  background: var(--deep-navy);
   color: #fff;
   padding: 12px 26px;
   font: 600 13px Inter, sans-serif;
   letter-spacing: 0.03em;
   cursor: pointer;
   transition: all 0.25s ease;
-  box-shadow: 0 4px 12px rgba(24, 86, 165, 0.25);
+  box-shadow: 0 4px 14px rgba(10, 42, 92, 0.28);
 }
 
 .primary:hover,
 .btn-primary:hover {
-  background: #114383;
+  background: #113870;
   transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(24, 86, 165, 0.32);
+  box-shadow: 0 6px 18px rgba(10, 42, 92, 0.35);
   color: #fff;
 }
 
@@ -114,9 +114,9 @@ h6 {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  border: 1.5px solid var(--ksli-blue);
+  border: 1.5px solid var(--deep-navy);
   background: #fff;
-  color: var(--ksli-blue);
+  color: var(--deep-navy);
   padding: 11px 24px;
   border-radius: var(--radius-pill);
   font: 600 13px Inter, sans-serif;
@@ -126,8 +126,9 @@ h6 {
 
 .secondary:hover,
 .btn-secondary:hover {
-  background: var(--pale-blue);
-  border-color: var(--ksli-blue);
+  background: var(--deep-navy);
+  border-color: var(--deep-navy);
+  color: #fff;
 }
 
 .btn-navy {
@@ -147,7 +148,7 @@ h6 {
 }
 
 .btn-navy:hover {
-  background: #1856A5;
+  background: #113870;
   color: #fff;
   transform: translateY(-1px);
 }
