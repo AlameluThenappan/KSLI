@@ -179,11 +179,16 @@ export default function Livelihood() {
     <div className="livelihood-page">
       {/* ─── HERO BANNER ─── */}
       <section
-        className="viewport-hero"
+        className="viewport-hero livelihood-hero"
         style={{
           background: 'linear-gradient(135deg, rgba(10, 42, 92, 0.70) 0%, rgba(17, 67, 131, 0.55) 60%, rgba(24, 86, 165, 0.45) 100%), url("https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?w=1920&auto=format&fit=crop&q=85") center/cover no-repeat',
           color: '#FFFFFF',
-          padding: '156px 0 60px',
+          padding: '76px 0 40px',
+          minHeight: '100svh',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          boxSizing: 'border-box',
           position: 'relative',
           overflow: 'hidden'
         }}
@@ -226,12 +231,13 @@ export default function Livelihood() {
             </span>
             <h1
               style={{
-                fontSize: 'clamp(36px, 4.4vw, 52px)',
+                fontSize: 'clamp(36px, 4.4vw, 56px)',
                 color: '#FFFFFF',
                 margin: '0 0 16px',
-                fontWeight: 800,
-                letterSpacing: '-0.02em',
-                lineHeight: 1.15
+                fontWeight: 700,
+                letterSpacing: '-0.025em',
+                lineHeight: 1.15,
+                fontFamily: 'Inter, sans-serif'
               }}
             >
               Livelihood

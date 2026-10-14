@@ -247,8 +247,10 @@ function AcademicProgramsSection() {
 
   return (
     <section
+      id="academic-programs"
       className={`ap-section ap-programs-section${inView ? ' is-visible' : ''}`}
       ref={ref}
+      style={{ scrollMarginTop: '90px' }}
     >
       <div className="shell">
         <div className="ap-section-heading">
@@ -295,7 +297,7 @@ function AcademicProgramsSection() {
 }
 
 /* ─────────────────────────────────────────────────────────────
-   SECTION 3 — WORKSHOPS & CERTIFICATE PROGRAMS
+   SECTION 3 — WORKSHOPS & CERTIFICATE PROGRAMS / TRAINING
    ───────────────────────────────────────────────────────────── */
 
 function WorkshopsSection() {
@@ -303,13 +305,15 @@ function WorkshopsSection() {
 
   return (
     <section
+      id="workshops"
       className={`ap-section ap-workshops-section${inView ? ' is-visible' : ''}`}
       ref={ref}
+      style={{ scrollMarginTop: '90px' }}
     >
       <div className="shell">
         <div className="ap-section-heading">
           <p className="eyebrow teal">Short-term &amp; Continuing Education</p>
-          <h2>Workshops &amp; Certificate Programs</h2>
+          <h2>Workshops &amp; Training Programs</h2>
           <p className="ap-section-sub">
             Practical, industry-aligned programs spanning dairy farming, integrated
             agriculture, sustainability management, and natural resource stewardship.
@@ -320,8 +324,12 @@ function WorkshopsSection() {
           {WORKSHOP_GROUPS.map((group, gi) => (
             <div
               key={group.title}
+              id={group.title.toLowerCase().includes('certificate') ? 'training' : undefined}
               className="ap-workshop-group"
-              style={{ transitionDelay: inView ? `${gi * 100}ms` : '0ms' }}
+              style={{
+                transitionDelay: inView ? `${gi * 100}ms` : '0ms',
+                scrollMarginTop: '100px'
+              }}
             >
               <div className="ap-workshop-group-header">
                 <h3 className="ap-workshop-group-title">{group.title}</h3>
@@ -534,9 +542,10 @@ function SustainabilityPathway() {
 
   return (
     <section
+      id="sustainability-pathway"
       className="ap-pathway-root"
       aria-labelledby="ap-pathway-heading"
-      style={{ '--pathway-progress': `${progressPercent}%` }}
+      style={{ '--pathway-progress': `${progressPercent}%`, scrollMarginTop: '90px' }}
     >
       {/* ── Accessible Static Fallback (for prefers-reduced-motion) ── */}
       {prefersReducedMotion ? (

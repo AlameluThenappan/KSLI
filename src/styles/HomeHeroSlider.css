@@ -1,0 +1,417 @@
+/* ── Home Hero Video Slider & Statistics Deck ── */
+
+.hero-slider-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  background: #07172E;
+  color: #FFFFFF;
+  box-sizing: border-box;
+  padding-top: 76px;
+  padding-bottom: 0;
+}
+
+/* ── Background Video Viewport & Crossfade ── */
+.hero-video-viewport {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero-video-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+}
+
+.hero-video-slide.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.hero-slide-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  /* Enhanced video clarity, warmth, and saturation */
+  filter: contrast(1.05) saturate(1.12) brightness(1.02);
+}
+
+/* High-definition cinematic gradient scrim matching reference appearance */
+.hero-video-scrim {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(7, 24, 52, 0.50) 0%,
+      rgba(7, 24, 52, 0.28) 45%,
+      rgba(7, 24, 52, 0.05) 80%,
+      transparent 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(7, 24, 52, 0.52) 0%,
+      rgba(7, 24, 52, 0.15) 22%,
+      transparent 45%,
+      rgba(3, 12, 26, 0.35) 70%,
+      rgba(2, 8, 18, 0.78) 100%
+    );
+  z-index: 1;
+}
+
+/* ── Foreground Shell ── */
+.hero-slider-shell {
+  position: relative;
+  z-index: 2;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 1240px;
+  margin: 0 auto;
+  width: min(100% - 48px, 1240px);
+  padding: 10px 0;
+}
+
+.hero-slider-content {
+  max-width: 840px;
+}
+
+.hero-slider-content .intro-label {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8CC2FC;
+  margin: 0 0 10px;
+}
+
+/* ── Editorial Heading ── */
+.hero-slider-title {
+  font: 700 clamp(32px, 4.4vw, 56px) / 1.15 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  margin: 0 0 16px;
+  letter-spacing: -0.025em;
+  color: #FFFFFF;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.55);
+  animation: heroFadeIn 0.5s ease-out;
+}
+
+.hero-slider-desc {
+  font-size: clamp(15px, 1.25vw, 18px);
+  line-height: 1.6;
+  max-width: 740px;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
+  animation: heroFadeIn 0.6s ease-out;
+  margin: 0 0 26px;
+}
+
+@keyframes heroFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-slider-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.hero-slider-actions .primary {
+  padding: 12px 28px;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 600;
+  background: #092652;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.hero-slider-actions .primary:hover {
+  background: #0c336e;
+  border-color: rgba(255, 255, 255, 0.45);
+  transform: translateY(-1px);
+}
+
+.hero-slider-actions .btn-navy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.hero-slider-actions .btn-navy:hover {
+  background: rgba(255, 255, 255, 0.28);
+  border-color: rgba(255, 255, 255, 0.7);
+  color: #FFFFFF;
+  transform: translateY(-1px);
+}
+
+/* ── Section 2: Transparent Impact Statistics Floating Directly Over Hero Video ── */
+.hero-stats-deck {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 0;
+  box-shadow: none;
+  margin-bottom: 22px;
+}
+
+.hero-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  align-items: center;
+  max-width: 1240px;
+  margin: 0 auto;
+  width: min(100% - 48px, 1240px);
+}
+
+.hero-stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4px 16px;
+  position: relative;
+  background: transparent;
+  border: none;
+}
+
+/* Subtle vertical divider between stat columns */
+.hero-stat-card:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 48px;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.hero-stat-icon {
+  display: none;
+}
+
+.hero-stat-number {
+  font: 700 clamp(30px, 3.4vw, 46px) / 1.1 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #FFFFFF;
+  letter-spacing: -0.025em;
+  margin: 0 0 6px;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
+}
+
+.hero-stat-label {
+  font: 400 clamp(13px, 1.05vw, 15px) / 1.35 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: rgba(255, 255, 255, 0.88);
+  letter-spacing: 0.01em;
+  text-transform: capitalize;
+  margin: 0;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Three Simple Circular Dots Below Stats Deck ── */
+.hero-dots-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  z-index: 5;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0 auto 24px;
+  width: auto;
+}
+
+.hero-dot-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.hero-dot-indicator {
+  display: block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-dot-btn:hover .hero-dot-indicator {
+  background: rgba(255, 255, 255, 0.85);
+  transform: scale(1.15);
+}
+
+.hero-dot-btn.is-active .hero-dot-indicator {
+  width: 9px;
+  height: 9px;
+  background: #FFFFFF;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+  transform: scale(1);
+}
+
+.hero-dot-btn:focus-visible {
+  outline: 2px solid #FFFFFF;
+  outline-offset: 3px;
+}
+
+/* Screen-reader accessible label only, no visible text/segmented container */
+.hero-dot-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── Responsive Refinements ── */
+@media (max-height: 760px) {
+  .hero-slider-section {
+    padding-top: 72px;
+  }
+  .hero-slider-title {
+    font-size: clamp(24px, 3.2vw, 36px);
+    margin-bottom: 10px;
+  }
+  .hero-slider-desc {
+    font-size: 14px;
+    margin-bottom: 16px;
+    line-height: 1.45;
+  }
+  .hero-slider-actions {
+    margin-bottom: 4px;
+  }
+  .hero-slider-actions .primary,
+  .hero-slider-actions .btn-navy {
+    padding: 10px 22px;
+    font-size: 13px;
+  }
+  .hero-stats-deck {
+    margin-bottom: 14px;
+  }
+  .hero-stat-number {
+    font-size: clamp(22px, 2.4vw, 32px);
+    margin-bottom: 4px;
+  }
+  .hero-stat-label {
+    font-size: 12px;
+  }
+  .hero-stat-card:not(:last-child)::after {
+    height: 38px;
+  }
+  .hero-dots-container {
+    margin-bottom: 14px;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero-slider-section {
+    height: auto;
+    min-height: 100vh;
+    min-height: 100svh;
+    padding-top: 76px;
+  }
+  .hero-slider-shell {
+    padding: 24px 0 16px;
+  }
+  .hero-stats-deck {
+    margin-bottom: 20px;
+  }
+  .hero-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 0;
+  }
+  .hero-stat-card:not(:last-child)::after {
+    display: none;
+  }
+  .hero-stat-card:nth-child(odd)::after {
+    display: block;
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 36px;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.25);
+  }
+  .hero-dots-container {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-slider-title {
+    font-size: 26px;
+  }
+  .hero-slider-desc {
+    font-size: 14px;
+  }
+  .hero-stat-number {
+    font-size: 24px;
+  }
+  .hero-stat-label {
+    font-size: 12px;
+  }
+}

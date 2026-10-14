@@ -1,0 +1,382 @@
+/* ══════════════════════════════════════════════════════════
+   KSLI · Our Core Purpose – Scroll-Animated Semicircle
+   Clean institutional look matching reference image
+   ══════════════════════════════════════════════════════════ */
+
+/* ── Section shell ── */
+.cp-section {
+  position: relative;
+  width: 100%;
+  /* Very subtle cool-blue tint from white → near-white */
+  background: #FAFCFF;
+}
+
+/* ── Sticky viewport pin ── */
+.cp-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  min-height: 640px;
+  max-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ── Content container ── */
+.cp-inner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ══ HEADER ══════════════════════════════════════════════ */
+.cp-header {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.cp-eyebrow {
+  display: block;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #5B87B8;            /* muted KSLI cornflower-blue */
+  margin-bottom: 12px;
+}
+
+.cp-heading {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: clamp(32px, 3.4vw, 44px);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  color: #0D2340;            /* deep navy */
+  margin: 0 0 14px;
+}
+
+.cp-subtitle {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: clamp(15px, 1.3vw, 18px);
+  font-weight: 400;
+  line-height: 1.65;
+  color: #4E6B88;            /* muted blue-grey */
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+/* ══ ARC WRAP ════════════════════════════════════════════ */
+.cp-arc-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.cp-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+/* ── Arc path: full dashed guide ── */
+.cp-guide {
+  fill: none;
+  stroke: #B9D4EE;           /* light cornflower-blue, very low saturation */
+  stroke-width: 1.8;
+  stroke-dasharray: 6 9;
+  stroke-linecap: round;
+}
+
+/* ── Arc path: revealed solid progress ── */
+.cp-stroke {
+  fill: none;
+  stroke: #1856A5;           /* KSLI primary blue */
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.10s linear;
+  /* Subtle, barely-there glow */
+  filter: drop-shadow(0 0 4px rgba(24, 86, 165, 0.28));
+}
+
+/* ── Endpoint dots ── */
+.cp-dot {
+  transition: fill 0.30s ease;
+}
+
+/* ══ MILESTONE NODES ════════════════════════════════════ */
+.cp-node {
+  cursor: pointer;
+  outline: none;
+  transform-origin: center;
+  transition: transform 0.30s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cp-node:focus-visible {
+  outline: 2px solid #2563EB;
+  outline-offset: 4px;
+  border-radius: 50%;
+}
+
+.cp-node:hover {
+  transform: scale(1.05);
+}
+
+/* Halo ring: only when active – faint concentric ring */
+.cp-node-halo {
+  fill: rgba(24, 86, 165, 0.08);
+  /* No animation – cleaner institutional feel */
+}
+
+/* White disc – default inactive state */
+.cp-node-disc {
+  fill: #FFFFFF;
+  stroke: #C8DDEF;           /* pale blue-grey outline */
+  stroke-width: 1.5;
+  transition: stroke 0.30s ease, stroke-width 0.30s ease, filter 0.30s ease;
+  /* Minimal shadow */
+  filter: drop-shadow(0 2px 6px rgba(13, 35, 64, 0.07));
+}
+
+/* Icon – default inactive */
+.cp-node-icon {
+  color: #8CAFC8;
+  transition: color 0.30s ease;
+}
+
+/* ── Active state ── */
+.cp-node.is-active .cp-node-disc {
+  fill: #FFFFFF;
+  stroke: #1856A5;
+  stroke-width: 2.0;
+  filter: drop-shadow(0 3px 10px rgba(24, 86, 165, 0.20));
+}
+
+.cp-node.is-active .cp-node-icon {
+  color: #1856A5;
+}
+
+/* Slight scale on current */
+.cp-node.is-current {
+  transform: scale(1.04);
+}
+
+/* ══ INTERIOR MILESTONE CONTENT ═════════════════════════ */
+.cp-content {
+  position: absolute;
+  /* Vertical center of the interior: between the arc base and the apex */
+  top: 72%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 48%;
+  max-width: 560px;
+  min-width: 280px;
+  text-align: center;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.cp-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ── Clip-reveal wrapper: hides overflow so title slides up inside ── */
+.cp-reveal-line {
+  overflow: hidden;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   ANIMATION 1 — Eyebrow: fades in + letter-spacing expands
+   Feel: telegraph, authoritative, deliberate
+───────────────────────────────────────────────────────────────── */
+@keyframes cpEyebrowIn {
+  from {
+    opacity: 0;
+    letter-spacing: 0.04em;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    letter-spacing: 0.18em;
+    transform: translateY(0);
+  }
+}
+
+.cp-anim-eyebrow {
+  display: inline-block;
+  opacity: 0;
+  animation:
+    cpEyebrowIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.00s forwards;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   ANIMATION 2 — Title: slides up from beneath clip edge
+   Feel: editorial reveal, cinematic
+───────────────────────────────────────────────────────────────── */
+@keyframes cpTitleSlide {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cp-anim-title {
+  display: block;
+  opacity: 0;
+  animation:
+    cpTitleSlide 0.58s cubic-bezier(0.22, 1, 0.36, 1) 0.10s forwards;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   ANIMATION 3 — Body text: blur-to-sharp fade
+   Feel: premium, almost photographic focus pull
+───────────────────────────────────────────────────────────────── */
+@keyframes cpBodyReveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0px);
+  }
+}
+
+.cp-anim-body {
+  opacity: 0;
+  animation:
+    cpBodyReveal 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.22s forwards;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   ANIMATION 4 — Accent rule: draws left-to-right
+   Feel: underline signature, definitive closure
+───────────────────────────────────────────────────────────────── */
+@keyframes cpRuleDraw {
+  from {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+.cp-anim-rule {
+  opacity: 0;
+  transform-origin: left center;
+  animation:
+    cpRuleDraw 0.50s cubic-bezier(0.22, 1, 0.36, 1) 0.40s forwards;
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .cp-anim-eyebrow,
+  .cp-anim-title,
+  .cp-anim-body,
+  .cp-anim-rule {
+    animation: none;
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+}
+
+/* Small numbered badge: "01 · VISION" */
+.cp-stage-eyebrow {
+  display: inline-block;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #1856A5;
+  margin-bottom: 8px;
+}
+
+/* Stage heading: "Our Vision" */
+.cp-stage-title {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: clamp(26px, 2.8vw, 36px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: #0D2340;
+  margin: 0 0 12px;
+}
+
+/* Description paragraph */
+.cp-stage-text {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: clamp(14px, 1.1vw, 15.5px);
+  font-weight: 400;
+  line-height: 1.65;
+  color: #3A5570;
+  margin: 0 0 16px;
+  max-width: 520px;
+}
+
+/* Short accent rule */
+.cp-stage-rule {
+  width: 44px;
+  height: 3px;
+  background: #1856A5;
+  border-radius: 999px;
+  margin: 0 auto;
+}
+
+/* ══ RESPONSIVE ══════════════════════════════════════════ */
+@media (max-height: 720px) {
+  .cp-sticky  { min-height: 560px; }
+  .cp-inner   { padding: 0 28px; }
+  .cp-heading { font-size: 28px; }
+  .cp-subtitle{ font-size: 14px; }
+  .cp-stage-title { font-size: 24px; }
+  .cp-stage-text  { font-size: 13px; }
+}
+
+@media (max-width: 900px) {
+  .cp-inner { padding: 0 20px; }
+  .cp-content {
+    top: 74%;
+    width: 60%;
+  }
+}
+
+@media (max-width: 640px) {
+  .cp-heading { font-size: 28px; }
+  .cp-subtitle { font-size: 14px; max-width: 92%; }
+  .cp-content {
+    top: 76%;
+    width: 80%;
+  }
+  .cp-stage-title { font-size: 22px; }
+  .cp-stage-text  { font-size: 13px; }
+  .cp-stage-rule  { width: 36px; }
+}
+
+@media (max-width: 480px) {
+  .cp-heading { font-size: 24px; }
+  .cp-eyebrow { font-size: 11px; letter-spacing: 0.18em; }
+  .cp-stage-title { font-size: 20px; }
+}

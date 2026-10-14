@@ -73,12 +73,64 @@ h6 {
 .ap-hero h1,
 .ap-hero-title,
 .aboutksli-hero h1,
+.domains-hero-title,
+.domains-hero h1,
+.ourwork-hero h1,
+.viewport-hero h1,
+.sustainability-hero h1,
 .domains-continuous-page section:first-of-type h1,
 .footer h1,
 .footer h2,
 .footer h3,
 .footer h4 {
   color: #FFFFFF !important;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   REFERENCE 1 — HERO HEADING TYPOGRAPHY SYSTEM (ALL HEROES)
+   - Clean, confident, editorial sans-serif typography (Inter)
+   - Natural letter shapes and spacing; medium-to-bold weight (700)
+   - Restrained line height (1.15) and readable line wrapping
+   - High contrast white text with subtle text shadow
+   ───────────────────────────────────────────────────────────── */
+.hero-slider-title,
+.aboutksli-hero h1,
+.ap-hero-title,
+.ap-hero h1,
+.domains-hero-title,
+.domains-hero h1,
+.ourwork-hero h1,
+.viewport-hero h1,
+.sustainability-hero h1 {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-size: clamp(36px, 4.4vw, 56px) !important;
+  font-weight: 700 !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.025em !important;
+  color: #FFFFFF !important;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45);
+  max-width: 820px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   ALL PAGE HERO SECTIONS — FULL VIEWPORT HEIGHT (SECTION 3)
+   - Target min-height: 100svh with 100vh fallback
+   - Account for actual navbar height (72px)
+   - Vertically balanced content
+   ───────────────────────────────────────────────────────────── */
+.hero-slider-section,
+.aboutksli-hero,
+.ap-hero,
+.domains-hero,
+.ourwork-hero,
+.viewport-hero,
+.sustainability-hero {
+  min-height: 100vh;
+  min-height: 100svh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 /* Buttons & Interactive Elements */
@@ -501,92 +553,7 @@ h6 {
   }
 }
 
-/* Core Purpose Arch */
-.arch-wrapper {
-  position: relative;
-  width: 100%;
-  max-width: 860px;
-  margin: 0 auto;
-  padding-top: 60px;
-  padding-bottom: 20px;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
 
-.arch-wrapper.in-view {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.arch-path {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 2 / 1;
-  border: 2px dashed rgba(24, 86, 165, 0.35);
-  border-bottom: none;
-  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
-}
-
-.arch-dot {
-  position: absolute;
-  width: 7px;
-  height: 7px;
-  background: rgba(24, 86, 165, 0.5);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.arch-node {
-  position: absolute;
-  width: 64px;
-  height: 64px;
-  background: #ffffff;
-  border: 1.5px solid var(--ksli-blue);
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  font-size: 24px;
-  color: var(--deep-navy);
-  transform: translate(-50%, -50%) scale(0);
-  box-shadow: 0 0 0 6px #ffffff, 0 8px 18px rgba(10, 42, 92, 0.12);
-  z-index: 2;
-  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease, color 0.3s ease;
-}
-
-.arch-wrapper.in-view .arch-node {
-  transform: translate(-50%, -50%) scale(1);
-}
-
-.arch-node:hover {
-  background: var(--ksli-blue);
-  color: #fff;
-  transform: translate(-50%, -50%) scale(1.1);
-  box-shadow: 0 0 0 6px #ffffff, 0 10px 24px rgba(24, 86, 165, 0.28);
-}
-
-.arch-content {
-  position: absolute;
-  top: 70%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90%;
-  max-width: 600px;
-  text-align: center;
-  z-index: 10;
-}
-
-.arch-content h2 {
-  color: var(--deep-navy);
-  font: 700 28px/1.25 Montserrat;
-  margin: 12px 0 16px;
-}
-
-.arch-content p {
-  color: var(--muted);
-  font-size: 16.5px;
-  line-height: 1.6;
-}
 
 /* Footer */
 .footer {

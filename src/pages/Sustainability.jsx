@@ -143,11 +143,16 @@ export default function Sustainability() {
     <div className="sustainability-page">
       {/* ─── HERO BANNER ─── */}
       <section
-        className="viewport-hero"
+        className="viewport-hero sustainability-hero"
         style={{
           background: 'linear-gradient(135deg, rgba(10, 42, 92, 0.70) 0%, rgba(24, 86, 165, 0.55) 65%, rgba(26, 143, 191, 0.40) 100%), url("https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1920&auto=format&fit=crop&q=85") center/cover no-repeat',
           color: '#FFFFFF',
-          padding: '156px 0 60px',
+          padding: '76px 0 40px',
+          minHeight: '100svh',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          boxSizing: 'border-box',
           position: 'relative',
           overflow: 'hidden'
         }}
@@ -190,12 +195,13 @@ export default function Sustainability() {
             </span>
             <h1
               style={{
-                fontSize: 'clamp(36px, 4.4vw, 52px)',
+                fontSize: 'clamp(36px, 4.4vw, 56px)',
                 color: '#FFFFFF',
                 margin: '0 0 16px',
-                fontWeight: 800,
-                letterSpacing: '-0.02em',
-                lineHeight: 1.15
+                fontWeight: 700,
+                letterSpacing: '-0.025em',
+                lineHeight: 1.15,
+                fontFamily: 'Inter, sans-serif'
               }}
             >
               Sustainability

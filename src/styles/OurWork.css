@@ -1,0 +1,221 @@
+/* ── Our Work Shared Template Styling ── */
+
+.ourwork-page {
+  padding-top: 0;
+  min-height: 100vh;
+  background: #FFFFFF;
+}
+
+.ourwork-hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  color: #FFFFFF;
+  padding: 76px 0 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.ourwork-hero-shell {
+  max-width: 900px;
+}
+
+.ourwork-hero h1 {
+  font: 700 clamp(36px, 4.4vw, 56px) / 1.15 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #FFFFFF;
+  margin: 10px 0 16px;
+  letter-spacing: -0.025em;
+  max-width: 820px;
+}
+
+.ourwork-hero-sub {
+  font-size: clamp(16px, 1.8vw, 19px);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.90);
+  max-width: 760px;
+  margin-bottom: 28px;
+}
+
+.ourwork-hero-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px 36px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.ourwork-hero-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ourwork-hero-stat strong {
+  font-size: clamp(22px, 2.5vw, 28px);
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: -0.02em;
+}
+
+.ourwork-hero-stat span {
+  font-size: 13px;
+  color: #8CC2FC;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Category Navigation Strip */
+.ourwork-nav-strip {
+  background: #F8FAFC;
+  border-bottom: 1px solid #E2E8F0;
+  position: sticky;
+  top: 76px;
+  z-index: 100;
+}
+
+.ourwork-nav-shell {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 10px 0;
+  scrollbar-width: none;
+}
+
+.ourwork-nav-shell::-webkit-scrollbar {
+  display: none;
+}
+
+.ourwork-tab-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #475569;
+  text-decoration: none;
+  background: transparent;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.ourwork-tab-link:hover {
+  color: #0A2A5C;
+  background: #E2E8F0;
+}
+
+.ourwork-tab-link.is-active {
+  color: #FFFFFF;
+  background: #1856A5;
+}
+
+/* Content Section */
+.ourwork-content-section {
+  padding-top: 48px;
+  padding-bottom: 80px;
+}
+
+.ourwork-section-head {
+  margin-bottom: 36px;
+  max-width: 760px;
+}
+
+.ourwork-section-head h2 {
+  font-size: clamp(26px, 3vw, 36px);
+  font-weight: 700;
+  color: #0A2A5C;
+  margin: 6px 0 10px;
+  letter-spacing: -0.015em;
+}
+
+.ourwork-section-head p {
+  font-size: 16px;
+  color: #4F617D;
+  line-height: 1.6;
+}
+
+/* CTA Banner */
+.ourwork-cta-banner {
+  margin-top: 60px;
+  padding: 36px 40px;
+  border-radius: 16px;
+  background: #EEF4FC;
+  border: 1px solid #D5E4F7;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.ourwork-cta-copy {
+  max-width: 600px;
+}
+
+.ourwork-cta-copy h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0A2A5C;
+  margin: 6px 0 8px;
+}
+
+.ourwork-cta-copy p {
+  color: #4F617D;
+  font-size: 15px;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.ourwork-cta-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.ourwork-cta-actions .btn-primary {
+  padding: 10px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 9999px;
+  background: #1856A5;
+  color: #FFFFFF;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.ourwork-cta-actions .btn-primary:hover {
+  background: #0A2A5C;
+}
+
+.ourwork-cta-actions .btn-secondary {
+  padding: 10px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 9999px;
+  background: #FFFFFF;
+  color: #1856A5;
+  border: 1px solid #CBD5E1;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.ourwork-cta-actions .btn-secondary:hover {
+  background: #F1F5F9;
+  border-color: #94A3B8;
+}
+
+@media (max-width: 768px) {
+  .ourwork-hero {
+    padding: 110px 0 40px;
+  }
+  .ourwork-cta-banner {
+    padding: 24px;
+  }
+}
